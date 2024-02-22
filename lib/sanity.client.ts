@@ -8,7 +8,7 @@ const NEXT_PUBLIC_SANITY_DATASET = 'production'
 
 import { createClient } from '@sanity/client'
 
-export const client = createClient({
+export const getClient = createClient({
   projectId: NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: NEXT_PUBLIC_SANITY_DATASET,
   // useCdn: process.env.NODE_ENV === 'production', // Use CDN in production

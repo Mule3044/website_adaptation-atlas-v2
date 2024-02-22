@@ -1,5 +1,4 @@
 import { defineType } from 'sanity'
-import VisualDivider from '@/components/sanity/divider'
 
 export default defineType({
   name: 'settings',

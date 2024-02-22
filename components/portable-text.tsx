@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import { client } from '@/lib/sanity-client'
+import { getClient } from '@/lib/sanity.client'
 import imageUrlBuilder from '@sanity/image-url';
 
-const builder = imageUrlBuilder(client);
+const builder = imageUrlBuilder(getClient);
 
 function urlFor(source: any) {
   return builder.image(source)

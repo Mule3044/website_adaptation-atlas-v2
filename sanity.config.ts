@@ -1,7 +1,7 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
-import { apiVersion, dataset, projectId } from '@/lib/env'
+import { apiVersion, dataset, projectId } from '@/lib/sanity.env'
 // import { schema } from '@/schemas/sanity.schema'
 import { BiCog } from "react-icons/bi"
 

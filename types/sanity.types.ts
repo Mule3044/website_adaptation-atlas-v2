@@ -7,3 +7,11 @@ export type Home = {
   slug: string;
   introText: string;
 }
+
+export type Spotlight = {
+  _id: string;
+  _createdAt: Date;
+  title: string;
+  slug: string;
+  introText: string;
+}
