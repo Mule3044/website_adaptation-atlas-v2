@@ -5,10 +5,15 @@ import { apiVersion, dataset, projectId } from '@/lib/sanity.env'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 // import { schema } from '@/schemas/sanity.schema'
 import { BiCog } from 'react-icons/bi'
+import { BiHome } from 'react-icons/bi'
+import { BiUser } from 'react-icons/bi'
+import { BiFile } from 'react-icons/bi'
+import { BiTag } from 'react-icons/bi'
 
 import { type SchemaTypeDefinition } from 'sanity'
 
-import home from './schemas/home.schema'
+import home from './schemas/page-home.schema'
+import about from './schemas/page-about.schema'
 import spotlightPost from './schemas/post-spotlight.schema'
 import insightPost from './schemas/post-insight.schema'
 import impactPost from './schemas/post-impact.schema'
@@ -20,7 +25,7 @@ import contentText from './schemas/content-text.schema'
 import contentPage from './schemas/content-page.schema'
 
 const schema: { types: SchemaTypeDefinition[] } = {
-  types: [home, spotlightPost, insightPost, impactPost, settings, primaryTag, secondaryTag, dataCard, contentText, contentPage],
+  types: [home, about, spotlightPost, insightPost, impactPost, settings, primaryTag, secondaryTag, dataCard, contentText, contentPage],
 }
 
 export default defineConfig({
@@ -38,6 +43,68 @@ export default defineConfig({
         return S.list()
           .title('Content')
           .items([
+            // Homepage
+            S.listItem()
+              .title('Homepage')
+              .icon(BiHome)
+              .child(
+                S.editor()
+                  .id('home')
+                  .schemaType('home')
+                  .documentId('home')
+              ),
+            // About page
+            S.listItem()
+              .title('About page')
+              .icon(BiUser)
+              .child(
+                S.editor()
+                  .id('about')
+                  .schemaType('about')
+                  .documentId('about')
+              ),
+            // Visual divider
+            S.divider(),
+            // Posts - these use orderable-document-list to order entries
+            orderableDocumentListDeskItem({
+              type: 'spotlight',
+              title: 'Spotlights',
+              icon: BiFile,
+              S,
+              context,
+            }),
+            orderableDocumentListDeskItem({
+              type: 'insight',
+              title: 'Data insights',
+              icon: BiFile,
+              S,
+              context,
+            }),
+            orderableDocumentListDeskItem({
+              type: 'impact',
+              title: 'Data in practice',
+              icon: BiFile,
+              S,
+              context,
+            }),
+            // Visual divider
+            S.divider(),
+            // Primary tags
+            S.listItem()
+              .title('Primary tags')
+              .icon(BiTag)
+              .child(
+                S.documentTypeList('primaryTag')
+              ),
+            // Secondary tags
+            S.listItem()
+              .title('Secondary tags')
+              .icon(BiTag)
+              .child(
+                S.documentTypeList('secondaryTag')
+              ),
+            // Visual divider
+            S.divider(),
             // Site settings
             S.listItem()
               .title('Settings')
@@ -47,41 +114,6 @@ export default defineConfig({
                   .id('settings')
                   .schemaType('settings')
                   .documentId('settings')
-              ),
-            // Visual divider
-            S.divider(),
-            // Posts - these use orderable-document-list to order entries
-            orderableDocumentListDeskItem({
-              type: 'spotlight',
-              title: 'Spotlights',
-              S,
-              context,
-            }),
-            orderableDocumentListDeskItem({
-              type: 'insight',
-              title: 'Data insights',
-              S,
-              context,
-            }),
-            orderableDocumentListDeskItem({
-              type: 'impact',
-              title: 'Data in practice',
-              S,
-              context,
-            }),
-            // Visual divider
-            S.divider(),
-            // Primary tags
-            S.listItem()
-              .title('Primary tags')
-              .child(
-                S.documentTypeList('primaryTag')
-              ),
-            // Secondary tags
-            S.listItem()
-              .title('Secondary tags')
-              .child(
-                S.documentTypeList('secondaryTag')
               ),
           ])
       }
