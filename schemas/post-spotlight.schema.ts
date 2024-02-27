@@ -9,6 +9,12 @@ const spotlightPost = {
   fields: [
     orderRankField({ type: "spotlight", newItemPosition: "before" }),
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'title',
       title: 'Title',
       type: 'string',

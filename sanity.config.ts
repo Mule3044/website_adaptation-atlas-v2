@@ -11,6 +11,7 @@ import { BiFile } from 'react-icons/bi'
 import { BiTag } from 'react-icons/bi'
 
 import { type SchemaTypeDefinition } from 'sanity'
+import { documentInternationalization } from '@sanity/document-internationalization'
 
 import home from './schemas/page-home.schema'
 import about from './schemas/page-about.schema'
@@ -118,6 +119,14 @@ export default defineConfig({
           ])
       }
     }),
-    visionTool()
+    visionTool(),
+    documentInternationalization({
+      supportedLanguages: [
+        { id: 'en', title: 'English' },
+        { id: 'fr', title: 'French' },
+      ],
+      schemaTypes: ['spotlight'],
+      languageField: 'language',
+    }),
   ],
 })
