@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import cn from 'classnames'
 import { BiX, BiMenu } from 'react-icons/bi'
+import atlasLogoLight from '@/public/images/atlas-logo-light.svg'
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false)
@@ -41,8 +43,8 @@ const Menu = () => {
       <button
         className={
           cn(
-            'fixed top-0 left-0 bg-off-white text-brand-green p-2 md:p-4 md:h-[55px] cursor-pointer',
-            'hover:bg-brand-green hover:text-white transition-colors duration-300 ease-in-out'
+            'fixed top-5 left-5 bg-brand-green text-white p-2 rounded-full cursor-pointer',
+            'hover:bg-grey-100 hover:text-brand-green transition-colors duration-300 ease-in-out'
           )
         }
         onClick={handleToggleMenu}
@@ -77,19 +79,17 @@ const Menu = () => {
             ))}
           </ul>
         </div>
-        <Link href='/' legacyBehavior>
-          <h1 onClick={handleToggleMenu} className={
-            cn(
-              'relative z-50 text-white text-lg font-medium uppercase text-center p-1.5 md:p-3 tracking-wide cursor-pointer',
-              'hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'
-            )
-          }>
-            <span className='hidden md:block'>African Agriculture Adaptation Tracking Tool</span>
-            <span className='block md:hidden'>Adaptation Tracking</span>
-          </h1>
-        </Link>
+        <div id='menu-logo' className='flex items-center justify-center w-full pt-8'>
+          <Link href='/' legacyBehavior onClick={handleToggleMenu}>
+            <Image
+              src={atlasLogoLight}
+              alt='Agriculture Adaptation Atlas logo'
+              width={170}
+            />
+          </Link>
+        </div>
         <button
-          className='absolute z-50 top-1 left-1 md:top-2 md:left-2 hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'
+          className='absolute z-50 top-5 left-5 hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'
           onClick={handleToggleMenu}
         >
           <BiX className='text-white h-10 w-10' />

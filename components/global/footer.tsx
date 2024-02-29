@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <footer className='flex justify-between w-full p-5'>
-      <p>© {year} AAA & CGIAR</p>
+      <p>© {year} CGIAR</p>
       {/* TODO: make this a component */}
       <div className='relative'>
         <button
