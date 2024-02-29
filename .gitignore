@@ -7,6 +7,12 @@
 node_modules/
 dist/
 
+# NextJS hot update files
+.next/
+
+# Sanity runtime files
+.sanity/
+
 # Compiled Java class files
 *.class
 
