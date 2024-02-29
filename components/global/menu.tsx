@@ -16,9 +16,9 @@ const Menu = () => {
   }
 
   const menuLinks = [
-    { link: '/', title: 'Our Work' },
-    { link: '/', title: 'About the Atlas' },
-    { link: '/', title: 'Get Involved' },
+    { id: 'menu-link-0', link: '/', title: 'Our Work' },
+    { id: 'menu-link-1', link: '/', title: 'About the Atlas' },
+    { id: 'menu-link-2', link: '/', title: 'Get Involved' },
   ]
 
   const year = new Date().getFullYear()
@@ -46,26 +46,21 @@ const Menu = () => {
           <ul className='flex flex-col gap-7 md:gap-14 ml-[45px] md:ml-[300px]'>
             {/* Menu Items */}
             {menuLinks.map((item, index) => (
-              <li key={item.link} className={cn(
+              <li key={item.id} className={cn(
                 menuListClass,
                 'text-white text-2xl md:text-4xl bold uppercase tracking-wide',
                 'transition duration-300 ease-in-out',
                 { 'delay-[50ms]': index === 0, 'delay-[100ms]': index === 1, 'delay-[150ms]': index === 2, 'delay-[200ms]': index === 3 },
               )}>
-                <Link href={item.link} legacyBehavior>
-                  <a
-                    onClick={handleToggleMenu}
-                    className='hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'
-                  >
-                    {item.title}
-                  </a>
+                <Link href={item.link} onClick={handleToggleMenu} className='hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'>
+                  {item.title}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
         <div id='menu-logo' className='flex items-center justify-center w-full pt-8'>
-          <Link href='/' legacyBehavior onClick={handleToggleMenu}>
+          <Link href='/' onClick={handleToggleMenu}>
             <Image
               src={atlasLogoLight}
               alt='Agriculture Adaptation Atlas logo'

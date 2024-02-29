@@ -16,14 +16,16 @@ export async function getHomeContent(): Promise<Home> {
 }
 
 // Data spotlights
-export async function getSpotlights(): Promise<Spotlight> {
+export async function getSpotlights(): Promise<Spotlight[]> {
   return getClient.fetch(
-    groq`*[_type == 'spotlight' && _id == 'spotlight'][0] {
+    groq`*[_type == 'spotlight']|order(orderRank) {
       _id,
       _createdAt,
       title,
-      introText,
+      'carousel': carousel,
       'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
     }`
   )
 }
