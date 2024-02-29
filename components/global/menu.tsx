@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import cn from 'classnames'
+import Share from '@/components/interface/share'
 import { BiX, BiMenu } from 'react-icons/bi'
 import atlasLogoLight from '@/public/images/atlas-logo-light.svg'
 
@@ -15,28 +16,12 @@ const Menu = () => {
   }
 
   const menuLinks = [
-    { link: '/map?view=partners', title: 'Partners' },
-    { link: '/map?view=projects', title: 'Projects' },
-    { link: '/tools', title: 'Tools' },
-    { link: '/about', title: 'About this site' }
+    { link: '/', title: 'Our Work' },
+    { link: '/', title: 'About the Atlas' },
+    { link: '/', title: 'Get Involved' },
   ]
 
-  const [tooltipVisible, setTooltipVisible] = useState(false)
-  const year = new Date().getFullYear() // TODO: move into separate component
-  const handleCopyToClipboard = async () => {
-    const url = window.location.origin;  // Get the root URL of the application
-
-    try {
-      await navigator.clipboard.writeText(url);
-      // Temporarily display a confirmation tooltip
-      setTooltipVisible(true);
-      setTimeout(() => {
-        setTooltipVisible(false);
-      }, 2000);
-    } catch (err) {
-      console.error('Failed to copy URL: ', err);
-    }
-  }
+  const year = new Date().getFullYear()
 
   return (
     <nav className='flex justify-between p-5'>
@@ -94,26 +79,14 @@ const Menu = () => {
         >
           <BiX className='text-white h-10 w-10' />
         </button>
+
         <div className='fixed right-0 bottom-0 left-0 z-50'>
-          {/* Footer */}
           <footer className='flex justify-between w-full p-5 text-white'>
             <p>© {year} AAA & CGIAR</p>
-            {/* TODO: make this a component */}
-            <div className='relative'>
-              <button
-                onClick={handleCopyToClipboard}
-                className='font-medium hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'
-              >
-                Share
-              </button>
-              <div className={cn(
-                'absolute -top-8 left-1/2 transform -translate-x-1/2 pointer-events-none',
-                'bg-grey-700 text-white text-xs rounded px-2 py-1',
-                'transition-all duration-500 ease-in-out',
-                tooltipVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              )}>
-                Copied
-              </div>
+            <div className='relative flex gap-4'>
+              <Link href='mailto:t.rosenstock@cgiar.org'>Sign up for our newsletter</Link>
+              <Link href='mailto:t.rosenstock@cgiar.org'>Contact us</Link>
+              <Share type='light' />
             </div>
           </footer>
         </div>
