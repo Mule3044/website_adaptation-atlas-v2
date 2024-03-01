@@ -18,5 +18,7 @@ export type Spotlight = {
   _createdAt: Date
   title: string
   slug: string
+  featuredImage: string
+  featuredImageAlt: string
   carousel: Carousel
 }

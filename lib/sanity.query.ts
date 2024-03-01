@@ -18,7 +18,7 @@ export async function getHomeContent(): Promise<Home> {
 // Data spotlights
 export async function getSpotlights(): Promise<Spotlight[]> {
   return getClient.fetch(
-    groq`*[_type == 'spotlight']|order(orderRank) {
+    groq`*[_type == 'spotlight' && language != 'fr']|order(orderRank) {
       _id,
       _createdAt,
       title,

@@ -1,4 +1,4 @@
-import Share from '@/components/interface/share'
+import Share from '@/components/ui/share'
 import Link from 'next/link'
 
 const Footer = () => {

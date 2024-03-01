@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Search from '@/components/interface/search'
+import Search from '@/components/ui/search'
 import atlasLogo from '@/public/images/atlas-logo.svg'
 import iconBars from '@/public/images/icon-bars.svg'
 import iconBadge from '@/public/images/icon-badge.svg'

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import cn from 'classnames'
-import Share from '@/components/interface/share'
+import Share from '@/components/ui/share'
 import { BiX, BiMenu } from 'react-icons/bi'
 import atlasLogoLight from '@/public/images/atlas-logo-light.svg'
 
