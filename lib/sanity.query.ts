@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { getClient } from './sanity.client'
-import { Home, Spotlight } from '@/types/sanity.types'
+import { Home, Spotlight, Tag } from '@/types/sanity.types'
 
 // Homepage content
 export async function getHomeContent(): Promise<Home> {
@@ -26,6 +26,23 @@ export async function getSpotlights(): Promise<Spotlight[]> {
       'slug': slug.current,
       'featuredImage': featuredImage.asset->url,
       'featuredImageAlt': featuredImage.asset->alt,
+      'featuredTags': tags.featured[]->{
+        _id,
+        name,
+        slug,
+      }
+    }`
+  )
+}
+
+// Primary tags
+export async function getPrimaryTags(): Promise<Tag[]> {
+  return getClient.fetch(
+    groq`*[_type == 'primaryTag']|order(orderRank) {
+      _id,
+      _createdAt,
+      name,
+      'slug': slug.current,
     }`
   )
 }

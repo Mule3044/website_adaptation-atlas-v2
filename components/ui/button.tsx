@@ -16,11 +16,13 @@ const buttonVariants = cva(
         link:
           'text-brand-green uppercase',
         carousel:
-          'bg-white text-brand-green transition-colors hover:bg-brand-green hover:text-white'
+          'bg-white text-brand-green transition-colors hover:bg-brand-green hover:text-white',
+        tag:
+          'text-brand-green bg-grey-100 rounded-[4px] transition-colors hover:bg-brand-green hover:text-white',
       },
       size: {
         default: 'h-9 px-4 py-2',
-        sm: 'h-8 px-3 text-sm',
+        sm: 'h-10 px-4 text-sm font-medium',
         lg: 'h-10 px-8 text-lg font-medium',
         icon: 'h-9 w-9',
       },

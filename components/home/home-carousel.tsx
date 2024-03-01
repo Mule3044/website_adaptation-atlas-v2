@@ -17,10 +17,10 @@ type Props = {
   spotlights: Spotlight[]
 }
 
-const SplashCarousel = ({ spotlights }: Props) => {
+const HomeCarousel = ({ spotlights }: Props) => {
 
   return (
-    <div id='splash-carousel' className='h-[800px]'>
+    <div id='splash-carousel' className='h-[800px] mb-20'>
       <Carousel className='h-[800px]'>
         <CarouselContent className='h-[800px]'>
           {spotlights.map((spotlight: Spotlight) =>
@@ -53,4 +53,4 @@ const SplashCarousel = ({ spotlights }: Props) => {
   )
 }
 
-export default SplashCarousel
+export default HomeCarousel

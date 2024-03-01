@@ -1,5 +1,12 @@
 // import { PortableTextBlock } from 'sanity'
 
+export type Tag = {
+  _id: string
+  _createdAt: Date
+  name: string
+  slug: string
+}
+
 export type Home = {
   _id: string
   _createdAt: Date
@@ -21,4 +28,5 @@ export type Spotlight = {
   featuredImage: string
   featuredImageAlt: string
   carousel: Carousel
+  featuredTags: Tag[]
 }
