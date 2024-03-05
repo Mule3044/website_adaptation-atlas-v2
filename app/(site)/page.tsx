@@ -4,6 +4,7 @@ import { getHomeContent, getSpotlights, getInsights, getImpacts, getPrimaryTags 
 import SpotlightGrid from '@/components/home/spotlight-grid'
 import InsightCarousel from '@/components/home/insight-carousel'
 import ImpactCarousel from '@/components/home/impact-carousel'
+import GetInvolvedTout from '@/components/home/get-involved-tout'
 
 export default async function Home() {
   const homeContent = await getHomeContent()
@@ -19,6 +20,7 @@ export default async function Home() {
       <SpotlightGrid spotlights={spotlights} tags={primaryTags} />
       <InsightCarousel insights={insights} />
       <ImpactCarousel impacts={impacts} />
+      <GetInvolvedTout content={homeContent} />
     </div>
   )
 }

@@ -7,12 +7,25 @@ export type Tag = {
   slug: string
 }
 
+type Tout = {
+  _id: string
+  _createdAt: Date
+  title: string
+  subtitle: string
+  featuredImage: string
+  featuredImageAlt: string
+  descriptionHeader: string
+  descriptionBody: string
+  buttonLabel: string
+}
+
 export type Home = {
   _id: string
   _createdAt: Date
   title: string
   slug: string
   introText: string
+  tout: Tout
 }
 
 type Carousel = {

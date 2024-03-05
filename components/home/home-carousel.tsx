@@ -11,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { LiaArrowRightSolid } from 'react-icons/lia';
+import { LiaArrowRightSolid } from 'react-icons/lia'
 
 type Props = {
   spotlights: Spotlight[]

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         light:
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         link:
-          'text-brand-green uppercase',
+          'text-brand-green',
         carousel:
           'bg-white text-brand-green transition-colors hover:bg-brand-green hover:text-white',
         tag:
@@ -23,7 +23,8 @@ const buttonVariants = cva(
       size: {
         default: 'h-9 px-4 py-2',
         sm: 'h-10 px-4 text-sm font-medium',
-        lg: 'h-10 px-8 text-lg font-medium',
+        md: 'h-10 text-base font-medium',
+        lg: 'h-10 px-8 text-lg font-medium uppercase',
         icon: 'h-9 w-9',
       },
     },

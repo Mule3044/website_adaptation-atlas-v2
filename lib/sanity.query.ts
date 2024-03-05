@@ -11,6 +11,11 @@ export async function getHomeContent(): Promise<Home> {
       title,
       introText,
       'slug': slug.current,
+      'tout': {
+        ...tout,
+        'featuredImage': tout.featuredImage.asset->url,
+        'featuredImageAlt': tout.featuredImage.alt
+      },
     }`
   )
 }
