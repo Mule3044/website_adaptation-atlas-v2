@@ -30,3 +30,21 @@ export type Spotlight = {
   carousel: Carousel
   featuredTags: Tag[]
 }
+
+export type Insight = {
+  _id: string
+  _createdAt: Date
+  title: string
+  slug: string
+  featuredImage: string
+  featuredImageAlt: string
+}
+
+export type Impact = {
+  _id: string
+  _createdAt: Date
+  title: string
+  slug: string
+  featuredImage: string
+  featuredImageAlt: string
+}
