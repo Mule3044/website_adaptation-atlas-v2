@@ -1,4 +1,4 @@
-// import { PortableTextBlock } from 'sanity'
+import { PortableTextBlock } from 'sanity'
 
 export type Tag = {
   _id: string
@@ -26,6 +26,14 @@ export type Home = {
   slug: string
   introText: string
   tout: Tout
+}
+
+export type Page = {
+  _id: string
+  _createdAt: Date
+  title: string
+  slug: string
+  content: PortableTextBlock[]
 }
 
 type Carousel = {

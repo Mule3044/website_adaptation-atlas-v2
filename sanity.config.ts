@@ -9,12 +9,14 @@ import { BiHome } from 'react-icons/bi'
 import { BiUser } from 'react-icons/bi'
 import { BiFile } from 'react-icons/bi'
 import { BiTag } from 'react-icons/bi'
+import { BiShapeCircle } from 'react-icons/bi';
 
 import { type SchemaTypeDefinition } from 'sanity'
 import { documentInternationalization } from '@sanity/document-internationalization'
 
 import home from './schemas/page-home.schema'
 import about from './schemas/page-about.schema'
+import getInvolved from './schemas/page-get-involved.schema'
 import spotlightPost from './schemas/post-spotlight.schema'
 import insightPost from './schemas/post-insight.schema'
 import impactPost from './schemas/post-impact.schema'
@@ -24,9 +26,10 @@ import secondaryTag from './schemas/tag-secondary.schema'
 import dataCard from './schemas/data-card.schema'
 import contentText from './schemas/content-text.schema'
 import contentPage from './schemas/content-page.schema'
+import gallery from './schemas/gallery.schema'
 
 const schema: { types: SchemaTypeDefinition[] } = {
-  types: [home, about, spotlightPost, insightPost, impactPost, settings, primaryTag, secondaryTag, dataCard, contentText, contentPage],
+  types: [home, about, getInvolved, spotlightPost, insightPost, impactPost, settings, primaryTag, secondaryTag, dataCard, contentText, contentPage, gallery],
 }
 
 export default defineConfig({
@@ -63,6 +66,16 @@ export default defineConfig({
                   .id('about')
                   .schemaType('about')
                   .documentId('about')
+              ),
+            // Get involved page
+            S.listItem()
+              .title('Get involved page')
+              .icon(BiShapeCircle)
+              .child(
+                S.editor()
+                  .id('getInvolved')
+                  .schemaType('getInvolved')
+                  .documentId('getInvolved')
               ),
             // Visual divider
             S.divider(),

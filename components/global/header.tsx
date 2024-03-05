@@ -1,44 +1,31 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
-import cn from 'classnames'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import atlasLogo from '@/public/images/atlas-logo.svg'
 import Menu from './menu'
+import cn from 'classnames'
 
 const Header = () => {
-  // const router = useRouter()
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const isMap = pathname === '/map'
-  const headerClass =
-    (isHome) ? 'fixed' :
-      (isMap) ? 'relative bg-off-white border-b border-grey-100' :
-        'fixed bg-off-white border-b border-grey-100'
+  const headerClass = (isHome) ? 'absolute top-0' : 'relative'
 
   return (
-    <header
-      className={cn(
-        headerClass,
-        'z-50 md:h-14 top-0 left-0 right-0 flex items-center justify-center md:justify-between px-5'
-      )}
-    >
-      {/* Only render site logo on homepage at mobile width */}
-      {isHome && (
-        <Link href='/' className='hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'>
-          <h1 className='block md:hidden text-white text-lg font-medium uppercase text-center md:p-3 tracking-wide ml-10'>
-            <span className='hidden md:block'>African Agriculture Adaptation Tracking Tool</span>
-            <span className='block md:hidden'>Adaptation Tracking</span>
-          </h1>
-        </Link>
-      )}
-
-      {/* Render site logo on all other pages */}
+    <header className={cn(
+      headerClass,
+      'flex items-center justify-center z-50'
+    )}>
+      {/* Render site logo on all other pages except home */}
       {!isHome && (
         <Link href='/'>
-          <h1 className='text-brand-green text-lg font-medium uppercase text-center md:p-3 tracking-wide ml-10'>
-            <span className='hidden md:block'>African Agriculture Adaptation Tracking Tool</span>
-            <span className='block md:hidden'>Adaptation Tracking</span>
-          </h1>
+          <Image // logo
+            src={atlasLogo}
+            alt='Agriculture Adaptation Atlas logo'
+            width={170}
+            className='pt-5'
+          />
         </Link>
       )}
 
