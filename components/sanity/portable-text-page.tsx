@@ -37,7 +37,7 @@ const GalleryImageComponent = ({ value }: any) => {
   )
 }
 
-export const portableTextComponents = {
+export const portableTextPage = {
   types: {
     image: ImageComponent,
     gallery: ({ value }: any) => {

@@ -128,7 +128,18 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
       'slug': slug.current,
       'featuredImage': featuredImage.asset->url,
       'featuredImageAlt': featuredImage.asset->alt,
-      content
+      url,
+      content,
+      'primaryTags': tags.primary[]->{
+        _id,
+        name,
+        slug,
+      },
+      'secondaryTags': tags.secondary[]->{
+        _id,
+        name,
+        slug,
+      },
     }`,
     { slug }
   )

@@ -52,6 +52,12 @@ const spotlightPost = {
       ]
     },
     {
+      title: 'Observable Notebook URL',
+      name: 'url',
+      type: 'url',
+      description: 'Include an external link to the related Observable Notebook.',
+    },
+    {
       name: 'content',
       title: 'Content',
       description: 'Use this rich text input to edit titles, body text and images on the page.',

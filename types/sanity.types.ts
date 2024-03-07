@@ -48,8 +48,12 @@ export type Spotlight = {
   slug: string
   featuredImage: string
   featuredImageAlt: string
+  url: string
   carousel: Carousel
   featuredTags: Tag[]
+  primaryTags: Tag[]
+  secondaryTags: Tag[]
+  content: PortableTextBlock[]
 }
 
 export type Insight = {
@@ -59,6 +63,7 @@ export type Insight = {
   slug: string
   featuredImage: string
   featuredImageAlt: string
+  content: PortableTextBlock[]
 }
 
 export type Impact = {
@@ -68,4 +73,5 @@ export type Impact = {
   slug: string
   featuredImage: string
   featuredImageAlt: string
+  content: PortableTextBlock[]
 }
