@@ -29,7 +29,7 @@ const InsightCarousel = ({ insights }: Props) => {
             <CarouselItem key={insight._id} className='relative md:basis-1/2 lg:basis-1/3 pl-5 transition-opacity hover:opacity-90'>
               <Link
                 key={insight._id}
-                href={`/${insight.slug}`}
+                href={`/data-insights/${insight.slug}`}
                 className='block'
               >
                 <div className='h-[380px] mb-2 relative'>

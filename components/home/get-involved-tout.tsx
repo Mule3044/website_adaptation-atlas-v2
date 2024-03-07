@@ -31,7 +31,7 @@ const GetInvolvedTout = ({ content }: Props) => {
           <p className='text-[18px] mb-3'>{content.tout.descriptionBody}</p>
           <Button variant={'link'} size={'md'} asChild className='group'>
             <div>
-              <Link href={`/get-involved}`}>{content.tout.buttonLabel}</Link>
+              <Link href='/get-involved'>{content.tout.buttonLabel}</Link>
               <LiaArrowRightSolid className='scale-125 ml-2 transition-transform group-hover:translate-x-2' />
             </div>
           </Button>

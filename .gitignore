@@ -7,7 +7,7 @@
 node_modules/
 dist/
 
-# NextJS hot update files
+# NextJS files
 .next/
 
 # Sanity runtime files

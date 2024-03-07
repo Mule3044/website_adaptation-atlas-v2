@@ -42,7 +42,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
         {spotlights.map((spotlight: Spotlight) =>
           <Link
             key={spotlight._id}
-            href={`/${spotlight.slug}`}
+            href={`/data-spotlights/${spotlight.slug}`}
             className='block transition-opacity hover:opacity-90'
           >
             <div className='h-[160px] mb-2 relative'>

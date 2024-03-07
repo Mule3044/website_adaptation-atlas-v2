@@ -37,7 +37,7 @@ const HomeCarousel = ({ spotlights }: Props) => {
                 <p className='text-lg text-grey-600 mb-5'>{spotlight.carousel.description}</p>
                 <Button variant={'link'} size={'lg'} asChild className='group'>
                   <div>
-                    <Link href={`/${spotlight.slug}`}>Explore what's at risk</Link>
+                    <Link href={`/data-spotlights/${spotlight.slug}`}>Explore what's at risk</Link>
                     <LiaArrowRightSolid className='scale-125 ml-2 transition-transform group-hover:translate-x-2' />
                   </div>
                 </Button>

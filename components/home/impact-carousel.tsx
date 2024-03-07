@@ -29,7 +29,7 @@ const ImpactCarousel = ({ impacts }: Props) => {
             <CarouselItem key={impact._id} className='relative md:basis-1/2 lg:basis-1/3 pl-5 transition-opacity hover:opacity-90'>
               <Link
                 key={impact._id}
-                href={`/${impact.slug}`}
+                href={`/data-in-practice/${impact.slug}`}
                 className='block'
               >
                 <div className='h-[380px] mb-2 relative'>

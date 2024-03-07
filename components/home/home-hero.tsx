@@ -17,7 +17,7 @@ const HomeHero = ({ content }: Props) => {
   const links = [
     {
       id: 'home-splash-links-0',
-      target: '/target',
+      target: '#spotlight-grid',
       text: 'Explore our data',
       width: 'max-w-[100px]',
       image: iconBars,
@@ -25,7 +25,7 @@ const HomeHero = ({ content }: Props) => {
     },
     {
       id: 'home-splash-links-1',
-      target: '/target',
+      target: '/about',
       text: 'Read about our data from experts',
       width: 'max-w-[200px]',
       image: iconBadge,
@@ -33,7 +33,7 @@ const HomeHero = ({ content }: Props) => {
     },
     {
       id: 'home-splash-links-2',
-      target: '/target',
+      target: '/get-involved',
       text: 'Read about our impact',
       width: 'max-w-[150px]',
       image: iconPage,

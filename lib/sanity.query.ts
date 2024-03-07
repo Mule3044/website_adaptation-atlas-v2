@@ -82,7 +82,7 @@ export async function getSpotlights(): Promise<Spotlight[]> {
   )
 }
 
-// Data spotlights
+// Get all data insights posts
 export async function getInsights(): Promise<Insight[]> {
   return getClient.fetch(
     groq`*[_type == 'insight' && language != 'fr']|order(orderRank) {
@@ -100,7 +100,7 @@ export async function getInsights(): Promise<Insight[]> {
   )
 }
 
-// Data spotlights
+// Get all data in practice (impact) posts
 export async function getImpacts(): Promise<Impact[]> {
   return getClient.fetch(
     groq`*[_type == 'impact' && language != 'fr']|order(orderRank) {
@@ -115,6 +115,54 @@ export async function getImpacts(): Promise<Impact[]> {
     {next: {
       revalidate: 3600 // look for updates to revalidate cache every hour
     }}
+  )
+}
+
+// Function for getting a single spotlight post
+export async function getSpotlightPost(slug: string): Promise<Spotlight> {
+  return getClient.fetch(
+    groq`*[_type == 'spotlight' && slug.current == $slug][0]{
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+      content
+    }`,
+    { slug }
+  )
+}
+
+// Function for getting a single data insight post
+export async function getInsightPost(slug: string): Promise<Insight> {
+  return getClient.fetch(
+    groq`*[_type == 'insight' && slug.current == $slug][0]{
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+      content
+    }`,
+    { slug }
+  )
+}
+
+// Function for getting a single data in practice (impact) post
+export async function getImpactPost(slug: string): Promise<Impact> {
+  return getClient.fetch(
+    groq`*[_type == 'impact' && slug.current == $slug][0]{
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+      content
+    }`,
+    { slug }
   )
 }
 
