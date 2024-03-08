@@ -19,7 +19,7 @@ export async function getHomeContent(): Promise<Home> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -36,7 +36,7 @@ export async function getAboutContent(): Promise<Page> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -53,7 +53,7 @@ export async function getGetInvolvedContent(): Promise<Page> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -87,7 +87,7 @@ export async function getSpotlights(): Promise<Spotlight[]> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -105,7 +105,7 @@ export async function getInsights(): Promise<Insight[]> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -123,7 +123,7 @@ export async function getImpacts(): Promise<Impact[]> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -209,7 +209,7 @@ export async function getPrimaryTags(): Promise<Tag[]> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
@@ -225,7 +225,7 @@ export async function getSecondaryTags(): Promise<Tag[]> {
     }`,
     {},
     {next: {
-      revalidate: 300 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every hour
     }}
   )
 }
