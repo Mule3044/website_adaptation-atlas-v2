@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Spotlight, Tag } from '@/types/sanity.types'
@@ -12,6 +13,25 @@ type Props = {
 }
 
 const SpotlightGrid = ({ spotlights, tags }: Props) => {
+  const [filteredSpotlights, setFilteredSpotlights] = useState(spotlights)
+  const [activeTag, setActiveTag] = useState<string | null>(null)
+
+  // Function to handle tag click
+  const handleTagClick = (tagName: string) => {
+    setActiveTag(activeTag => activeTag === tagName ? null : tagName);
+  }
+
+  // Effect to filter spotlights when activeTag changes
+  useEffect(() => {
+    if (activeTag) {
+      setFilteredSpotlights(spotlights.filter(spotlight => {
+        console.log(spotlight);
+        return spotlight.primaryTags && Array.isArray(spotlight.primaryTags) && spotlight.primaryTags.some(tag => tag.name === activeTag)
+      }))
+    } else {
+      setFilteredSpotlights(spotlights)
+    }
+  }, [activeTag, spotlights])
 
   return (
     <div id='spotlight-grid' className='mb-20'>
@@ -28,6 +48,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                 key={tag._id}
                 variant={'tag'}
                 size={'sm'}
+                onClick={() => handleTagClick(tag.name)}
               >
                 {tag.name}
               </Button>
@@ -39,7 +60,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
         </div>
       </div>
       <div id='grid' className='grid grid-cols-4 gap-5'>
-        {spotlights.map((spotlight: Spotlight) =>
+        {filteredSpotlights.map((spotlight: Spotlight) =>
           <Link
             key={spotlight._id}
             href={`/data-spotlights/${spotlight.slug}`}

@@ -73,7 +73,17 @@ export async function getSpotlights(): Promise<Spotlight[]> {
         _id,
         name,
         slug,
-      }
+      },
+      'primaryTags': tags.primary[]->{
+        _id,
+        name,
+        slug,
+      },
+      'secondaryTags': tags.secondary[]->{
+        _id,
+        name,
+        slug,
+      },
     }`,
     {},
     {next: {
@@ -130,6 +140,11 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
       'featuredImageAlt': featuredImage.asset->alt,
       url,
       content,
+      'featuredTags': tags.featured[]->{
+        _id,
+        name,
+        slug,
+      },
       'primaryTags': tags.primary[]->{
         _id,
         name,
