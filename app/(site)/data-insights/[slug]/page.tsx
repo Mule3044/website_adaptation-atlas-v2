@@ -12,7 +12,7 @@ export default async function InsightPost({ params }: Props) {
   const post = await getInsightPost(params.slug)
 
   return (
-    <div id='impact-post' className='p-5 mt-32'>
+    <div id='impact-post' className='p-5 mt-32 mb-[100px]'>
       <header className='max-w-[960px] mx-auto mb-16'>
         <div className='flex gap-3 items-end mb-3'>
           <div className='p-2 bg-black'>
@@ -27,9 +27,16 @@ export default async function InsightPost({ params }: Props) {
         <h1 className='text-4xl text-brand-green font-semibold leading-tight mb-10'>{post.title}</h1>
       </header>
 
-      <div id='about-content' className='mb-[100px]'>
+      <div id='post-content' className='mb-20'>
         <PortableText value={post.content} components={portableTextPost} />
       </div>
+
+      {post.methods &&
+        <div id='post-methods'>
+          <h2 className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-6'>Methods</h2>
+          <PortableText value={post.methods} components={portableTextPost} />
+        </div>
+      }
     </div>
   )
 }

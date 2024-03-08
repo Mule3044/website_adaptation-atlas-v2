@@ -42,7 +42,7 @@ const HomeHero = ({ content }: Props) => {
   ]
 
   return (
-    <div id='hero' className='flex justify-between h-screen'>
+    <div id='hero' className='flex justify-between h-[800px] mb-10'>
       <div id='intro-search' className='w-3/4 flex justify-center items-center gap-5'>
         <div className='w-2/3'>
           <Image // logo
@@ -60,8 +60,9 @@ const HomeHero = ({ content }: Props) => {
           <Search placeholder='Search for evidence-based research and data...' />
         </div>
       </div>
-
-      <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'>
+      
+      {/* <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'> */}
+      <div id='intro-nav' className='w-1/4 h-full flex flex-col gap-5'>
         {links.map((link) =>
           <Link key={link.id} href={link.target} className='relative w-full h-1/3 bg-brand-green'>
             <Image // link icon

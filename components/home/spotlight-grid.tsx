@@ -66,7 +66,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
             href={`/data-spotlights/${spotlight.slug}`}
             className='block transition-opacity hover:opacity-90'
           >
-            <div className='h-[160px] mb-2 relative'>
+            <div className='h-[160px] xl:h-[240px] mb-2 relative'>
               <Image
                 src={spotlight.featuredImage}
                 alt={spotlight.featuredImageAlt}
@@ -77,7 +77,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
             </div>
             <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
             <div className='flex gap-3'>
-              {spotlight.featuredTags.map((tag) => {
+              {spotlight.featuredTags && spotlight.featuredTags.map((tag) => {
                 return <p key={tag._id} className='text-brand-green text-sm font-medium'>{tag.name}</p>
               }
               )}

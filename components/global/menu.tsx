@@ -43,10 +43,10 @@ const Menu = () => {
         )}
       >
         <div className='flex items-center h-full w-full absolute top-0'>
-          <ul className='flex flex-col gap-7 md:gap-14 ml-[45px] md:ml-[300px]'>
+          <div className='flex flex-col gap-7 md:gap-14 ml-[45px] md:ml-[300px]'>
             {/* Menu Items */}
             {menuLinks.map((item, index) => (
-              <li key={item.id} className={cn(
+              <div key={item.id} className={cn(
                 menuListClass,
                 'text-white text-2xl md:text-4xl bold uppercase tracking-wide',
                 'transition duration-300 ease-in-out',
@@ -55,9 +55,9 @@ const Menu = () => {
                 <Link href={item.link} onClick={handleToggleMenu} className='hover:opacity-100 opacity-90 transition-opacity duration-300 ease-in-out'>
                   {item.title}
                 </Link>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
         <div id='menu-logo' className='flex items-center justify-center w-full pt-8'>
           <Link href='/' onClick={handleToggleMenu}>

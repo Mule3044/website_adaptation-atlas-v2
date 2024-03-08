@@ -7,6 +7,14 @@ export type Tag = {
   slug: string
 }
 
+export type DataCard = {
+  title: string
+  description: string
+  observableEmbed: string
+  featuredImage: string
+  featuredImageAlt: string
+}
+
 type Tout = {
   _id: string
   _createdAt: Date
@@ -54,6 +62,7 @@ export type Spotlight = {
   primaryTags: Tag[]
   secondaryTags: Tag[]
   content: PortableTextBlock[]
+  dataCard: DataCard
 }
 
 export type Insight = {
@@ -64,6 +73,7 @@ export type Insight = {
   featuredImage: string
   featuredImageAlt: string
   content: PortableTextBlock[]
+  methods: PortableTextBlock[]
 }
 
 export type Impact = {

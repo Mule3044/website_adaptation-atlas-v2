@@ -13,7 +13,7 @@ export default async function SpotlightPost({ params }: Props) {
   const post = await getSpotlightPost(params.slug)
 
   return (
-    <div id='impact-post' className='p-5 mt-3'>
+    <div id='impact-post' className='p-5 mt-3 mb-[100px]'>
       <header className='relative w-full h-[800px] flex justify-center items-center mb-20'>
         <Image
           src={post.featuredImage}
@@ -50,7 +50,7 @@ export default async function SpotlightPost({ params }: Props) {
       {(post.primaryTags || post.secondaryTags) &&
         <div id='key-concepts' className='mb-16'>
           <h2 className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-6'>Key Concepts</h2>
-          <ul className='max-w-[960px] mx-auto list-none leading-[42px]'>
+          <ul className='relative max-w-[960px] mx-auto list-none leading-[42px] -left-[30px]'>
             {post.primaryTags && post.primaryTags.map((tag, index) => {
               return (
                 <li className='inline-block text-2xl font-normal tracking-normal'>{tag.name}<span className='px-3'>•</span></li>
@@ -65,9 +65,37 @@ export default async function SpotlightPost({ params }: Props) {
         </div>
       }
 
-      <div id='about-content' className='mb-[100px]'>
+      <div id='post-content'>
         <PortableText value={post.content} components={portableTextPost} />
       </div>
+
+      {/* TODO - Add observable embed support */}
+      {(post.dataCard.featuredImage) &&
+        <div id='data-card' className='flex gap-5 justify-between items-center'>
+          <div className='w-2/3'>
+            <Image
+              src={post.dataCard.featuredImage}
+              alt={post.dataCard.featuredImageAlt}
+              layout='responsive'
+              width={960}
+              height={960}
+            />
+          </div>
+          <div className='w-1/3'>
+            <h3 className='uppercase text-grey-600 font-medium mb-0.5'>Preview</h3>
+            <h4 className='text-[28px] font-semibold mb-4'>{post.dataCard.title}</h4>
+            <p className='text-[18px] mb-10'>{post.dataCard.description}</p>
+            <Link
+              href={post.url}
+              className='relative w-full flex items-center px-6 py-4 bg-brand-green'
+            >
+              <Image src={'/images/observable-logo.svg'} alt={'Page icon'} width={22} height={21} />
+              <span className='text-2xl text-white pl-5'>Explore Full Spotlight</span>
+              <Image className='absolute right-6' src={'/images/icon-link.svg'} alt={'Page icon'} width={14} height={14} />
+            </Link>
+          </div>
+        </div>
+      }
     </div>
   )
 }

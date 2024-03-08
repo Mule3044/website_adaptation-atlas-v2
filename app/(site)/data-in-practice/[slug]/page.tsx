@@ -27,7 +27,7 @@ export default async function ImpactPost({ params }: Props) {
         <h1 className='text-4xl text-brand-green font-semibold leading-tight mb-10'>{post.title}</h1>
       </header>
 
-      <div id='about-content' className='mb-[100px]'>
+      <div id='post-content' className='mb-[100px]'>
         <PortableText value={post.content} components={portableTextPost} />
       </div>
     </div>

@@ -140,6 +140,11 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
       'featuredImageAlt': featuredImage.asset->alt,
       url,
       content,
+      'dataCard': {
+        ...dataCard,
+        'featuredImage': dataCard.image.asset->url,
+        'featuredImageAlt': dataCard.image.alt
+      },
       'featuredTags': tags.featured[]->{
         _id,
         name,
@@ -170,7 +175,8 @@ export async function getInsightPost(slug: string): Promise<Insight> {
       'slug': slug.current,
       'featuredImage': featuredImage.asset->url,
       'featuredImageAlt': featuredImage.asset->alt,
-      content
+      content,
+      methods,
     }`,
     { slug }
   )
@@ -186,7 +192,7 @@ export async function getImpactPost(slug: string): Promise<Impact> {
       'slug': slug.current,
       'featuredImage': featuredImage.asset->url,
       'featuredImageAlt': featuredImage.asset->alt,
-      content
+      content,
     }`,
     { slug }
   )

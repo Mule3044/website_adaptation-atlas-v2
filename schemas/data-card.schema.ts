@@ -12,7 +12,7 @@ export default defineType({
       type: 'string',
     },
     {
-      name: 'partnersLinkSubtitle',
+      name: 'description',
       title: 'Data card description',
       type: 'text',
     },
