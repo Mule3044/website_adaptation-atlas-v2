@@ -161,7 +161,10 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
         slug,
       },
     }`,
-    { slug }
+    { slug },
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every hour
+    }}
   )
 }
 
@@ -178,7 +181,10 @@ export async function getInsightPost(slug: string): Promise<Insight> {
       content,
       methods,
     }`,
-    { slug }
+    { slug },
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every hour
+    }}
   )
 }
 
@@ -194,7 +200,10 @@ export async function getImpactPost(slug: string): Promise<Impact> {
       'featuredImageAlt': featuredImage.asset->alt,
       content,
     }`,
-    { slug }
+    { slug },
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every hour
+    }}
   )
 }
 
