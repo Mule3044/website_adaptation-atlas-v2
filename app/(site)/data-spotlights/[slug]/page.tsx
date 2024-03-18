@@ -21,7 +21,7 @@ export default async function SpotlightPost({ params }: Props) {
           layout='fill'
           objectFit='cover'
         />
-        <div className='relative h-[575px] w-[575px] p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-50'>
+        <div className='relative h-[575px] w-[575px] p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-10'>
           <div className='inline-block p-2 mb-2 bg-black'>
             <Image
               src={iconBars}

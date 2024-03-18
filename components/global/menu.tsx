@@ -24,7 +24,7 @@ const Menu = () => {
   const year = new Date().getFullYear()
 
   return (
-    <nav className='fixed'>
+    <nav className='fixed z-50'>
       <button
         className={
           cn(
@@ -39,7 +39,7 @@ const Menu = () => {
       <div
         className={cn(
           menuClass,
-          'fixed top-0 right-0 bottom-0 left-0 bg-brand-green transition duration-400',
+          'fixed z-50 top-0 right-0 bottom-0 left-0 bg-brand-green transition duration-400',
         )}
       >
         <div className='flex items-center h-full w-full absolute top-0'>
