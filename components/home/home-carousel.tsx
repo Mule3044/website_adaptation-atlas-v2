@@ -20,7 +20,7 @@ type Props = {
 const HomeCarousel = ({ spotlights }: Props) => {
 
   return (
-    <div id='home-carousel' className='h-[800px] mb-20'>
+    <div id='home-carousel' className='h-[800px]'>
       <Carousel className='h-[800px]'>
         <CarouselContent className='h-[800px]'>
           {spotlights.map((spotlight: Spotlight) =>

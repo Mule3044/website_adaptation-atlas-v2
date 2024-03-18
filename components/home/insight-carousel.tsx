@@ -18,7 +18,7 @@ type Props = {
 const InsightCarousel = ({ insights }: Props) => {
 
   return (
-    <div id='insight-carousel' className='mb-20'>
+    <div id='insight-carousel' className='pt-20'>
       <div id='insight-carousel-header' className='mb-5'>
         <h2 className='text-4xl text-grey-600 font-semibold mb-2'>Data Insights</h2>
         <h3 className='text-lg text-grey-600 font-medium'>Read about how our work and data collection efforts have led to real-world change.</h3>

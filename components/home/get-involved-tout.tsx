@@ -13,7 +13,7 @@ type Props = {
 const GetInvolvedTout = ({ content }: Props) => {
 
   return (
-    <div id='get-involved-tout' className='mb-20'>
+    <div id='get-involved-tout' className='pt-20 mb-20'>
       <div id='tout-header' className='mb-5'>
         <h2 className='text-4xl text-grey-600 font-semibold mb-2'>{content.tout.title}</h2>
         <h3 className='text-lg text-grey-600 font-medium'>{content.tout.subtitle}</h3>

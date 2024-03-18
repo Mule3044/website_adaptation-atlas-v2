@@ -21,6 +21,7 @@ const config: Config = {
       colors: {
         'brand': {
           'green': '#2E7636',
+          'dark-green': '#245E2A',
         },
         'grey': {
           100: '#F6F6F6',

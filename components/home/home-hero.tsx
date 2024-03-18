@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import Search from '@/components/ui/search'
@@ -25,7 +27,7 @@ const HomeHero = ({ content }: Props) => {
     },
     {
       id: 'home-splash-links-1',
-      target: '/about',
+      target: '#insight-carousel',
       text: 'Read about our data from experts',
       width: 'max-w-[200px]',
       image: iconBadge,
@@ -33,7 +35,7 @@ const HomeHero = ({ content }: Props) => {
     },
     {
       id: 'home-splash-links-2',
-      target: '/get-involved',
+      target: '#impact-carousel',
       text: 'Read about our impact',
       width: 'max-w-[150px]',
       image: iconPage,
@@ -41,8 +43,17 @@ const HomeHero = ({ content }: Props) => {
     },
   ]
 
+  const handleLinkClick = (e: any, target: any) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    const scrollTarget = document.querySelector(target);
+
+    if (scrollTarget) {
+      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   return (
-    <div id='hero' className='flex justify-between h-[800px] mb-10'>
+    <div id='hero' className='flex justify-between h-[800px] mb-5'>
       <div id='intro-search' className='w-3/4 flex justify-center items-center gap-5'>
         <div className='w-2/3'>
           <Image // logo
@@ -64,7 +75,12 @@ const HomeHero = ({ content }: Props) => {
       {/* <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'> */}
       <div id='intro-nav' className='w-1/4 h-full flex flex-col gap-5'>
         {links.map((link) =>
-          <Link key={link.id} href={link.target} className='relative w-full h-1/3 bg-brand-green'>
+          <a
+            key={link.id}
+            href={link.target}
+            onClick={(e) => handleLinkClick(e, link.target)}
+            className='relative w-full h-1/3 transition-colors bg-brand-green hover:bg-brand-dark-green'
+          >
             <Image // link icon
               src={link.image}
               alt={link.alt}
@@ -78,7 +94,7 @@ const HomeHero = ({ content }: Props) => {
               width={20}
               className='absolute bottom-6 right-6'
             />
-          </Link>
+          </a>
         )}
       </div>
     </div>
