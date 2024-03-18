@@ -21,7 +21,7 @@ const HomeCarousel = ({ spotlights }: Props) => {
 
   return (
     <div id='home-carousel' className='h-[800px]'>
-      <Carousel className='h-[800px]'>
+      <Carousel type='hero' className='h-[800px]'>
         <CarouselContent className='h-[800px]'>
           {spotlights.map((spotlight: Spotlight) =>
             <CarouselItem key={spotlight._id} className='relative h-[800px] flex justify-center items-center'>
@@ -37,7 +37,7 @@ const HomeCarousel = ({ spotlights }: Props) => {
                 <p className='text-lg text-grey-600 mb-5'>{spotlight.carousel.description}</p>
                 <Button variant={'link'} size={'lg'} asChild className='group'>
                   <div>
-                    <Link href={`/data-spotlights/${spotlight.slug}`}>Explore what's at risk</Link>
+                    <Link href={`/data-spotlights/${spotlight.slug}`}>Explore spotlight</Link>
                     <LiaArrowRightSolid className='scale-125 ml-2 transition-transform group-hover:translate-x-2' />
                   </div>
                 </Button>

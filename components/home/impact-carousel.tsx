@@ -10,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import iconPage from '@/public/images/icon-page.svg'
 
 type Props = {
   impacts: Impact[]
@@ -23,7 +24,7 @@ const ImpactCarousel = ({ impacts }: Props) => {
         <h2 className='text-4xl text-grey-600 font-semibold mb-2'>Data in Practice</h2>
         <h3 className='text-lg text-grey-600 font-medium'>Read about how our work and data collection efforts have led to real-world change.</h3>
       </div>
-      <Carousel>
+      <Carousel type='gallery'>
         <CarouselContent className='-ml-5'>
           {impacts.map((impact: Impact) =>
             <CarouselItem key={impact._id} className='relative md:basis-1/2 lg:basis-1/3 pl-5 transition-opacity hover:opacity-90'>
@@ -33,6 +34,13 @@ const ImpactCarousel = ({ impacts }: Props) => {
                 className='block'
               >
                 <div className='h-[380px] mb-2 relative'>
+                  <div className='absolute z-10 flex justify-center items-center h-10 w-10 top-3 right-3 bg-grey-600'>
+                    <Image // icon
+                      src={iconPage}
+                      alt={'Bars icon'}
+                      width={17}
+                    />
+                  </div>
                   <Image
                     src={impact.featuredImage}
                     alt={impact.featuredImageAlt}

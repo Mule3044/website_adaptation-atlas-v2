@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { IoChevronBackSharp } from "react-icons/io5"
-import { IoChevronForwardSharp } from "react-icons/io5";
+import { IoChevronBackSharp } from 'react-icons/io5'
+import { IoChevronForwardSharp } from 'react-icons/io5'
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react'
@@ -20,6 +20,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: 'horizontal' | 'vertical'
   setApi?: (api: CarouselApi) => void
+  type?: 'hero' | 'gallery'
 }
 
 type CarouselContextProps = {
@@ -52,6 +53,7 @@ const Carousel = React.forwardRef<
       orientation = 'horizontal',
       opts,
       setApi,
+      type,
       plugins,
       className,
       children,
@@ -68,6 +70,9 @@ const Carousel = React.forwardRef<
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [currentSlide, setCurrentSlide] = React.useState(0)
+    const [totalSlides, setTotalSlides] = React.useState(0)
+
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -79,11 +84,25 @@ const Carousel = React.forwardRef<
     }, [])
 
     const scrollPrev = React.useCallback(() => {
-      api?.scrollPrev()
+      if (!api) return
+
+      // If it's the first slide, jump to the last slide
+      if (api.canScrollPrev()) {
+        api.scrollPrev()
+      } else {
+        api.scrollTo(api.slideNodes().length - 1) // Jump to the last slide
+      }
     }, [api])
 
     const scrollNext = React.useCallback(() => {
-      api?.scrollNext()
+      if (!api) return
+
+      // If it's the last slide, jump back to the first slide
+      if (api.canScrollNext()) {
+        api.scrollNext()
+      } else {
+        api.scrollTo(0) // Jump back to the first slide
+      }
     }, [api])
 
     const handleKeyDown = React.useCallback(
@@ -112,20 +131,30 @@ const Carousel = React.forwardRef<
         return
       }
 
-      onSelect(api)
-      api.on('reInit', onSelect)
+      // Set the total number of slides
+      setTotalSlides(api.slideNodes().length)
+
+      // Set the current slide
+      setCurrentSlide(api.selectedScrollSnap() + 1)
+
+      // Update the current slide on carousel select change
+      const onSelect = () => {
+        setCurrentSlide(api.selectedScrollSnap() + 1)
+      }
+
       api.on('select', onSelect)
 
       return () => {
         api?.off('select', onSelect)
       }
-    }, [api, onSelect])
+    }, [api])
 
     return (
       <CarouselContext.Provider
         value={{
           carouselRef,
           api: api,
+          type,
           opts,
           orientation:
             orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
@@ -144,6 +173,11 @@ const Carousel = React.forwardRef<
           {...props}
         >
           {children}
+          {type === 'hero' &&
+            <div id='carousel-indicator' className='absolute flex justify-center w-full text-white uppercase bottom-5'>
+              {currentSlide} of {totalSlides}
+            </div>
+          }
         </div>
       </CarouselContext.Provider>
     )
@@ -213,7 +247,7 @@ const CarouselPrevious = React.forwardRef<
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}
-      disabled={!canScrollPrev}
+      // disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
@@ -242,7 +276,7 @@ const CarouselNext = React.forwardRef<
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}
-      disabled={!canScrollNext}
+      // disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >

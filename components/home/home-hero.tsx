@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import Search from '@/components/ui/search'
 import atlasLogo from '@/public/images/atlas-logo.svg'
 import iconBars from '@/public/images/icon-bars.svg'
