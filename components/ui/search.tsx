@@ -6,10 +6,15 @@ import iconSearch from '@/public/images/icon-search.svg'
 import cn from 'classnames'
 import Fuse from 'fuse.js'
 import { Combobox } from '@headlessui/react'
+import iconBars from '@/public/images/icon-bars-dark.svg'
+import iconArrow from '@/public/images/icon-arrow-dark.svg'
+import { BiX } from 'react-icons/bi'
 
 type Props = {
   placeholder: string
   size?: string
+  searchBoxActive: boolean
+  setSearchBoxActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const books = [
@@ -177,26 +182,13 @@ const books = [
 ]
 
 const fuseOptions = {
-  // isCaseSensitive: false,
-  // includeScore: false,
-  // shouldSort: true,
-  // includeMatches: false,
-  // findAllMatches: false,
-  // minMatchCharLength: 1,
-  // location: 0,
-  // threshold: 0.6,
-  // distance: 100,
-  // useExtendedSearch: false,
-  // ignoreLocation: false,
-  // ignoreFieldNorm: false,
-  // fieldNormWeight: 1,
   keys: [
     "title",
     "author.firstName"
   ]
 }
 
-const Search = ({ placeholder, size }: Props) => {
+const Search = ({ placeholder, searchBoxActive, setSearchBoxActive }: Props) => {
   const [selectedBook, setSelectedBook] = useState(books[0])
   const [query, setQuery] = useState('')
 
@@ -204,29 +196,60 @@ const Search = ({ placeholder, size }: Props) => {
 
   const filteredBooks = fuse.search(query)
 
+  const resetSearchBox = () => {
+    setQuery('') // reset query
+    setSearchBoxActive(false) // close search box
+  }
+
   return (
-    <div id='search' className='w-full bg-grey-100 rounded-sm py-3 px-5'>
-      {/* <Combobox value={selectedBook} onChange={setSelectedBook}>
-        <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
-        <Combobox.Options>
-          {filteredBooks.map((book: any) => (
-            <Combobox.Option key={book.item.title} value={book.item.title}>
-              {book.item.title}
-            </Combobox.Option>
-          ))}
-        </Combobox.Options>
-      </Combobox> */}
-      <div id='search-input' className='flex items-center'>
-        <Image
-          src={iconSearch}
-          alt='Search'
-          width={15}
-        />
-        <span className={cn(
-          'text-grey-400 italic pl-3',
-          size === 'sm' ? 'text-sm' : 'text-lg'
-        )}>{placeholder}</span>
-      </div>
+    <div id='search' className='w-full'>
+      <Combobox value={selectedBook} onChange={setSelectedBook}>
+        <div className='relative'>
+          <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-3 px-4'>
+            <Image
+              src={iconSearch}
+              alt='Search'
+              width={15}
+            />
+            <Combobox.Input
+              onChange={(event) => setQuery(event.target.value)}
+              onFocus={() => setSearchBoxActive(true)}
+              onBlur={resetSearchBox}
+              placeholder={placeholder}
+              className='w-full bg-grey-100 outline-none text-lg'
+            />
+            {searchBoxActive &&
+              <button
+                className='absolute right-3'
+                onClick={() => setSearchBoxActive(false)}
+              >
+                <BiX className='text-grey-300 h-6 w-6' />
+              </button>
+            }
+          </div>
+          <Combobox.Options className='absolute bg-grey-100 w-full px-5 max-h-[320px] overflow-y-auto'>
+            {filteredBooks.length > 0 && filteredBooks.map((book: any) => (
+              <Combobox.Option key={book.item.title} value={book.item.title} className='list-none cursor-pointer'>
+                <div className='group flex gap-3 text-base mb-3'>
+                  <Image // icon
+                    src={iconBars}
+                    alt={'Bars icon'}
+                    width={22}
+                  />
+                  <span>{book.item.title}</span>
+                  <Image // icon
+                    src={iconArrow}
+                    alt={'Arrow icon'}
+                    width={22}
+                    className='scale-90 transition-transform group-hover:translate-x-2'
+                  />
+                </div>
+              </Combobox.Option>
+            ))}
+            {(filteredBooks.length === 0 && query.length > 0) && <div className='text-base pb-5'>No results found</div>}
+          </Combobox.Options>
+        </div>
+      </Combobox>
     </div>
   )
 }

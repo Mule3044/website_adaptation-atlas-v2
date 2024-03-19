@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
+import { Transition } from '@headlessui/react';
 import Search from '@/components/ui/search'
 import atlasLogo from '@/public/images/atlas-logo.svg'
 import iconBars from '@/public/images/icon-bars.svg'
@@ -8,12 +10,14 @@ import iconBadge from '@/public/images/icon-badge.svg'
 import iconPage from '@/public/images/icon-page.svg'
 import iconArrow from '@/public/images/icon-arrow-right.svg'
 import { Home } from '@/types/sanity.types'
+import cn from 'classnames'
 
 type Props = {
   content: Home
 }
 
 const HomeHero = ({ content }: Props) => {
+  const [searchBoxActive, setSearchBoxActive] = useState(false)
 
   const links = [
     {
@@ -53,24 +57,33 @@ const HomeHero = ({ content }: Props) => {
 
   return (
     <div id='hero' className='flex justify-between h-[800px] mb-5'>
-      <div id='intro-search' className='w-3/4 flex justify-center items-center gap-5'>
+      <div id='intro-search' className='w-3/4 flex justify-center mt-[200px] gap-5'>
         <div className='w-2/3'>
           <Image // logo
             src={atlasLogo}
             alt='Agriculture Adaptation Atlas logo'
             width={280}
+            height={280}
             className='mb-7'
           />
 
           {content.introText && (
-            <h2 className='max-w-[600px] text-grey-600 text-4xl font-semibold leading-snug mb-20'>{content.introText}</h2>
+            <h2 className={cn(
+              'max-w-[600px] text-grey-600 text-4xl font-semibold leading-snug mb-20 transition-opacity',
+              { 'opacity-0': searchBoxActive }
+            )}>{content.introText}</h2>
           )}
 
-          <p className='text-grey-600 text-lg font-medium mb-3'>Know what you’re looking for?</p>
-          <Search placeholder='Search for evidence-based research and data...' />
+          <div id='search-container' className={cn(
+            'transition-transform',
+            { '-translate-y-[220px]': searchBoxActive }
+          )}>
+            <p className='text-grey-600 text-lg font-medium mb-3'>Know what you’re looking for?</p>
+            <Search placeholder='Search for evidence-based research and data...' searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
+          </div>
         </div>
       </div>
-      
+
       {/* <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'> */}
       <div id='intro-nav' className='w-1/4 h-full flex flex-col gap-5'>
         {links.map((link) =>
