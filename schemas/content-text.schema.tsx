@@ -1,11 +1,14 @@
-import { defineType, defineArrayMember } from 'sanity'
+import { defineType } from 'sanity'
+
+const SuperIcon = () => <div>x<sup>2</sup></div>
+const SuperDecorator = (props: any) => <sup>{props.children}</sup>
 
 export default defineType({
   title: 'Content',
   name: 'contentText',
   type: 'array',
   of: [
-    defineArrayMember({
+    {
       title: 'Block',
       type: 'block',
       styles: [
@@ -22,6 +25,7 @@ export default defineType({
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Underline', value: 'underline' },
+          { title: "Super", value: 'super', icon: SuperIcon, component: SuperDecorator },
         ],
         annotations: [
           {
@@ -38,8 +42,8 @@ export default defineType({
           },
         ],
       },
-    }),
-    defineArrayMember({
+    },
+    {
       name: 'imageFull',
       title: 'Featured image',
       type: 'image',
@@ -51,8 +55,8 @@ export default defineType({
           type: 'string',
         }
       ]
-    }),
-    defineArrayMember({
+    },
+    {
       name: 'imageCaption',
       title: 'Captioned image',
       type: 'image',
@@ -66,10 +70,27 @@ export default defineType({
         {
           name: 'caption',
           title: 'Caption',
-          type: 'text',
+          type: 'array',
+          of: [
+            {
+              title: 'Block',
+              type: 'block',
+              styles: [],
+              lists: [],
+              marks: {
+                decorators: [
+                  { title: 'Strong', value: 'strong' },
+                  { title: 'Emphasis', value: 'em' },
+                  { title: 'Underline', value: 'underline' },
+                  { title: "Super", value: 'super', icon: SuperIcon, component: SuperDecorator },
+                ],
+                annotations: [],
+              },
+            },
+          ],
         }
       ]
-    }),
+    },
   ],
 })
 

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { getClient } from '@/lib/sanity.client'
-import imageUrlBuilder from '@sanity/image-url';
+import imageUrlBuilder from '@sanity/image-url'
+import { PortableText } from '@portabletext/react'
 
 const builder = imageUrlBuilder(getClient);
 
@@ -14,11 +15,11 @@ const ImageFullComponent = ({ value }: any) => {
   return (
     <div className='mb-20'>
       <Image
-        src={imageUrl.width(1280).url()}
+        src={imageUrl.width(1440).url()}
         alt={value.alt}
         layout='responsive'
-        width={1280}
-        height={1280}
+        width={1440}
+        height={1440}
       />
     </div>
   )
@@ -26,18 +27,21 @@ const ImageFullComponent = ({ value }: any) => {
 
 const ImageCaptionComponent = ({ value }: any) => {
   const imageUrl = urlFor(value)
-  console.log(value.caption);
 
   return (
     <div className='max-w-[960px] mx-auto mb-20'>
       <Image
-        src={imageUrl.width(960).url()}
+        src={imageUrl.width(1280).url()}
         alt={value.alt}
         layout='responsive'
-        width={960}
-        height={960}
+        width={1280}
+        height={1280}
       />
-      {value.caption && <p className='text-lg leading-normal mt-5'>{value.caption}</p>}
+      {value.caption &&
+        <div id='image-caption' className='text-lg leading-normal mt-5'>
+          <PortableText value={value.caption} />
+        </div>
+      }
     </div>
   )
 }

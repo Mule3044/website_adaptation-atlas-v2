@@ -13,11 +13,11 @@ const ImageComponent = ({ value }: any) => {
 
   return (
     <Image
-      src={imageUrl.width(960).url()}
+      src={imageUrl.width(1440).url()}
       alt={value.alt}
       layout='responsive'
-      width={960}
-      height={960}
+      width={1440}
+      height={1440}
       className={'mb-20'}
     />
   )
@@ -28,10 +28,10 @@ const GalleryImageComponent = ({ value }: any) => {
 
   return (
     <Image
-      src={imageUrl.width(240).url()}
+      src={imageUrl.width(480).url()}
       alt={value.alt}
-      width={240}
-      height={240}
+      width={480}
+      height={480}
       className={'w-[200px] h-fit'}
     />
   )

@@ -20,3 +20,9 @@ li {
   font-size: 24px;
   line-height: 42px;
 }
+
+/* Portable text superscript */
+.unknown__pt__mark__super {
+  vertical-align: super;
+  font-size: 14px;
+}

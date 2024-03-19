@@ -1,6 +1,9 @@
 import { Rule } from '@sanity/types'
 import { defineType } from 'sanity'
 
+const SuperIcon = () => <div>x<sup>2</sup></div>
+const SuperDecorator = (props: any) => <sup>{props.children}</sup>
+
 export default defineType({
   title: 'Content',
   name: 'contentPage',
@@ -24,6 +27,7 @@ export default defineType({
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Underline', value: 'underline' },
+          { title: "Super", value: 'super', icon: SuperIcon, component: SuperDecorator},
         ],
         annotations: [
           {
