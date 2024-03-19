@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <div id='home' className='p-5'>
-      <HomeHero content={homeContent} />
+      <HomeHero data={spotlights} content={homeContent} />
       <HomeCarousel spotlights={spotlights} />
       <SpotlightGrid spotlights={spotlights} tags={primaryTags} />
       <InsightCarousel insights={insights} />

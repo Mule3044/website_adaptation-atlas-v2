@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import iconSearch from '@/public/images/icon-search.svg'
 import cn from 'classnames'
 import Fuse from 'fuse.js'
@@ -9,201 +10,59 @@ import { Combobox } from '@headlessui/react'
 import iconBars from '@/public/images/icon-bars-dark.svg'
 import iconArrow from '@/public/images/icon-arrow-dark.svg'
 import { BiX } from 'react-icons/bi'
+import { Spotlight } from '@/types/sanity.types'
+import { useRouter, usePathname } from 'next/navigation'
 
 type Props = {
+  data: Spotlight[]
   placeholder: string
   size?: string
   searchBoxActive: boolean
   setSearchBoxActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const books = [
-  {
-    "title": "Old Man's War",
-    "author": {
-      "firstName": "John",
-      "lastName": "Scalzi"
-    }
-  },
-  {
-    "title": "The Lock Artist",
-    "author": {
-      "firstName": "Steve",
-      "lastName": "Hamilton"
-    }
-  },
-  {
-    "title": "HTML5",
-    "author": {
-      "firstName": "Remy",
-      "lastName": "Sharp"
-    }
-  },
-  {
-    "title": "Right Ho Jeeves",
-    "author": {
-      "firstName": "P.D",
-      "lastName": "Woodhouse"
-    }
-  },
-  {
-    "title": "The Code of the Wooster",
-    "author": {
-      "firstName": "P.D",
-      "lastName": "Woodhouse"
-    }
-  },
-  {
-    "title": "Thank You Jeeves",
-    "author": {
-      "firstName": "P.D",
-      "lastName": "Woodhouse"
-    }
-  },
-  {
-    "title": "The DaVinci Code",
-    "author": {
-      "firstName": "Dan",
-      "lastName": "Brown"
-    }
-  },
-  {
-    "title": "Angels & Demons",
-    "author": {
-      "firstName": "Dan",
-      "lastName": "Brown"
-    }
-  },
-  {
-    "title": "The Silmarillion",
-    "author": {
-      "firstName": "J.R.R",
-      "lastName": "Tolkien"
-    }
-  },
-  {
-    "title": "Syrup",
-    "author": {
-      "firstName": "Max",
-      "lastName": "Barry"
-    }
-  },
-  {
-    "title": "The Lost Symbol",
-    "author": {
-      "firstName": "Dan",
-      "lastName": "Brown"
-    }
-  },
-  {
-    "title": "The Book of Lies",
-    "author": {
-      "firstName": "Brad",
-      "lastName": "Meltzer"
-    }
-  },
-  {
-    "title": "Lamb",
-    "author": {
-      "firstName": "Christopher",
-      "lastName": "Moore"
-    }
-  },
-  {
-    "title": "Fool",
-    "author": {
-      "firstName": "Christopher",
-      "lastName": "Moore"
-    }
-  },
-  {
-    "title": "Incompetence",
-    "author": {
-      "firstName": "Rob",
-      "lastName": "Grant"
-    }
-  },
-  {
-    "title": "Fat",
-    "author": {
-      "firstName": "Rob",
-      "lastName": "Grant"
-    }
-  },
-  {
-    "title": "Colony",
-    "author": {
-      "firstName": "Rob",
-      "lastName": "Grant"
-    }
-  },
-  {
-    "title": "Backwards, Red Dwarf",
-    "author": {
-      "firstName": "Rob",
-      "lastName": "Grant"
-    }
-  },
-  {
-    "title": "The Grand Design",
-    "author": {
-      "firstName": "Stephen",
-      "lastName": "Hawking"
-    }
-  },
-  {
-    "title": "The Book of Samson",
-    "author": {
-      "firstName": "David",
-      "lastName": "Maine"
-    }
-  },
-  {
-    "title": "The Preservationist",
-    "author": {
-      "firstName": "David",
-      "lastName": "Maine"
-    }
-  },
-  {
-    "title": "Fallen",
-    "author": {
-      "firstName": "David",
-      "lastName": "Maine"
-    }
-  },
-  {
-    "title": "Monster 1959",
-    "author": {
-      "firstName": "David",
-      "lastName": "Maine"
-    }
-  }
-]
-
 const fuseOptions = {
   keys: [
     "title",
-    "author.firstName"
   ]
 }
 
-const Search = ({ placeholder, searchBoxActive, setSearchBoxActive }: Props) => {
-  const [selectedBook, setSelectedBook] = useState(books[0])
+const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Props) => {
+  const [selectedPost, setSelectedPost] = useState(data[0])
+  const [optionSelected, setOptionSelected] = useState(false)
   const [query, setQuery] = useState('')
+  const router = useRouter()
+  const pathname = usePathname()
+  const fuse = new Fuse(data, fuseOptions)
+  const filteredData = fuse.search(query)
 
-  const fuse = new Fuse(books, fuseOptions)
+  console.log(filteredData)
 
-  const filteredBooks = fuse.search(query)
+  const blurSearchBox = () => {
+    // if (!optionSelected) { // Only reset if no option was selected
+    //   // setSearchBoxActive(false);
+    //   // setQuery('');
+    // }
+    setOptionSelected(false)
+  }
 
   const resetSearchBox = () => {
-    setQuery('') // reset query
-    setSearchBoxActive(false) // close search box
+    setSearchBoxActive(false)
+    setQuery('')
+    setOptionSelected(false)
+
   }
 
   return (
     <div id='search' className='w-full'>
-      <Combobox value={selectedBook} onChange={setSelectedBook}>
+      <Combobox
+        value={query}
+        onChange={(selectedSlug) => {
+          router.push(`/data-spotlights/${selectedSlug}`)
+          setOptionSelected(true)
+          // setQuery(''); // Optionally reset query after selection
+        }}
+      >
         <div className='relative'>
           <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-3 px-4'>
             <Image
@@ -214,29 +73,33 @@ const Search = ({ placeholder, searchBoxActive, setSearchBoxActive }: Props) => 
             <Combobox.Input
               onChange={(event) => setQuery(event.target.value)}
               onFocus={() => setSearchBoxActive(true)}
-              onBlur={resetSearchBox}
+              onBlur={blurSearchBox}
               placeholder={placeholder}
               className='w-full bg-grey-100 outline-none text-lg'
             />
             {searchBoxActive &&
               <button
                 className='absolute right-3'
-                onClick={() => setSearchBoxActive(false)}
+                onClick={resetSearchBox}
               >
                 <BiX className='text-grey-300 h-6 w-6' />
               </button>
             }
           </div>
           <Combobox.Options className='absolute bg-grey-100 w-full px-5 max-h-[320px] overflow-y-auto'>
-            {filteredBooks.length > 0 && filteredBooks.map((book: any) => (
-              <Combobox.Option key={book.item.title} value={book.item.title} className='list-none cursor-pointer'>
+            {filteredData.length > 0 && filteredData.map((post: any) => (
+              <Combobox.Option
+                key={post.item.slug}
+                value={post.item.slug}
+                className='list-none cursor-pointer'
+              >
                 <div className='group flex gap-3 text-base mb-3'>
                   <Image // icon
                     src={iconBars}
                     alt={'Bars icon'}
                     width={22}
                   />
-                  <span>{book.item.title}</span>
+                  <span>{post.item.title}</span>
                   <Image // icon
                     src={iconArrow}
                     alt={'Arrow icon'}
@@ -246,7 +109,7 @@ const Search = ({ placeholder, searchBoxActive, setSearchBoxActive }: Props) => 
                 </div>
               </Combobox.Option>
             ))}
-            {(filteredBooks.length === 0 && query.length > 0) && <div className='text-base pb-5'>No results found</div>}
+            {(filteredData.length === 0 && query.length > 0) && <div className='text-base pb-5'>No results found</div>}
           </Combobox.Options>
         </div>
       </Combobox>

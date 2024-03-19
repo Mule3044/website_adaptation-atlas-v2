@@ -11,12 +11,14 @@ import iconPage from '@/public/images/icon-page.svg'
 import iconArrow from '@/public/images/icon-arrow-right.svg'
 import { Home } from '@/types/sanity.types'
 import cn from 'classnames'
+import { Spotlight } from '@/types/sanity.types'
 
 type Props = {
+  data: Spotlight[]
   content: Home
 }
 
-const HomeHero = ({ content }: Props) => {
+const HomeHero = ({ data, content }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
 
   const links = [
@@ -79,7 +81,7 @@ const HomeHero = ({ content }: Props) => {
             { '-translate-y-[220px]': searchBoxActive }
           )}>
             <p className='text-grey-600 text-lg font-medium mb-3'>Know what you’re looking for?</p>
-            <Search placeholder='Search for evidence-based research and data...' searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
+            <Search data={data} placeholder='Search for evidence-based research and data...' searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
           </div>
         </div>
       </div>

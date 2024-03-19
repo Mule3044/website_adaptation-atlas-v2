@@ -56,7 +56,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
             )}
           </div>
           <div id='spotlight-search' className='w-1/4 px-3'>
-            <Search size='sm' placeholder='Search for a topic...' />
+            {/* <Search size='sm' placeholder='Search for a topic...' /> */}
           </div>
         </div>
       </div>
