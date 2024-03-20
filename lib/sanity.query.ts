@@ -95,15 +95,13 @@ export async function getSpotlights(): Promise<Spotlight[]> {
 // Data spotlights
 export async function getSearchContent(): Promise<Spotlight[]> {
   return getClient.fetch(
-    groq`*[_type == 'spotlight' && language != 'fr']|order(orderRank) {
+    // groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
+    groq`*[_type == 'spotlight']|order(orderRank) {
       _id,
       _createdAt,
       title,
-      'carousel': carousel,
       'slug': slug.current,
       content,
-      'featuredImage': featuredImage.asset->url,
-      'featuredImageAlt': featuredImage.asset->alt,
       'featuredTags': tags.featured[]->{
         _id,
         name,

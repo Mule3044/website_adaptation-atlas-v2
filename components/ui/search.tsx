@@ -11,7 +11,7 @@ import iconBars from '@/public/images/icon-bars-dark.svg'
 import iconArrow from '@/public/images/icon-arrow-dark.svg'
 import { BiX } from 'react-icons/bi'
 import { Spotlight } from '@/types/sanity.types'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   data: Spotlight[]
@@ -32,8 +32,8 @@ const fuseOptions = {
 }
 
 const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Props) => {
-  const [selectedPost, setSelectedPost] = useState(data[0])
-  const [optionSelected, setOptionSelected] = useState(false)
+  const [selectedPost, setSelectedPost] = useState()
+  const [optionSelected, setOptionSelected] = useState(true)
   const [query, setQuery] = useState('')
   const router = useRouter()
 
@@ -52,12 +52,17 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
 
   console.log(filteredData)
 
+  const focusSearchBox = () => {
+    setSearchBoxActive(true)
+  }
+
   const blurSearchBox = () => {
-    // if (!optionSelected) { // Only reset if no option was selected
-    //   // setSearchBoxActive(false);
-    //   // setQuery('');
-    // }
-    setOptionSelected(false)
+    setTimeout(() => {
+      if (!query.length) {
+        setSearchBoxActive(false) // Only close search box if no query is present
+      }
+      setQuery(''); // reset query
+    }, 100); // Delay reset to allow for navigation event to fire
   }
 
   const resetSearchBox = () => {
@@ -70,11 +75,6 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
     <div id='search' className='w-full'>
       <Combobox
         value={query}
-        onChange={(selectedSlug) => {
-          router.push(`/data-spotlights/${selectedSlug}`)
-          setOptionSelected(true)
-          // setQuery(''); // Optionally reset query after selection
-        }}
       >
         <div className='relative'>
           <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-3 px-4'>
@@ -85,7 +85,7 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
             />
             <Combobox.Input
               onChange={(event) => setQuery(event.target.value)}
-              onFocus={() => setSearchBoxActive(true)}
+              onFocus={focusSearchBox}
               onBlur={blurSearchBox}
               placeholder={placeholder}
               className='w-full bg-grey-100 outline-none text-lg'
@@ -105,6 +105,10 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
                 key={post.item.slug}
                 value={post.item.slug}
                 className='list-none cursor-pointer'
+                // onSelect={() => setSelectedPost(post)}
+                onClick={() => {
+                  router.push(`/data-spotlights/${post.item.slug}`) // TODO - check for post type and change path accordingly
+                }}
               >
                 <div className='group flex gap-3 text-base mb-3'>
                   <Image // icon
