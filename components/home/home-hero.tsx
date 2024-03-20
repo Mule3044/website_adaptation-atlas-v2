@@ -14,11 +14,11 @@ import cn from 'classnames'
 import { Spotlight } from '@/types/sanity.types'
 
 type Props = {
-  data: Spotlight[]
+  searchContent: Spotlight[]
   content: Home
 }
 
-const HomeHero = ({ data, content }: Props) => {
+const HomeHero = ({ searchContent, content }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
 
   const links = [
@@ -81,7 +81,7 @@ const HomeHero = ({ data, content }: Props) => {
             { '-translate-y-[220px]': searchBoxActive }
           )}>
             <p className='text-grey-600 text-lg font-medium mb-3'>Know what you’re looking for?</p>
-            <Search data={data} placeholder='Search for evidence-based research and data...' searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
+            <Search data={searchContent} placeholder='Search for evidence-based research and data...' searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
           </div>
         </div>
       </div>

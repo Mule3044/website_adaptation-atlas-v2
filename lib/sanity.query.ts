@@ -92,6 +92,41 @@ export async function getSpotlights(): Promise<Spotlight[]> {
   )
 }
 
+// Data spotlights
+export async function getSearchContent(): Promise<Spotlight[]> {
+  return getClient.fetch(
+    groq`*[_type == 'spotlight' && language != 'fr']|order(orderRank) {
+      _id,
+      _createdAt,
+      title,
+      'carousel': carousel,
+      'slug': slug.current,
+      content,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+      'featuredTags': tags.featured[]->{
+        _id,
+        name,
+        slug,
+      },
+      'primaryTags': tags.primary[]->{
+        _id,
+        name,
+        slug,
+      },
+      'secondaryTags': tags.secondary[]->{
+        _id,
+        name,
+        slug,
+      },
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every hour
+    }}
+  )
+}
+
 // Get all data insights posts
 export async function getInsights(): Promise<Insight[]> {
   return getClient.fetch(

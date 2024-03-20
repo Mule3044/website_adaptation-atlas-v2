@@ -23,7 +23,11 @@ type Props = {
 
 const fuseOptions = {
   keys: [
-    "title",
+    { name: "title", weight: 1 },
+    { name: "featuredTags.name", weight: 1 },
+    { name: "primaryTags.name", weight: 0.75 },
+    { name: "secondaryTags.name", weight: 0.5 },
+    { name: "searchableText", weight: 0.25 },
   ]
 }
 
@@ -32,8 +36,18 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
   const [optionSelected, setOptionSelected] = useState(false)
   const [query, setQuery] = useState('')
   const router = useRouter()
-  const pathname = usePathname()
-  const fuse = new Fuse(data, fuseOptions)
+
+  // Preprocess post data to include body text
+  const processedData = data.map(post => ({
+    ...post,
+    searchableText: post.content
+      .filter(block => block._type === 'block')
+      .map((block: any) => block.children?.map((child: any) => child.text).join(' '))
+      .join(' ')
+  }));
+
+  // Define fuse object and filter data by query
+  const fuse = new Fuse(processedData, fuseOptions)
   const filteredData = fuse.search(query)
 
   console.log(filteredData)
@@ -50,7 +64,6 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
     setSearchBoxActive(false)
     setQuery('')
     setOptionSelected(false)
-
   }
 
   return (
@@ -99,7 +112,7 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
                     alt={'Bars icon'}
                     width={22}
                   />
-                  <span>{post.item.title}</span>
+                  <span className='truncate'>{post.item.title}</span>
                   <Image // icon
                     src={iconArrow}
                     alt={'Arrow icon'}

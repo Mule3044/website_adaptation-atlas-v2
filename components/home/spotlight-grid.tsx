@@ -26,7 +26,6 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
   useEffect(() => {
     if (activeTag) {
       setFilteredSpotlights(spotlights.filter(spotlight => {
-        console.log(spotlight);
         return spotlight.primaryTags && Array.isArray(spotlight.primaryTags) && spotlight.primaryTags.some(tag => tag.name === activeTag)
       }))
     } else {
