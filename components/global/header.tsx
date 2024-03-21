@@ -24,7 +24,7 @@ const Header = () => {
             src={atlasLogo}
             alt='Agriculture Adaptation Atlas logo'
             width={170}
-            className='pt-5'
+            className='pt-6'
           />
         </Link>
       )}
