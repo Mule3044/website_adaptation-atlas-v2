@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { getClient } from './sanity.client'
-import { Home, Page, Spotlight, Impact, Insight, Tag } from '@/types/sanity.types'
+import { Home, Page, Spotlight, Impact, Insight, Tag, Search } from '@/types/sanity.types'
 
 // Homepage content
 export async function getHomeContent(): Promise<Home> {
@@ -93,12 +93,12 @@ export async function getSpotlights(): Promise<Spotlight[]> {
 }
 
 // Data spotlights
-export async function getSearchContent(): Promise<Spotlight[]> {
+export async function getSearchContent(): Promise<Search[]> {
   return getClient.fetch(
     // groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
-    groq`*[_type == 'spotlight']|order(orderRank) {
+    groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
       _id,
-      _createdAt,
+      _type,
       title,
       'slug': slug.current,
       content,

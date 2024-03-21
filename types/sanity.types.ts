@@ -49,6 +49,17 @@ type Carousel = {
   description: string
 }
 
+export type Search = {
+  _id: string
+  _type: string
+  title: string
+  slug: string
+  featuredTags: Tag[]
+  primaryTags: Tag[]
+  secondaryTags: Tag[]
+  content: PortableTextBlock[]
+}
+
 export type Spotlight = {
   _id: string
   _createdAt: Date
