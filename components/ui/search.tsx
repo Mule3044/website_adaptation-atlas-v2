@@ -10,10 +10,10 @@ import { Combobox } from '@headlessui/react'
 import iconBars from '@/public/images/icon-bars-dark.svg'
 import iconArrow from '@/public/images/icon-arrow-dark.svg'
 import { BiX } from 'react-icons/bi'
-import { Spotlight } from '@/types/sanity.types'
+import { SearchItem } from '@/types/sanity.types'
 
 type Props = {
-  data: Spotlight[]
+  data: SearchItem[]
   placeholder: string
   size?: string
   searchBoxActive: boolean

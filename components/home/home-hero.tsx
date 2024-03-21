@@ -9,12 +9,11 @@ import iconBars from '@/public/images/icon-bars.svg'
 import iconBadge from '@/public/images/icon-badge.svg'
 import iconPage from '@/public/images/icon-page.svg'
 import iconArrow from '@/public/images/icon-arrow-right.svg'
-import { Home } from '@/types/sanity.types'
+import { Home, SearchItem } from '@/types/sanity.types'
 import cn from 'classnames'
-import { Spotlight } from '@/types/sanity.types'
 
 type Props = {
-  searchContent: Spotlight[]
+  searchContent: SearchItem[]
   content: Home
 }
 

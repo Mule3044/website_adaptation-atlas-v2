@@ -49,7 +49,7 @@ type Carousel = {
   description: string
 }
 
-export type Search = {
+export type SearchItem = {
   _id: string
   _type: string
   title: string
