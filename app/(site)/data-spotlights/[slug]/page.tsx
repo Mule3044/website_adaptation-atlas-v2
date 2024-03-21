@@ -77,8 +77,8 @@ export default async function SpotlightPost({ params }: Props) {
               src={post.dataCard.featuredImage}
               alt={post.dataCard.featuredImageAlt}
               layout='responsive'
-              width={960}
-              height={960}
+              width={1920}
+              height={1080}
             />
           </div>
           <div className='w-1/3'>

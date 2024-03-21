@@ -15,11 +15,11 @@ const ImageFullComponent = ({ value }: any) => {
   return (
     <div className='mb-20'>
       <Image
-        src={imageUrl.width(1440).url()}
+        src={imageUrl.width(1920).url()}
         alt={value.alt}
         layout='responsive'
-        width={1440}
-        height={1440}
+        width={1920}
+        height={1080}
       />
     </div>
   )
@@ -31,11 +31,11 @@ const ImageCaptionComponent = ({ value }: any) => {
   return (
     <div className='max-w-[960px] mx-auto mb-20'>
       <Image
-        src={imageUrl.width(1280).url()}
+        src={imageUrl.width(1920).url()}
         alt={value.alt}
         layout='responsive'
-        width={1280}
-        height={1280}
+        width={1920}
+        height={1080}
       />
       {value.caption &&
         <div id='image-caption' className='text-lg leading-normal mt-5'>
