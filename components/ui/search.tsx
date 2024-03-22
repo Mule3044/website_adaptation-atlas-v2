@@ -1,16 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import iconSearch from '@/public/images/icon-search.svg'
-import cn from 'classnames'
 import Fuse from 'fuse.js'
 import { Combobox } from '@headlessui/react'
-import iconBars from '@/public/images/icon-bars-dark.svg'
 import iconArrow from '@/public/images/icon-arrow-dark.svg'
 import { BiX } from 'react-icons/bi'
 import { SearchItem } from '@/types/sanity.types'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   data: SearchItem[]
@@ -38,6 +37,7 @@ const searchPaths = [
 
 const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Props) => {
   const [query, setQuery] = useState('')
+  const router = useRouter()
 
   // Preprocess post data to include body text
   const processedData = data.map(post => ({
@@ -59,23 +59,32 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
   }
 
   const blurSearchBox = () => {
-    setTimeout(() => {
-      if (!query.length) {
-        setSearchBoxActive(false) // Only close search box if no query is present
-      }
-      setQuery(''); // reset query
-    }, 100); // Delay reset to allow for navigation event to fire
+    // if (!query.length) {
+    //   setSearchBoxActive(false) // Only close search box if no query is present
+    // }
+    setSearchBoxActive(false) // Reset search box but keep query
   }
 
   const resetSearchBox = () => {
-    setSearchBoxActive(false)
-    setQuery('')
+    setSearchBoxActive(false) // reset search box
+    setQuery('') // reset query
   }
 
   return (
     <div id='search' className='w-full'>
       <Combobox
         value={query}
+        onChange={(selectedSlug) => {
+          // Find the full post object or additional data needed for routing
+          const post = data.find(p => p.slug === selectedSlug);
+          if (post) {
+            const type = searchPaths.find(type => type.type === post._type);
+            if (type) {
+              router.push(`/${type.path}/${post.slug}`);
+              resetSearchBox() // Reset search box after selection
+            }
+          }
+        }}
       >
         <div className='relative'>
           <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-3 px-4'>
@@ -109,24 +118,22 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
                   value={post.item.slug}
                   className='list-none cursor-pointer'
                 >
-                  <Link href={`/${type?.path}/${post.item.slug}`}>
-                    <div className='group flex gap-3 text-base mb-3'>
-                      <Image // icon
-                        src={type!.image}
-                        alt={'Icon'}
-                        width={18}
-                        height={18}
-                      />
-                      <span className='truncate'>{post.item.title}</span>
-                      <Image // icon
-                        src={iconArrow}
-                        alt={'Arrow icon'}
-                        width={22}
-                        height={22}
-                        className='scale-90 transition-transform group-hover:translate-x-2'
-                      />
-                    </div>
-                  </Link>
+                  <div className='group flex gap-3 text-base mb-3'>
+                    <Image // icon
+                      src={type!.image}
+                      alt={'Icon'}
+                      width={18}
+                      height={18}
+                    />
+                    <span className='truncate'>{post.item.title}</span>
+                    <Image // icon
+                      src={iconArrow}
+                      alt={'Arrow icon'}
+                      width={22}
+                      height={22}
+                      className='scale-90 transition-transform group-hover:translate-x-2'
+                    />
+                  </div>
                 </Combobox.Option>
               )
             })}
