@@ -59,10 +59,9 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
   }
 
   const blurSearchBox = () => {
-    // if (!query.length) {
-    //   setSearchBoxActive(false) // Only close search box if no query is present
-    // }
-    setSearchBoxActive(false) // Reset search box but keep query
+    if (!query.length) {
+      setSearchBoxActive(false) // Only close search box if no query is present
+    }
   }
 
   const resetSearchBox = () => {
