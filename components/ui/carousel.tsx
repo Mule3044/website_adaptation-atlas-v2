@@ -44,6 +44,18 @@ function useCarousel() {
   return context
 }
 
+const ProgressBar = ({ progress }: any) => {
+  return (
+    <div className="w-full bg-gray-200 h-0.5 rounded-full overflow-hidden">
+      <div
+        className="bg-grey-600 h-full transition-all"
+        style={{ width: `${progress}%` }}
+      ></div>
+    </div>
+  );
+};
+
+
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
@@ -73,6 +85,11 @@ const Carousel = React.forwardRef<
     const [currentSlide, setCurrentSlide] = React.useState(0)
     const [totalSlides, setTotalSlides] = React.useState(0)
 
+    // Calculate the progress for the progress bar
+    const slidesVisible = 3; // Number of slides visible at once
+    const totalUniqueFirstSlides = Math.max(1, totalSlides - slidesVisible + 1);
+    const currentIndex = currentSlide - 1; // Adjust for zero-based indexing
+    const progress = ((currentIndex / Math.max(1, totalUniqueFirstSlides - 1)) * 100).toFixed(2); // Ensure the division is safe
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -126,6 +143,8 @@ const Carousel = React.forwardRef<
       setApi(api)
     }, [api, setApi])
 
+    
+
     React.useEffect(() => {
       if (!api) {
         return
@@ -173,11 +192,18 @@ const Carousel = React.forwardRef<
           {...props}
         >
           {children}
+          {/* Hero carousel current slide indicator */}
           {type === 'hero' &&
             <div id='carousel-indicator' className='absolute flex justify-center w-full text-white uppercase bottom-5'>
               {currentSlide} of {totalSlides}
             </div>
           }
+          {/* Gallery carousel progress bar */}
+          {type === 'gallery' && (
+            <div className="py-5 mb-5">
+              <ProgressBar progress={progress} />
+            </div>
+          )}
         </div>
       </CarouselContext.Provider>
     )
@@ -233,7 +259,7 @@ const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const { type, orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
     <Button
@@ -242,9 +268,9 @@ const CarouselPrevious = React.forwardRef<
       size={size}
       className={cn(
         'absolute  h-8 w-8 rounded-full',
-        orientation === 'horizontal'
-          ? 'left-5 top-1/2 -translate-y-1/2'
-          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+        type === 'gallery'
+          ? 'left-5 top-[190px] -translate-y-1/2'
+          : 'left-5 top-1/2 -translate-y-1/2',
         className
       )}
       // disabled={!canScrollPrev}
@@ -262,7 +288,7 @@ const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { type, orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
     <Button
@@ -271,9 +297,9 @@ const CarouselNext = React.forwardRef<
       size={size}
       className={cn(
         'absolute h-8 w-8 rounded-full',
-        orientation === 'horizontal'
-          ? 'right-5 top-1/2 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+        type === 'gallery'
+          ? 'right-5 top-[190px] -translate-y-1/2'
+          : 'right-5 top-1/2 -translate-y-1/2',
         className
       )}
       // disabled={!canScrollNext}
