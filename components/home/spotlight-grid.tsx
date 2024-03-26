@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Spotlight, Tag } from '@/types/sanity.types'
-import { Button } from '@/components/ui/button'
-import Search from '@/components/ui/search'
-import iconBars from '@/public/images/icon-bars.svg'
+import Filter from '@/components/ui/filter'
+import Tags from '@/components/ui/tags'
 
 type Props = {
   spotlights: Spotlight[]
@@ -15,23 +14,22 @@ type Props = {
 
 const SpotlightGrid = ({ spotlights, tags }: Props) => {
   const [filteredSpotlights, setFilteredSpotlights] = useState(spotlights)
-  const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [activeTags, setActiveTags] = useState<Tag[]>([])
+  const [query, setQuery] = useState('')
 
-  // Function to handle tag click
-  const handleTagClick = (tagName: string) => {
-    setActiveTag(activeTag => activeTag === tagName ? null : tagName);
+  // Reset search query and show all items
+  const resetFilter = () => {
+    if (query.length) {
+      setQuery('') // reset query if present
+    }
   }
 
-  // Effect to filter spotlights when activeTag changes
-  useEffect(() => {
-    if (activeTag) {
-      setFilteredSpotlights(spotlights.filter(spotlight => {
-        return spotlight.primaryTags && Array.isArray(spotlight.primaryTags) && spotlight.primaryTags.some(tag => tag.name === activeTag)
-      }))
-    } else {
-      setFilteredSpotlights(spotlights)
+  // Reset the active tags and show all items
+  const resetTags = () => {
+    if (activeTags.length) {
+      setActiveTags([]) // reset active tags if present
     }
-  }, [activeTag, spotlights])
+  }
 
   return (
     <div id='spotlight-grid' className='pt-20'>
@@ -42,20 +40,26 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
       <div id='spotlight-filter-search' className='mb-5 -mx-2.5'>
         <h4 className='uppercase text-sm text-grey-600 mb-2 px-2.5'>Filter tools</h4>
         <div className='flex justify-between items-center'>
-          <div id='spotlight-filters' className='flex gap-3 w-3/4 px-2.5'>
-            {tags.map((tag: Tag) =>
-              <Button
-                key={tag._id}
-                variant={'tag'}
-                size={'sm'}
-                onClick={() => handleTagClick(tag.name)}
-              >
-                {tag.name}
-              </Button>
-            )}
+          <div id='spotlight-tags' className='w-3/4 px-2.5' >
+            <Tags
+              data={spotlights}
+              tags={tags}
+              setFilteredData={setFilteredSpotlights}
+              activeTags={activeTags}
+              setActiveTags={setActiveTags}
+              resetFilter={resetFilter}
+            />
           </div>
           <div id='spotlight-search' className='w-1/4 px-3'>
-            {/* <Search size='sm' placeholder='Search for a topic...' /> */}
+            <Filter
+              data={spotlights}
+              query={query}
+              setQuery={setQuery}
+              setFilteredData={setFilteredSpotlights}
+              placeholder='Search for a topic...'
+              resetFilter={resetFilter}
+              resetTags={resetTags}
+            />
           </div>
         </div>
       </div>
@@ -69,9 +73,10 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
             <div className='h-[160px] lg:h-[240px] xl:h-[280px] mb-2 relative'>
               <div className='absolute z-10 flex justify-center items-center h-10 w-10 top-3 right-3 bg-grey-600'>
                 <Image // icon
-                  src={iconBars}
+                  src={'/images/icon-bars.svg'}
                   alt={'Bars icon'}
                   width={22}
+                  height={22}
                 />
               </div>
               <Image

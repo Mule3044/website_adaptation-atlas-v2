@@ -2,11 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import iconSearch from '@/public/images/icon-search.svg'
 import Fuse from 'fuse.js'
 import { Combobox } from '@headlessui/react'
-import iconArrow from '@/public/images/icon-arrow-dark.svg'
 import { BiX } from 'react-icons/bi'
 import { SearchItem } from '@/types/sanity.types'
 import { useRouter } from 'next/navigation'
@@ -52,8 +49,6 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
   const fuse = new Fuse(processedData, fuseOptions)
   const filteredData = fuse.search(query)
 
-  console.log(filteredData)
-
   const focusSearchBox = () => {
     setSearchBoxActive(true)
   }
@@ -88,9 +83,10 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
         <div className='relative'>
           <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-3 px-4'>
             <Image
-              src={iconSearch}
+              src={'/images/icon-search.svg'}
               alt='Search'
               width={15}
+              height={15}
             />
             <Combobox.Input
               onChange={(event) => setQuery(event.target.value)}
@@ -126,7 +122,7 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
                     />
                     <span className='truncate'>{post.item.title}</span>
                     <Image // icon
-                      src={iconArrow}
+                      src={'/images/icon-arrow-dark.svg'}
                       alt={'Arrow icon'}
                       width={22}
                       height={22}

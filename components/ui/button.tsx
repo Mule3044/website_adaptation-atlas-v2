@@ -19,6 +19,8 @@ const buttonVariants = cva(
           'bg-white text-brand-green transition-colors hover:bg-brand-green hover:text-white',
         tag:
           'text-brand-green bg-grey-100 rounded-[4px] transition-colors hover:bg-brand-green hover:text-white',
+        tagActive:
+          'text-white bg-brand-green rounded-[4px] transition-colors hover:bg-brand-dark-green',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -37,7 +39,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
