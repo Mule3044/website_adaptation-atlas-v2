@@ -20,19 +20,20 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: 'horizontal' | 'vertical'
   setApi?: (api: CarouselApi) => void
-  type?: 'hero' | 'gallery'
+  type?: 'hero' | 'gallery' | 'tags'
 }
 
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
   api: ReturnType<typeof useEmblaCarousel>[1]
+  scrollToStart: () => void
   scrollPrev: () => void
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
 } & CarouselProps
 
-const CarouselContext = React.createContext<CarouselContextProps | null>(null)
+export const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
 function useCarousel() {
   const context = React.useContext(CarouselContext)
@@ -99,6 +100,10 @@ const Carousel = React.forwardRef<
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
     }, [])
+
+    const scrollToStart = () => {
+      api?.scrollTo(0)
+    }
 
     const scrollPrev = React.useCallback(() => {
       if (!api) return
@@ -173,6 +178,7 @@ const Carousel = React.forwardRef<
         value={{
           carouselRef,
           api: api,
+          scrollToStart,
           type,
           opts,
           orientation:
@@ -268,9 +274,9 @@ const CarouselPrevious = React.forwardRef<
       size={size}
       className={cn(
         'absolute  h-8 w-8 rounded-full',
-        type === 'gallery'
-          ? 'left-5 top-[190px] -translate-y-1/2'
-          : 'left-5 top-1/2 -translate-y-1/2',
+        'left-5 top-1/2 -translate-y-1/2',
+        { 'top-[190px]': type === 'gallery' },
+        { '-left-2 border border-grey-200 text-grey-300': type === 'tags' },
         className
       )}
       // disabled={!canScrollPrev}
@@ -297,9 +303,9 @@ const CarouselNext = React.forwardRef<
       size={size}
       className={cn(
         'absolute h-8 w-8 rounded-full',
-        type === 'gallery'
-          ? 'right-5 top-[190px] -translate-y-1/2'
-          : 'right-5 top-1/2 -translate-y-1/2',
+        'right-5 top-1/2 -translate-y-1/2',
+        { 'top-[190px]': type === 'gallery' },
+        { '-right-1 border border-grey-200 text-grey-300': type === 'tags' },
         className
       )}
       // disabled={!canScrollNext}

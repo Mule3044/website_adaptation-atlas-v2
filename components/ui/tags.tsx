@@ -1,9 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Button } from '@/components/ui/button'
 import { BiX } from 'react-icons/bi'
 import { Spotlight, Tag } from '@/types/sanity.types'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselContext,
+} from '@/components/ui/carousel'
 
 type Props = {
   data: Spotlight[]
@@ -15,55 +23,59 @@ type Props = {
 }
 
 const Tags = ({ data, tags, activeTags, setActiveTags, setFilteredData, resetFilter }: Props) => {
+  const carouselContext = useContext(CarouselContext)
 
-  // Function to handle tag click
   const handleTagClick = (clickedTag: string) => {
-    resetFilter() // clear search filter query
+    // resetFilter() // clear search filter query
     setActiveTags(currentActiveTags => {
-      const isTagActive = currentActiveTags.some(tag => tag.name === clickedTag);
+      const isTagActive = currentActiveTags.some(tag => tag.name === clickedTag)
       if (isTagActive) {
-        // Remove the tag if it's already active
-        return currentActiveTags.filter(tag => tag.name !== clickedTag);
+        return currentActiveTags.filter(tag => tag.name !== clickedTag)
       } else {
-        // Add the tag if it's not already active
-        // Find the full tag object to add
-        const tagToAdd = tags.find(tag => tag.name === clickedTag);
-        return tagToAdd ? [...currentActiveTags, tagToAdd] : currentActiveTags;
+        const tagToAdd = tags.find(tag => tag.name === clickedTag)
+        return tagToAdd ? [...currentActiveTags, tagToAdd] : currentActiveTags
       }
-    });
-  };
+    })
+    carouselContext?.scrollToStart() // Reset carousel to the start
+  }
 
-
-  // Filter spotlights when activeTag changes
   useEffect(() => {
-    resetFilter() // clear search filter query
+    // resetFilter() // clear search filter query
     if (activeTags.length > 0) {
       setFilteredData(data.filter(post =>
         activeTags.every(activeTag =>
-          // Ensure post.primaryTags is treated as an array even if it's undefined
           (post.primaryTags ?? []).some(tag => tag.name === activeTag.name)
         )
-      ));
+      ))
     } else {
-      setFilteredData(data); // No tags are active, so don't filter
+      setFilteredData(data)
     }
-  }, [activeTags, data, setFilteredData]);
-  
+  }, [activeTags, data, setFilteredData])
 
+  // Sort tags array so that active tags come first
+  const sortedTags = [...tags].sort((a, b) => {
+    const aActive = activeTags.some(tag => tag.name === a.name)
+    const bActive = activeTags.some(tag => tag.name === b.name)
+    return aActive === bActive ? 0 : aActive ? -1 : 1
+  })
 
   return (
-    <div id='tags' className='flex gap-3'>
-      {tags.map((tag: Tag) =>
-        <Button
-          key={tag._id}
-          variant={activeTags.some(activeTag => activeTag.name === tag.name) ? 'tagActive' : 'tag'}
-          size={'sm'}
-          onClick={() => handleTagClick(tag.name)}
-        >
-          {tag.name}
-        </Button>
-      )}
-    </div>
+    <CarouselContent className='mr-10'>
+      {sortedTags.map((tag: Tag) => {
+        const tagActive = activeTags.some(activeTag => activeTag.name === tag.name)
+        return (
+          <CarouselItem key={tag._id} className='basis-auto'>
+            <Button
+              variant={tagActive ? 'tagActive' : 'tag'}
+              size={'sm'}
+              onClick={() => handleTagClick(tag.name)}
+            >
+              {tag.name}{tagActive && <BiX className='scale-150 ml-2 -mr-1' />}
+            </Button>
+          </CarouselItem>
+        )
+      })}
+    </CarouselContent>
   )
 }
 

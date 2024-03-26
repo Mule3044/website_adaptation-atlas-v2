@@ -6,6 +6,13 @@ import Link from 'next/link'
 import { Spotlight, Tag } from '@/types/sanity.types'
 import Filter from '@/components/ui/filter'
 import Tags from '@/components/ui/tags'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 
 type Props = {
   spotlights: Spotlight[]
@@ -14,6 +21,7 @@ type Props = {
 
 const SpotlightGrid = ({ spotlights, tags }: Props) => {
   const [filteredSpotlights, setFilteredSpotlights] = useState(spotlights)
+  // const [filterActive, setFilterActive] = useState(false)
   const [activeTags, setActiveTags] = useState<Tag[]>([])
   const [query, setQuery] = useState('')
 
@@ -26,9 +34,8 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
 
   // Reset the active tags and show all items
   const resetTags = () => {
-    if (activeTags.length) {
-      setActiveTags([]) // reset active tags if present
-    }
+    // setFilteredSpotlights(spotlights) // reset filter
+    setActiveTags([])
   }
 
   return (
@@ -41,14 +48,19 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
         <h4 className='uppercase text-sm text-grey-600 mb-2 px-2.5'>Filter tools</h4>
         <div className='flex justify-between items-center'>
           <div id='spotlight-tags' className='w-3/4 px-2.5' >
-            <Tags
-              data={spotlights}
-              tags={tags}
-              setFilteredData={setFilteredSpotlights}
-              activeTags={activeTags}
-              setActiveTags={setActiveTags}
-              resetFilter={resetFilter}
-            />
+            <Carousel type='tags'>
+              <Tags
+                data={spotlights}
+                tags={tags}
+                setFilteredData={setFilteredSpotlights}
+                activeTags={activeTags}
+                setActiveTags={setActiveTags}
+                resetFilter={resetFilter}
+              />
+              {/* <CarouselPrevious /> */}
+              <CarouselNext />
+            </Carousel>
+
           </div>
           <div id='spotlight-search' className='w-1/4 px-3'>
             <Filter
@@ -64,7 +76,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
         </div>
       </div>
       <div id='grid' className='flex flex-wrap -mx-3'>
-        {filteredSpotlights.map((spotlight: Spotlight) =>
+        {filteredSpotlights && filteredSpotlights.map((spotlight: Spotlight) =>
           <Link
             key={spotlight._id}
             href={`/data-spotlights/${spotlight.slug}`}
@@ -96,6 +108,11 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
             </div>
           </Link>
         )}
+        {!filteredSpotlights.length &&
+          <div className='mx-auto my-20'>
+            <p className='text-base'>No results found</p>
+          </div>
+        }
       </div>
     </div>
   )
