@@ -59,7 +59,7 @@ const Filter = ({ data, query, setQuery, placeholder, setFilteredData, resetFilt
             <Combobox.Input
               onChange={(event) => setQuery(event.target.value)}
               onFocus={focusSearchBox}
-              onBlur={resetFilter}
+              // onBlur={resetFilter}
               placeholder={placeholder}
               className='w-full bg-grey-100 outline-none text-lg'
             />
