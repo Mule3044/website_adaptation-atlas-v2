@@ -43,7 +43,7 @@ const Tags = ({ data, tags, activeTags, setActiveTags, setFilteredData, resetFil
     // resetFilter() // clear search filter query
     if (activeTags.length > 0) {
       setFilteredData(data.filter(post =>
-        activeTags.every(activeTag =>
+        activeTags.some(activeTag =>
           (post.primaryTags ?? []).some(tag => tag.name === activeTag.name)
         )
       ))
