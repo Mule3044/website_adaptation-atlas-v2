@@ -27,7 +27,7 @@ export default defineType({
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Underline', value: 'underline' },
-          { title: "Super", value: 'super', icon: SuperIcon, component: SuperDecorator},
+          { title: "Super", value: 'super', icon: SuperIcon, component: SuperDecorator },
         ],
         annotations: [
           {
@@ -39,6 +39,9 @@ export default defineType({
                 title: 'URL',
                 name: 'href',
                 type: 'url',
+                validation: Rule => Rule.uri({
+                  scheme: ['http', 'https', 'mailto']
+                })
               },
             ],
           },
