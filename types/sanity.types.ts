@@ -7,10 +7,16 @@ export type Tag = {
   slug: string
 }
 
+type Observable = {
+  embedCode: string
+  src: string
+  height: number
+}
+
 export type DataCard = {
   title: string
   description: string
-  observableEmbed: string
+  observable: Observable
   featuredImage: string
   featuredImageAlt: string
 }

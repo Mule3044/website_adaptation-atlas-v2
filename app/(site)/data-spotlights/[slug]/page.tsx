@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { getSpotlightPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPost } from '@/components/sanity/portable-text-post'
@@ -11,15 +10,20 @@ type Props = {
 
 export default async function SpotlightPost({ params }: Props) {
   const post = await getSpotlightPost(params.slug)
+  const dataCardImage = post.dataCard?.featuredImage
+  const dataCardAlt = post.dataCard?.featuredImageAlt
+  const dataCardEmbedSrc = post.dataCard.observable?.src
+  const dataCardEmbedHeight = post.dataCard.observable?.height
 
   return (
     <div id='impact-post' className='p-5 mt-2 mb-[100px]'>
       <header className='relative w-full h-[800px] flex justify-center items-center mb-20'>
         <Image
           src={post.featuredImage}
-          alt={post.featuredImageAlt}
-          layout='fill'
-          objectFit='cover'
+          alt={(post.featuredImageAlt) ? post.featuredImageAlt : 'Featured image'}
+          fill // fill available space
+          priority // prioritize above the fold images
+          style={{ objectFit: "cover" }} // NextJS 13+ Image accepts style property
         />
         <div className='relative h-[575px] w-[575px] p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-10'>
           <div className='inline-block p-2 mb-2 bg-black'>
@@ -27,6 +31,7 @@ export default async function SpotlightPost({ params }: Props) {
               src={iconBars}
               alt={'Page icon'}
               width={20}
+              height={20}
             />
           </div>
           <span className='uppercase leading-none font-medium mb-5'>Data Spotlight</span>
@@ -73,23 +78,30 @@ export default async function SpotlightPost({ params }: Props) {
         <PortableText value={post.content} components={portableTextPost} />
       </div>
 
-      {/* TODO - Add observable embed support */}
-      {(post.dataCard.featuredImage) &&
+      {/* Data card with observable embed or preview image */}
+      {(dataCardImage || dataCardEmbedSrc) &&
         <div id='data-card' className='flex gap-5 justify-between items-center'>
           <div className='w-2/3'>
-            <a
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src={post.dataCard.featuredImage}
-                alt={post.dataCard.featuredImageAlt}
-                layout='responsive'
-                width={1920}
-                height={1080}
-              />
-            </a>
+            {/* If observable embed exists, display embed */}
+            {dataCardEmbedSrc &&
+              <iframe width="100%" height={dataCardEmbedHeight} src={dataCardEmbedSrc}></iframe>
+            }
+            {/* If preview image exists and embed doesn't, display image */}
+            {(dataCardImage && !dataCardEmbedSrc) &&
+              <a
+                href={post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={dataCardImage}
+                  alt={dataCardAlt}
+                  layout='responsive'
+                  width={1920}
+                  height={1080}
+                />
+              </a>
+            }
           </div>
           <div className='w-1/3'>
             <h3 className='uppercase text-grey-600 font-medium mb-0.5'>Preview</h3>

@@ -27,6 +27,18 @@ export default defineType({
           title: 'Iframe embed code',
           type: 'text',
           description: 'The full embed code copied from the Observable notebook.',
+        },
+        {
+          name: 'src',
+          title: 'Iframe embed src',
+          type: 'string',
+          description: 'The src property of the iframe as it appears in the embed code.',
+        },
+        {
+          name: 'height',
+          title: 'Iframe height',
+          type: 'number',
+          description: 'The height property of the iframe as it appears in the embed code.',
         }
       ]
     },
