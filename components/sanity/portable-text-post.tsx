@@ -15,7 +15,7 @@ const ImageFullComponent = ({ value }: any) => {
   return (
     <div className='mb-20'>
       <Image
-        src={imageUrl.width(1920).url()}
+        src={imageUrl.url()}
         alt={value.alt}
         layout='responsive'
         width={1920}
@@ -31,7 +31,7 @@ const ImageCaptionComponent = ({ value }: any) => {
   return (
     <div className='max-w-[960px] mx-auto mb-20'>
       <Image
-        src={imageUrl.width(1920).url()}
+        src={imageUrl.url()}
         alt={value.alt}
         layout='responsive'
         width={1920}

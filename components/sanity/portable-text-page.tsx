@@ -13,7 +13,7 @@ const ImageComponent = ({ value }: any) => {
 
   return (
     <Image
-      src={imageUrl.width(1440).url()}
+      src={imageUrl.url()}
       alt={value.alt}
       layout='responsive'
       width={1440}
@@ -28,7 +28,7 @@ const GalleryImageComponent = ({ value }: any) => {
 
   return (
     <Image
-      src={imageUrl.width(480).url()}
+      src={imageUrl.url()}
       alt={value.alt}
       width={480}
       height={480}
