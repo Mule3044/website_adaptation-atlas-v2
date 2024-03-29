@@ -79,8 +79,8 @@ const Menu = () => {
           <footer className='flex justify-between w-full p-5 text-white'>
             <p>© {year} AAA & CGIAR</p>
             <div className='relative flex gap-4'>
-              <Link href='mailto:t.rosenstock@cgiar.org' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Sign up for our newsletter</Link>
-              <Link href='mailto:t.rosenstock@cgiar.org' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Contact us</Link>
+              <a href='mailto:t.rosenstock@cgiar.org' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Sign up for our newsletter</a>
+              <a href='mailto:t.rosenstock@cgiar.org' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Contact us</a>
               <Share type='light' />
             </div>
           </footer>

@@ -21,13 +21,13 @@ const InsightCarousel = ({ insights }: Props) => {
   return (
     <div id='insight-carousel' className='pt-20'>
       <div id='insight-carousel-header' className='mb-5'>
-        <h2 className='text-4xl text-grey-600 font-semibold mb-2'>Data Insights</h2>
-        <h3 className='text-lg text-grey-600 font-medium'>Read about how our work and data collection efforts have led to real-world change.</h3>
+        <h1 className='mb-2'>Data Insights</h1>
+        <h3>Read about how our work and data collection efforts have led to real-world change.</h3>
       </div>
-      <Carousel type='gallery'>
+      <Carousel type='gallery' opts={{ align: 'start' }}>
         <CarouselContent className='-ml-5'>
           {insights.map((insight: Insight) =>
-            <CarouselItem key={insight._id} className='relative md:basis-1/2 lg:basis-1/3 pl-5 transition-opacity hover:opacity-90'>
+            <CarouselItem key={insight._id} className='relative basis-full md:basis-1/2 lg:basis-1/3 pl-5 transition-opacity hover:opacity-90'>
               <Link
                 key={insight._id}
                 href={`/data-insights/${insight.slug}`}

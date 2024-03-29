@@ -15,20 +15,20 @@ const GetInvolvedTout = ({ content }: Props) => {
   return (
     <div id='get-involved-tout' className='pt-20 mb-20'>
       <div id='tout-header' className='mb-5'>
-        <h2 className='text-4xl text-grey-600 font-semibold mb-2'>{content.tout.title}</h2>
-        <h3 className='text-lg text-grey-600 font-medium'>{content.tout.subtitle}</h3>
+        <h1 className='mb-2'>{content.tout.title}</h1>
+        <h3>{content.tout.subtitle}</h3>
       </div>
-      <div className='flex justify-between gap-5 items-center'>
+      <div className='flex flex-col lg:flex-row justify-between gap-5 items-center'>
         <Image
           src={content.tout.featuredImage}
           alt={content.tout.featuredImageAlt}
           width={940}
           height={800}
-          className='w-2/3'
+          className='basis-full lg:basis-2/3'
         />
-        <div id='tout-description' className='w-1/3'>
-          <h4 className='text-[28px] font-semibold mb-4'>{content.tout.descriptionHeader}</h4>
-          <p className='text-[18px] mb-3'>{content.tout.descriptionBody}</p>
+        <div id='tout-description' className='basis-full lg:basis-1/3'>
+          <h4 className='mb-4'>{content.tout.descriptionHeader}</h4>
+          <p className='mb-3'>{content.tout.descriptionBody}</p>
           <Button variant={'link'} size={'md'} asChild className='group'>
             <div>
               <Link href='/get-involved'>{content.tout.buttonLabel}</Link>

@@ -104,7 +104,7 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
               </button>
             }
           </div>
-          <Combobox.Options className='absolute bg-grey-100 w-full px-5 max-h-[320px] overflow-y-auto'>
+          <Combobox.Options className='absolute bg-grey-100 w-full px-5 max-h-[200px] lg:max-h-[320px] overflow-y-auto'>
             {filteredData.length > 0 && filteredData.map((post: any) => {
               const type = searchPaths.find((item: any) => item.type === post.item._type)
               return (

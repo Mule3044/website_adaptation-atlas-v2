@@ -13,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import cn from 'classnames'
 
 type Props = {
   spotlights: Spotlight[]
@@ -41,14 +42,14 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
   return (
     <div id='spotlight-grid' className='pt-20'>
       <div id='spotlight-grid-header' className='mb-5'>
-        <h2 className='text-4xl text-grey-600 font-semibold mb-2'>Data Spotlights</h2>
-        <h3 className='text-lg text-grey-600 font-medium'>Explore interactive visualizations of data we’ve collected.</h3>
+        <h1 className='mb-2'>Data Spotlights</h1>
+        <h3>Explore interactive visualizations of data we’ve collected.</h3>
       </div>
       <div id='spotlight-filter-search' className='mb-5 -mx-2.5'>
         <h4 className='uppercase text-sm text-grey-600 mb-2 px-2.5'>Filter tools</h4>
-        <div className='flex justify-between items-center'>
-          <div id='spotlight-tags' className='w-3/4 px-2.5' >
-            <Carousel type='tags'>
+        <div className='flex justify-between items-center flex-wrap'>
+          <div id='spotlight-tags' className='w-full md:w-3/4 px-2.5 mb-5 md:mb-0' >
+            <Carousel type='tags' opts={{ align: 'start' }}>
               <Tags
                 data={spotlights}
                 tags={tags}
@@ -60,9 +61,8 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
               {/* <CarouselPrevious /> */}
               <CarouselNext />
             </Carousel>
-
           </div>
-          <div id='spotlight-search' className='w-1/4 px-3'>
+          <div id='spotlight-search' className='w-full md:w-1/4 px-3'>
             <Filter
               data={spotlights}
               query={query}
@@ -77,37 +77,48 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
       </div>
       <div id='grid' className='flex flex-wrap -mx-3'>
         {filteredSpotlights && filteredSpotlights.map((spotlight: Spotlight) =>
-          <Link
-            key={spotlight._id}
-            href={`/data-spotlights/${spotlight.slug}`}
-            className='block transition-opacity hover:opacity-90 w-1/4 px-2.5 mb-10'
-          >
-            <div className='h-[160px] lg:h-[240px] xl:h-[280px] mb-2 relative'>
-              <div className='absolute z-10 flex justify-center items-center h-10 w-10 top-3 right-3 bg-grey-600'>
-                <Image // icon
-                  src={'/images/icon-bars.svg'}
-                  alt={'Bars icon'}
-                  width={22}
-                  height={22}
-                />
+          <div key={spotlight._id} className="block basis-full sm:basis-1/2 md:basis-1/3 xl:basis-1/4 px-2.5 mb-10">
+            {spotlight.comingSoon ? (
+              <div className="relative">
+                {/* Coming soon post */}
+                <div className='flex justify-center items-center h-[240px] xl:h-[280px] mb-2 relative'>
+                  <Image
+                    src={spotlight.featuredImage}
+                    alt={spotlight.featuredImageAlt}
+                    layout='fill'
+                    objectFit='cover'
+                    className='object-center opacity-30'
+                  />
+                  <div className='relative z-10 flex flex-col justify-center items-center '>
+                    <h3 className='uppercase tracking-wide font-medium mb-2'>Coming soon</h3>
+                    <a href='mailto:t.rosenstock@cgiar.org' className='text-brand-green font-medium'>Notify Me</a>
+                  </div>
+                </div>
+                <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
               </div>
-              <Image
-                src={spotlight.featuredImage}
-                alt={spotlight.featuredImageAlt}
-                layout='fill'
-                objectFit='cover'
-                className='object-center'
-              />
-            </div>
-            <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
-            <div className='flex gap-3'>
+            ) : (
+              <Link href={`/data-spotlights/${spotlight.slug}`} className='transition-opacity hover:opacity-90'>
+                {/* Published post */}
+                <div className='relative flex justify-center items-center h-[240px] xl:h-[280px] mb-2'>
+                  <Image
+                    src={spotlight.featuredImage}
+                    alt={spotlight.featuredImageAlt}
+                    layout='fill'
+                    objectFit='cover'
+                    className='object-center'
+                  />
+                </div>
+                <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
+              </Link>
+            )}
+            <div className='flex gap-x-3 gap-y-1 flex-wrap'>
               {spotlight.featuredTags && spotlight.featuredTags.map((tag) => {
                 return <p key={tag._id} className='text-brand-green text-sm font-medium'>{tag.name}</p>
-              }
-              )}
+              })}
             </div>
-          </Link>
+          </div>
         )}
+
         {!filteredSpotlights.length &&
           <div className='mx-auto my-20'>
             <p className='text-base'>No results found</p>

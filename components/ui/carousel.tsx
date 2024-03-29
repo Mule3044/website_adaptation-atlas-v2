@@ -6,7 +6,8 @@ import { IoChevronForwardSharp } from 'react-icons/io5'
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react'
-
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { breakpoints } from '@/lib/constants'
 import cn from 'classnames'
 import { Button } from '@/components/ui/button'
 
@@ -33,6 +34,8 @@ type CarouselContextProps = {
   canScrollNext: boolean
 } & CarouselProps
 
+
+
 export const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
 function useCarousel() {
@@ -46,6 +49,7 @@ function useCarousel() {
 }
 
 const ProgressBar = ({ progress }: any) => {
+
   return (
     <div className="w-full bg-gray-200 h-0.5 rounded-full overflow-hidden">
       <div
@@ -85,9 +89,12 @@ const Carousel = React.forwardRef<
     const [canScrollNext, setCanScrollNext] = React.useState(false)
     const [currentSlide, setCurrentSlide] = React.useState(0)
     const [totalSlides, setTotalSlides] = React.useState(0)
+    // Define screen breakpoints for progress bar
+    const isDesktop = useMediaQuery(breakpoints.lg)
+    const isTablet = useMediaQuery(breakpoints.md)
 
     // Calculate the progress for the progress bar
-    const slidesVisible = 3; // Number of slides visible at once
+    const slidesVisible = (isDesktop) ? 3 : (isTablet) ? 2 : 1; // Number of slides visible at once
     const totalUniqueFirstSlides = Math.max(1, totalSlides - slidesVisible + 1);
     const currentIndex = currentSlide - 1; // Adjust for zero-based indexing
     const progress = ((currentIndex / Math.max(1, totalUniqueFirstSlides - 1)) * 100).toFixed(2); // Ensure the division is safe
@@ -148,7 +155,7 @@ const Carousel = React.forwardRef<
       setApi(api)
     }, [api, setApi])
 
-    
+
 
     React.useEffect(() => {
       if (!api) {

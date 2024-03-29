@@ -18,23 +18,25 @@ type Props = {
 }
 
 const HomeCarousel = ({ spotlights }: Props) => {
+  const publishedSpotlights = spotlights.filter((spotlight) => !spotlight.comingSoon)
 
   return (
-    <div id='home-carousel' className='h-[800px]'>
-      <Carousel type='hero' className='h-[800px]'>
-        <CarouselContent className='h-[800px]'>
-          {spotlights.map((spotlight: Spotlight) =>
-            <CarouselItem key={spotlight._id} className='relative h-[800px] flex justify-center items-center'>
+    <div id='home-carousel'>
+      <Carousel type='hero'>
+        <CarouselContent className='h-[600px] lg:h-[800px]'>
+          {publishedSpotlights.map((spotlight: Spotlight) =>
+            <CarouselItem key={spotlight._id} className='relative flex justify-center items-center'>
               <Image
                 src={spotlight.featuredImage}
                 alt={spotlight.featuredImageAlt}
                 layout='fill'
                 objectFit='cover'
               />
-              <div id='carousel-content' className='relative h-[575px] w-[575px] p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-50'>
+              <div id='carousel-content' className='relative h-[340px] w-[340px] p-[40px] lg:h-[575px] lg:w-[575px] lg:p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-50'>
                 <h3 className='uppercase text-grey-600 font-medium mb-0.5'>Discover</h3>
-                <h2 className='text-[28px] text-grey-600 font-semibold mb-3'>{spotlight.carousel.title}</h2>
-                <p className='text-lg text-grey-600 mb-5'>{spotlight.carousel.description}</p>
+                {/* <h2 className='text-[20px] lg:text-[28px] text-grey-600 font-semibold mb-3'>{spotlight.carousel.title}</h2> */}
+                {spotlight.carousel?.title && <h2 className='text-grey-600 font-semibold mb-3'>{spotlight.carousel.title}</h2>}
+                {spotlight.carousel?.description && <p className='hidden lg:block text-lg text-grey-600 mb-5'>{spotlight.carousel.description}</p>}
                 <Button variant={'link'} size={'lg'} asChild className='group'>
                   <div>
                     <Link href={`/data-spotlights/${spotlight.slug}`}>Explore spotlight</Link>

@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Transition } from '@headlessui/react';
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { breakpoints } from '@/lib/constants'
 import Search from '@/components/ui/search'
 import atlasLogo from '@/public/images/atlas-logo.svg'
 import { Home, SearchItem } from '@/types/sanity.types'
@@ -15,6 +16,8 @@ type Props = {
 
 const HomeHero = ({ searchContent, content }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
+  const isLgScreen = useMediaQuery(breakpoints.xl)
+  const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase...' : 'Search for research and data...'
 
   const handleLinkClick = (e: any, target: any) => {
     e.preventDefault(); // Prevent default anchor behavior
@@ -26,36 +29,36 @@ const HomeHero = ({ searchContent, content }: Props) => {
   }
 
   return (
-    <div id='hero' className='flex justify-between h-[800px] mb-5'>
-      <div id='intro-search' className='w-3/4 flex justify-center mt-[200px] gap-5'>
-        <div className='w-2/3'>
+    <div id='hero' className='flex flex-wrap justify-between h-[480px] lg:h-[800px] mb-5'>
+      <div id='intro-search' className='basis-full lg:basis-3/4 flex justify-center mt-[100px] lg:mt-[200px] gap-5'>
+        <div className='basis-4/5 lg:basis-2/3'>
           <Image // logo
             src={atlasLogo}
             alt='Agriculture Adaptation Atlas logo'
             width={280}
             height={280}
-            className='mb-7'
+            className='mb-7 w-[200px] lg:w-[280px]'
           />
 
           {content.introText && (
-            <h2 className={cn(
-              'max-w-[600px] text-grey-600 text-4xl font-semibold leading-snug mb-20 transition-opacity',
+            <h1 className={cn(
+              'max-w-[600px] text-grey-600 font-semibold leading-snug mb-10 lg:mb-20 transition-opacity',
               { 'opacity-0': searchBoxActive }
-            )}>{content.introText}</h2>
+            )}>{content.introText}</h1>
           )}
 
           <div id='search-container' className={cn(
             'transition-transform',
-            { '-translate-y-[220px]': searchBoxActive }
+            { '-translate-y-[140px] lg:-translate-y-[160px]': searchBoxActive } // TODO - make this dynamic
           )}>
             <p className='text-grey-600 text-lg font-medium mb-3'>Know what you’re looking for?</p>
-            <Search data={searchContent} placeholder='Search for evidence-based research and data by keyword or phrase...' searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
+            <Search data={searchContent} placeholder={searchPlaceholder} searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
           </div>
         </div>
       </div>
 
       {/* <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'> */}
-      <div id='intro-nav' className='w-1/4 h-full flex flex-col gap-5'>
+      <div id='intro-nav' className='hidden lg:flex flex-col gap-5 basis-full lg:basis-1/4 h-full'>
           <a
             href='#spotlight-grid'
             onClick={(e) => handleLinkClick(e, '#spotlight-grid')}
