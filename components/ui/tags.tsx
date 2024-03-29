@@ -1,6 +1,4 @@
-'use client'
-
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { Button } from '@/components/ui/button'
 import { BiX } from 'react-icons/bi'
 import { Spotlight, Tag } from '@/types/sanity.types'

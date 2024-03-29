@@ -1,5 +1,3 @@
-'use client'
-
 import { getGetInvolvedContent } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPage } from '@/components/sanity/portable-text-page'

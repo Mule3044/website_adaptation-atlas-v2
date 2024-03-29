@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import { getInsightPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'

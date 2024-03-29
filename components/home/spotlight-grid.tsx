@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Spotlight, Tag } from '@/types/sanity.types'
@@ -8,10 +8,7 @@ import Filter from '@/components/ui/filter'
 import Tags from '@/components/ui/tags'
 import {
   Carousel,
-  CarouselContent,
-  CarouselItem,
   CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel'
 import cn from 'classnames'
 
