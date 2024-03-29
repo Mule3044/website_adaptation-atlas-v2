@@ -1,3 +1,5 @@
+'use client'
+
 import HomeHero from '@/components/home/home-hero'
 import HomeCarousel from '@/components/home/home-carousel'
 import { getHomeContent, getSpotlights, getInsights, getImpacts, getPrimaryTags, getSearchContent } from '@/lib/sanity.query'

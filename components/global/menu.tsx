@@ -59,7 +59,7 @@ const Menu = () => {
             ))}
           </div>
         </div>
-        <div id='menu-logo' className='flex items-center justify-center w-full pt-6'>
+        <div id='menu-logo' className='relative z-50 flex items-center justify-center w-full pt-6'>
           <Link href='/' onClick={handleToggleMenu}>
             <Image
               src={atlasLogoLight}

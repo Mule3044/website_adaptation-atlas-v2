@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { getClient } from '@/lib/sanity.client'
 import imageUrlBuilder from '@sanity/image-url'

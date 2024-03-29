@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { getSpotlightPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'

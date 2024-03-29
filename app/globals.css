@@ -59,7 +59,6 @@ h1 {
 
 h1.page-header {
   color: #2E7636;
-  /* line-heignt: 1.25rem; */
 }
 
 @media (min-width: 1024px) {
@@ -71,13 +70,23 @@ h1.page-header {
 
 h2 {
   font-size: 1.25rem/* 20px */;
+  line-height: 2.25rem/* 36px */;
+}
+
+h2.carousel-header {
   line-height: 1.75rem/* 28px */;
+  margin-bottom: 0.75rem/* 12px */;
 }
 
 @media (min-width: 1024px) {
   h2 {
     font-size: 1.5rem/* 24px */;
     line-height: 2.5rem/* 40px */;
+  }
+
+  h2.carousel-header {
+    line-height: 2rem/* 32px */;
+    margin-bottom: 0.75rem/* 12px */;
   }
 }
 
