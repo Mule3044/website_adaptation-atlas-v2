@@ -53,7 +53,7 @@ export const portableTextPost = {
   },
 
   block: {
-    h2: ({ children }: any) => <h2 className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-6'>{children}</h2>,
+    h2: ({ children }: any) => <h2 className='max-w-[960px] mx-auto mb-6'>{children}</h2>,
     blockquote: ({ children }: any) => <blockquote className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-2'>{children}</blockquote>,
     // bullet: ({ children }: any) => <li className='max-w-[960px] mx-auto text-2xl font-normal tracking-normal leading-[42px] mb-16'>{children}</li>,
     normal: ({ children }: any) => {

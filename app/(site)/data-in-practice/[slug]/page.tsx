@@ -12,7 +12,7 @@ export default async function ImpactPost({ params }: Props) {
   const post = await getImpactPost(params.slug)
 
   return (
-    <div id='impact-post' className='p-5 mt-32'>
+    <div id='impact-post' className='p-5 mt-20 lg:mt-32'>
       <header className='max-w-[960px] mx-auto mb-16'>
         <div className='flex gap-3 items-end mb-3'>
           <div className='p-2 bg-black'>

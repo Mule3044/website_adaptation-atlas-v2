@@ -34,8 +34,7 @@ const HomeCarousel = ({ spotlights }: Props) => {
               />
               <div id='carousel-content' className='relative h-[340px] w-[340px] p-[40px] lg:h-[575px] lg:w-[575px] lg:p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-50'>
                 <h3 className='uppercase text-grey-600 font-medium mb-0.5'>Discover</h3>
-                {/* <h2 className='text-[20px] lg:text-[28px] text-grey-600 font-semibold mb-3'>{spotlight.carousel.title}</h2> */}
-                {spotlight.carousel?.title && <h2 className='text-grey-600 font-semibold mb-3'>{spotlight.carousel.title}</h2>}
+                {spotlight.carousel?.title && <h2 className='mb-3'>{spotlight.carousel.title}</h2>}
                 {spotlight.carousel?.description && <p className='hidden lg:block text-lg text-grey-600 mb-5'>{spotlight.carousel.description}</p>}
                 <Button variant={'link'} size={'lg'} asChild className='group'>
                   <div>

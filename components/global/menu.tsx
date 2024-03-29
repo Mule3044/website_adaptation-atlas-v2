@@ -76,9 +76,9 @@ const Menu = () => {
         </button>
 
         <div className='fixed right-0 bottom-0 left-0 z-50'>
-          <footer className='flex justify-between w-full p-5 text-white'>
-            <p>© {year} AAA & CGIAR</p>
-            <div className='relative flex gap-4'>
+          <footer className='flex flex-col lg:flex-row justify-between w-full p-5 text-white'>
+            <p className='order-2 lg:order-1'>© {year} AAA & CGIAR</p>
+            <div className='relative flex flex-col lg:flex-row order-1 lg:order-2 gap-4 mb-5'>
               <a href='mailto:t.rosenstock@cgiar.org' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Sign up for our newsletter</a>
               <a href='mailto:t.rosenstock@cgiar.org' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Contact us</a>
               <Share type='light' />
