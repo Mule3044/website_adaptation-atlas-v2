@@ -8,7 +8,7 @@ export default async function GetInvolved() {
   return (
     <div id='get-involved' className='p-5 mt-32'>
       <header className='max-w-[960px] mx-auto mb-16'>
-        <h1 className='text-4xl text-brand-green font-semibold'>{content.title}</h1>
+        <h1 className='page-header'>{content.title}</h1>
       </header>
       <div id='page-content' className='mb-[100px]'>
         <PortableText value={content.content} components={portableTextPage} />

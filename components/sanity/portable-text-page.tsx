@@ -58,7 +58,7 @@ export const portableTextPage = {
     h2: ({ children }: any) => <h2 className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-2'>{children}</h2>,
     normal: ({ children }: any) => {
       if (children[0]) {
-        return <p className='max-w-[960px] mx-auto text-2xl font-normal tracking-normal leading-[42px] mb-16'>{children}</p>
+        return <p className='page-text max-w-[960px] mx-auto'>{children}</p>
       } else {
         return <br />
       }

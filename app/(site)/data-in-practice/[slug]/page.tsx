@@ -24,7 +24,8 @@ export default async function ImpactPost({ params }: Props) {
           </div>
           <span className='uppercase leading-none font-medium'>Data in Practice</span>
         </div>
-        <h1 className='text-4xl text-brand-green font-semibold leading-tight mb-10'>{post.title}</h1>
+        <h1 className='page-header'>{post.title}</h1>
+        {/* <h1 className='text-4xl text-brand-green font-semibold leading-tight mb-10'>{post.title}</h1> */}
       </header>
 
       <div id='post-content' className='mb-[100px]'>

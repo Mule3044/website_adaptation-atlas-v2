@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  color: #2d2d2d;
+  color: #2D2D2D;
   font-size: 16px;
   background-color: white;
 }
@@ -32,13 +32,18 @@ li {
 /* Typography */
 
 h1, h2, h3, h4, h5, h6 {
-  font-color: '#2D2D2D';
+  color: #2D2D2D;
   font-weight: 600;
 }
 
 h1 {
-  font-size: 1.5rem/* 24px */;
-  line-height: 2rem/* 32px */;
+  font-size: 1.75rem/* 28px */;
+  line-height: 2.25rem/* 36px */;
+}
+
+h1.page-header {
+  color: #2E7636;
+  /* line-heignt: 1.25rem; */
 }
 
 @media (min-width: 1024px) {
@@ -49,12 +54,14 @@ h1 {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 1.25rem/* 20px */;
+  line-height: 1.75rem/* 28px */;
 }
 
 @media (min-width: 1024px) {
   h2 {
-    font-size: 28px;
+    font-size: 1.5rem/* 24px */;
+    line-height: 2.5rem/* 40px */;
   }
 }
 
@@ -79,9 +86,24 @@ h4 {
 }
 
 p {
-  font-size: 1.125rem/* 18px */;
-  line-height: 1.75rem/* 28px */;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   font-weight: 400;
+}
+
+p.page-text {
+  font-size: 1.25rem/* 20px */;
+  line-height: 2.25rem/* 36px */;
+  font-weight: 400;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+  p.page-text {
+    font-size: 1.5rem/* 24px */;
+    line-height: 2.5rem/* 40px */;
+    margin-bottom: 4rem;
+  }
 }
 
 /* Portable text superscript */
