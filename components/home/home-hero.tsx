@@ -17,7 +17,7 @@ type Props = {
 const HomeHero = ({ searchContent, content }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
   const isLgScreen = useMediaQuery(breakpoints.xl)
-  const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase...' : 'Search for research and data...'
+  const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase…' : 'Search for research and data…'
 
   const handleLinkClick = (e: any, target: any) => {
     e.preventDefault(); // Prevent default anchor behavior
@@ -51,7 +51,7 @@ const HomeHero = ({ searchContent, content }: Props) => {
             'transition-transform',
             { '-translate-y-[140px] lg:-translate-y-[160px]': searchBoxActive } // TODO - make this dynamic
           )}>
-            <p className='text-grey-600 text-lg font-medium mb-3'>Know what you’re looking for?</p>
+            <p className='text-grey-600 text-lg font-medium mb-3'>Find specific information quickly</p>
             <Search data={searchContent} placeholder={searchPlaceholder} searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
           </div>
         </div>

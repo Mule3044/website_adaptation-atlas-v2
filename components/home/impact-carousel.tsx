@@ -20,7 +20,7 @@ const ImpactCarousel = ({ impacts }: Props) => {
     <div id='impact-carousel' className='pt-20'>
       <div id='impact-carousel-header' className='mb-5'>
         <h1 className='mb-2'>Data in Practice</h1>
-        <h3>Read about how our work and data collection efforts have led to real-world change.</h3>
+        <h3>Read about how the Atlas has supported adaptation programs.</h3>
       </div>
       <Carousel type='gallery' opts={{ align: 'start' }}>
         <CarouselContent className='-ml-5'>

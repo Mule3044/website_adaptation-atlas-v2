@@ -40,7 +40,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
     <div id='spotlight-grid' className='pt-20'>
       <div id='spotlight-grid-header' className='mb-5'>
         <h1 className='mb-2'>Data Spotlights</h1>
-        <h3>Explore interactive visualizations of data we’ve collected.</h3>
+        <h3>Explore interactive data visualizations.</h3>
       </div>
       <div id='spotlight-filter-search' className='mb-5 -mx-2.5'>
         <h4 className='uppercase text-sm mb-2 px-2.5'>Filter tools</h4>

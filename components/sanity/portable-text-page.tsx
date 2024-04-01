@@ -44,7 +44,7 @@ const GalleryImageComponent = ({ value }: any) => {
       alt={value.alt}
       width={480}
       height={480}
-      className={'w-[200px] h-fit'}
+      className={'w-[300px] h-fit'}
     />
   )
 }
@@ -54,7 +54,7 @@ export const portableTextPage = {
     image: ImageComponent,
     gallery: ({ value }: any) => {
       return (
-        <div id='gallery' className='max-w-[960px] mx-auto mb-20 flex justify-center flex-wrap items-center gap-20'>
+        <div id='gallery' className='max-w-[960px] mx-auto mb-20 pt-[40px] flex justify-center flex-wrap items-center gap-4'>
           {value.images.map((image: any) => (
             GalleryImageComponent({
               value: image
