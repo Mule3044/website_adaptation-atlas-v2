@@ -1,5 +1,12 @@
 import { PortableTextBlock } from 'sanity'
 
+export type RelatedPost = {
+  _id: string
+  _type: string
+  title: string
+  slug: string
+}
+
 export type Tag = {
   _id: string
   _createdAt: Date
@@ -81,6 +88,7 @@ export type Spotlight = {
   secondaryTags: Tag[]
   content: PortableTextBlock[]
   dataCard: DataCard
+  relatedPosts: RelatedPost[]
 }
 
 export type Insight = {
@@ -92,6 +100,7 @@ export type Insight = {
   featuredImageAlt: string
   content: PortableTextBlock[]
   methods: PortableTextBlock[]
+  relatedPosts: RelatedPost[]
 }
 
 export type Impact = {
@@ -102,4 +111,5 @@ export type Impact = {
   featuredImage: string
   featuredImageAlt: string
   content: PortableTextBlock[]
+  relatedPosts: RelatedPost[]
 }

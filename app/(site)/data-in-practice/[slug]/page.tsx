@@ -3,6 +3,7 @@ import { getImpactPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPost } from '@/components/sanity/portable-text-post'
 import iconPage from '@/public/images/icon-page.svg'
+import RelatedPosts from '@/components/posts/related-posts'
 
 type Props = {
   params: { slug: string }
@@ -31,6 +32,10 @@ export default async function ImpactPost({ params }: Props) {
       <div id='post-content' className='mb-[100px]'>
         <PortableText value={post.content} components={portableTextPost} />
       </div>
+
+      {post.relatedPosts &&
+        <RelatedPosts posts={post.relatedPosts} />
+      }
     </div>
   )
 }

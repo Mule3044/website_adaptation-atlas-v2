@@ -3,6 +3,7 @@ import { getSpotlightPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPost } from '@/components/sanity/portable-text-post'
 import iconBars from '@/public/images/icon-bars.svg'
+import RelatedPosts from '@/components/posts/related-posts'
 
 type Props = {
   params: { slug: string }
@@ -14,6 +15,26 @@ export default async function SpotlightPost({ params }: Props) {
   const dataCardAlt = post.dataCard?.featuredImageAlt
   const dataCardEmbedSrc = post.dataCard.observable?.src
   const dataCardEmbedHeight = post.dataCard.observable?.height
+  // relatedPosts: [
+  //   {
+  //     title: 'On-farm Solutions for Today',
+  //     slug: 'on-farm-solutions',
+  //     _id: '1fe2aab8-12fb-4d99-815f-ed5d4f274d14',
+  //     _type: 'spotlight'
+  //   },
+  //   {
+  //     slug: 'economic-returns',
+  //     _id: 'c8d356ea-a4c8-4e40-8544-e43f84c06749',
+  //     _type: 'spotlight',
+  //     title: 'Estimating Economic Returns on Adaptation'
+  //   },
+  //   {
+  //     title: 'Prioritizing Livestock Investments',
+  //     slug: 'livestock-investments',
+  //     _id: '8ee33480-3337-452e-89c8-e1259bb13d4e',
+  //     _type: 'spotlight'
+  //   }
+  // ],
 
   return (
     <div id='impact-post' className='p-5 mt-2 mb-[60px] lg:mb-[100px]'>
@@ -120,6 +141,10 @@ export default async function SpotlightPost({ params }: Props) {
             </a>
           </div>
         </div>
+      }
+
+      {post.relatedPosts &&
+        <RelatedPosts posts={post.relatedPosts} />
       }
     </div>
   )

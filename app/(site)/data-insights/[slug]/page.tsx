@@ -3,6 +3,7 @@ import { getInsightPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPost } from '@/components/sanity/portable-text-post'
 import iconBadge from '@/public/images/icon-badge.svg'
+import RelatedPosts from '@/components/posts/related-posts'
 
 type Props = {
   params: { slug: string }
@@ -36,6 +37,10 @@ export default async function InsightPost({ params }: Props) {
           <h2 className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-6'>Methods</h2>
           <PortableText value={post.methods} components={portableTextPost} />
         </div>
+      }
+      
+      {post.relatedPosts &&
+        <RelatedPosts posts={post.relatedPosts} />
       }
     </div>
   )

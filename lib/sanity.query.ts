@@ -194,6 +194,12 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
         name,
         slug,
       },
+      'relatedPosts': relatedPosts[]->{
+        _id,
+        _type,
+        title,
+        'slug': slug.current,
+      },
     }`,
     { slug },
     {next: {
@@ -214,6 +220,12 @@ export async function getInsightPost(slug: string): Promise<Insight> {
       'featuredImageAlt': featuredImage.asset->alt,
       content,
       methods,
+      'relatedPosts': relatedPosts[]->{
+        _id,
+        _type,
+        title,
+        'slug': slug.current,
+      },
     }`,
     { slug },
     {next: {
@@ -233,6 +245,12 @@ export async function getImpactPost(slug: string): Promise<Impact> {
       'featuredImage': featuredImage.asset->url,
       'featuredImageAlt': featuredImage.asset->alt,
       content,
+      'relatedPosts': relatedPosts[]->{
+        _id,
+        _type,
+        title,
+        'slug': slug.current,
+      },
     }`,
     { slug },
     {next: {
