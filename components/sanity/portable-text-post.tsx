@@ -10,12 +10,18 @@ function urlFor(source: any) {
 }
 
 const ImageFullComponent = ({ value }: any) => {
-  const imageUrl = urlFor(value)
+  // Directly access the '_ref' property of the asset object
+  const imageRef = value.asset?._ref;
+  // Use 'urlFor' to generate the URL from the reference
+  const imageUrl = imageRef ? urlFor({_type: 'reference', _ref: imageRef}).url() : '';
+
+  // If image URL doesn't exist, don't render
+  if (!imageUrl) return
 
   return (
     <div className='mb-20'>
       <Image
-        src={imageUrl.url()}
+        src={imageUrl}
         alt={value.alt}
         layout='responsive'
         width={1920}
@@ -26,13 +32,19 @@ const ImageFullComponent = ({ value }: any) => {
 }
 
 const ImageCaptionComponent = ({ value }: any) => {
-  const imageUrl = urlFor(value)
+  // Directly access the '_ref' property of the asset object
+  const imageRef = value.asset?._ref;
+  // Use 'urlFor' to generate the URL from the reference
+  const imageUrl = imageRef ? urlFor({_type: 'reference', _ref: imageRef}).url() : '';
+
+  // If image URL doesn't exist, don't render
+  if (!imageUrl) return
 
   return (
     <div className='max-w-[960px] mx-auto mb-20'>
       <Image
-        src={imageUrl.url()}
-        alt={value.alt}
+        src={imageUrl}
+        alt={value.alt || 'Missing image'}
         layout='responsive'
         width={1920}
         height={1080}

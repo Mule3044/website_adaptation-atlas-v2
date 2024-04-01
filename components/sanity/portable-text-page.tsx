@@ -9,11 +9,17 @@ function urlFor(source: any) {
 }
 
 const ImageComponent = ({ value }: any) => {
-  const imageUrl = urlFor(value)
+  // Directly access the '_ref' property of the asset object
+  const imageRef = value.asset?._ref;
+  // Use 'urlFor' to generate the URL from the reference
+  const imageUrl = imageRef ? urlFor({_type: 'reference', _ref: imageRef}).url() : '';
+
+  // If image URL doesn't exist, don't render
+  if (!imageUrl) return
 
   return (
     <Image
-      src={imageUrl.url()}
+      src={imageUrl}
       alt={value.alt}
       layout='responsive'
       width={1440}
@@ -24,11 +30,17 @@ const ImageComponent = ({ value }: any) => {
 }
 
 const GalleryImageComponent = ({ value }: any) => {
-  const imageUrl = urlFor(value)
+  // Directly access the '_ref' property of the asset object
+  const imageRef = value.asset?._ref;
+  // Use 'urlFor' to generate the URL from the reference
+  const imageUrl = imageRef ? urlFor({_type: 'reference', _ref: imageRef}).url() : '';
+
+  // If image URL doesn't exist, don't render
+  if (!imageUrl) return
 
   return (
     <Image
-      src={imageUrl.url()}
+      src={imageUrl}
       alt={value.alt}
       width={480}
       height={480}
