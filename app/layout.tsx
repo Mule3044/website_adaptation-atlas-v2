@@ -11,8 +11,8 @@ import type { Metadata } from 'next'
 // https://www.sanity.io/blog/tutorial-host-your-sanity-based-next-js-project-on-netlify
 
 export const metadata: Metadata = {
-  title: 'African Adaptation Atlas',
-  description: 'Explore the work being done to adapt to climate change in Africa.',
+  title: 'Africa Agriculture Adaptation Atlas',
+  description: 'Data and tools to better understand and take action on climate change.',
 }
 
 export default function RootLayout({

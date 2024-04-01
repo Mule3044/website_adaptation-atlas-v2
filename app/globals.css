@@ -69,7 +69,7 @@ h1.page-header {
 
 h2 {
   font-size: 1.25rem/* 20px */;
-  line-height: 2.25rem/* 36px */;
+  line-height: 1.75rem/* 28px */;
 }
 
 h2.carousel-header {
@@ -80,7 +80,7 @@ h2.carousel-header {
 @media (min-width: 1024px) {
   h2 {
     font-size: 1.5rem/* 24px */;
-    line-height: 2.5rem/* 40px */;
+    line-height: 2.25rem/* 36px */;
   }
 
   h2.carousel-header {

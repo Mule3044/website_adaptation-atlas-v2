@@ -34,7 +34,7 @@ const schema: { types: SchemaTypeDefinition[] } = {
 
 export default defineConfig({
   name: 'ab-atlas',
-  title: 'AB Atlas',
+  title: 'Africa Agriculture Adaptation Atlas',
   basePath: '/admin',
   apiVersion,
   projectId,
