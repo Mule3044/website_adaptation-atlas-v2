@@ -16,6 +16,8 @@ type Props = {
 }
 
 const fuseOptions = {
+  minMatchCharLength: 3, // Only the matches whose length exceeds this value will be returned
+  threshold: 0.3, // A threshold of 0.0 requires a perfect match, a threshold of 1.0 would match anything
   keys: [
     { name: "title", weight: 1 },
     { name: "featuredTags.name", weight: 1 },
