@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { breakpoints } from '@/lib/constants'
@@ -16,17 +16,28 @@ type Props = {
 
 const HomeHero = ({ searchContent, content }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
+  const isDesktop = useMediaQuery(breakpoints.lg)
   const isLgScreen = useMediaQuery(breakpoints.xl)
   const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase…' : 'Search for research and data…'
+  const introTextRef = useRef<HTMLHeadingElement>(null)
+  const [translateY, setTranslateY] = useState(0)
 
   const handleLinkClick = (e: any, target: any) => {
-    e.preventDefault(); // Prevent default anchor behavior
-    const scrollTarget = document.querySelector(target);
+    e.preventDefault() // Prevent default anchor behavior
+    const scrollTarget = document.querySelector(target)
 
     if (scrollTarget) {
-      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
+
+  useEffect(() => {
+    if (introTextRef.current) {
+      const height = introTextRef.current.offsetHeight
+      const offset = isDesktop ? 70 : 40
+      setTranslateY(searchBoxActive ? (-height - offset) : 0)
+    }
+  }, [searchBoxActive])
 
   return (
     <div id='hero' className='flex flex-wrap justify-between h-[480px] lg:h-[800px] mb-5'>
@@ -41,16 +52,13 @@ const HomeHero = ({ searchContent, content }: Props) => {
           />
 
           {content.introText && (
-            <h1 className={cn(
+            <h1 ref={introTextRef} className={cn(
               'max-w-[600px] text-grey-600 font-semibold leading-snug mb-10 lg:mb-20 transition-opacity',
               { 'opacity-0': searchBoxActive }
             )}>{content.introText}</h1>
           )}
 
-          <div id='search-container' className={cn(
-            'transition-transform',
-            { '-translate-y-[140px] lg:-translate-y-[160px]': searchBoxActive } // TODO - make this dynamic
-          )}>
+          <div id='search-container' style={{ transform: `translateY(${translateY}px)` }} className='transition-transform'>
             <p className='text-grey-600 text-lg font-medium mb-3'>Find specific information quickly</p>
             <Search data={searchContent} placeholder={searchPlaceholder} searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
           </div>
@@ -59,19 +67,19 @@ const HomeHero = ({ searchContent, content }: Props) => {
 
       {/* <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'> */}
       <div id='intro-nav' className='hidden lg:flex flex-col gap-5 basis-full lg:basis-1/4 h-full'>
-          <a
-            href='#spotlight-grid'
-            onClick={(e) => handleLinkClick(e, '#spotlight-grid')}
-            className='flex items-center gap-3 px-10 relative w-full h-full transition-colors bg-brand-green hover:bg-brand-dark-green'
-          >
-            <span className='text-white text-xl text-medium uppercase'>Interact with data</span>
-            <Image // arrow icon
-              src={'/images/icon-arrow-right.svg'}
-              alt='Right arrow icon'
-              width={20}
-              height={20}
-            />
-          </a>
+        <a
+          href='#spotlight-grid'
+          onClick={(e) => handleLinkClick(e, '#spotlight-grid')}
+          className='flex items-center gap-3 px-10 relative w-full h-full transition-colors bg-brand-green hover:bg-brand-dark-green'
+        >
+          <span className='text-white text-xl text-medium uppercase'>Interact with data</span>
+          <Image // arrow icon
+            src={'/images/icon-arrow-right.svg'}
+            alt='Right arrow icon'
+            width={20}
+            height={20}
+          />
+        </a>
       </div>
     </div>
   )

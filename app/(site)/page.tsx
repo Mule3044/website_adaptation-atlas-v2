@@ -13,10 +13,11 @@ export default async function Home() {
   const insights = await getInsights()
   const impacts = await getImpacts()
   const searchContent = await getSearchContent()
+  const filteredSearchContent = searchContent.filter((item) => !item.comingSoon) // filter out coming soon items
 
   return (
     <div id='home' className='p-5'>
-      <HomeHero searchContent={searchContent} content={homeContent} />
+      <HomeHero searchContent={filteredSearchContent} content={homeContent} />
       <HomeCarousel spotlights={spotlights} />
       <SpotlightGrid spotlights={spotlights} tags={primaryTags} />
       <InsightCarousel insights={insights} />

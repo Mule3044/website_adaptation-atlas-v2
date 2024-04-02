@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 // TODO: consider using metadataBase to resolve build errors for opengraph image URLs
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {children}
+      <GoogleAnalytics gaId="G-RLSYY46BZL" />
     </html>
   )
 }

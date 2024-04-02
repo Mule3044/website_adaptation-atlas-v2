@@ -97,10 +97,11 @@ export async function getSpotlights(): Promise<Spotlight[]> {
 export async function getSearchContent(): Promise<SearchItem[]> {
   return getClient.fetch(
     // groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
-    groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
+    groq`*[_type in ['spotlight', 'insight', 'impact']]|order(orderRank) {
       _id,
       _type,
       title,
+      'comingSoon': comingSoon,
       'slug': slug.current,
       content,
       'featuredTags': tags.featured[]->{

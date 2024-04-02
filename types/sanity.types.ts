@@ -71,6 +71,7 @@ export type SearchItem = {
   primaryTags: Tag[]
   secondaryTags: Tag[]
   content: PortableTextBlock[]
+  comingSoon?: boolean
 }
 
 export type Spotlight = {
