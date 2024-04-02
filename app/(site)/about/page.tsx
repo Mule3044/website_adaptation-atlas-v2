@@ -1,6 +1,12 @@
 import { getAboutContent } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPage } from '@/components/sanity/portable-text-page'
+import { Metadata } from 'next'
+import { siteTitle } from '@/lib/constants'
+
+export const metadata: Metadata = {
+  title: `About the Atlas | ${siteTitle}`,
+}
 
 export default async function About() {
   const content = await getAboutContent()

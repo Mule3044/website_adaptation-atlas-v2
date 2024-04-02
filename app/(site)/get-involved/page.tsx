@@ -1,6 +1,12 @@
 import { getGetInvolvedContent } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPage } from '@/components/sanity/portable-text-page'
+import { Metadata } from 'next'
+import { siteTitle } from '@/lib/constants'
+
+export const metadata: Metadata = {
+  title: `Get Involved | ${siteTitle}`,
+}
 
 export default async function GetInvolved() {
   const content = await getGetInvolvedContent()

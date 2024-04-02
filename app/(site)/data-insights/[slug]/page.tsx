@@ -4,9 +4,25 @@ import { PortableText } from '@portabletext/react'
 import { portableTextPost } from '@/components/sanity/portable-text-post'
 import iconBadge from '@/public/images/icon-badge.svg'
 import RelatedPosts from '@/components/posts/related-posts'
+import { Metadata } from 'next'
+import { siteTitle } from '@/lib/constants'
 
 type Props = {
   params: { slug: string }
+}
+
+export async function generateMetadata(
+  { params }: Props
+): Promise<Metadata> {
+  // read route params
+  const id = params.slug
+
+  // fetch data
+  const post = await getInsightPost(params.slug)
+
+  return {
+    title: `${post.title} | ${siteTitle}`,
+  }
 }
 
 export default async function InsightPost({ params }: Props) {
