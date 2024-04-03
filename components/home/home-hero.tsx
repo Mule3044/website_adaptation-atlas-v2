@@ -41,8 +41,8 @@ const HomeHero = ({ searchContent, content }: Props) => {
 
   return (
     <div id='hero' className='flex flex-wrap justify-between h-[480px] lg:h-[800px] mb-5'>
-      <div id='intro-search' className='basis-full lg:basis-3/4 flex justify-center mt-[100px] lg:mt-[200px] gap-5'>
-        <div className='basis-4/5 lg:basis-2/3'>
+      <div id='intro-search' className='basis-full lg:basis-3/4 flex lg:justify-center mt-[100px] lg:mt-[200px] gap-5'>
+        <div className='basis-full lg:basis-2/3'>
           <Image // logo
             src={atlasLogo}
             alt='Agriculture Adaptation Atlas logo'
@@ -53,7 +53,7 @@ const HomeHero = ({ searchContent, content }: Props) => {
 
           {content.introText && (
             <h1 ref={introTextRef} className={cn(
-              'max-w-[600px] text-grey-600 font-semibold leading-snug mb-10 lg:mb-20 transition-opacity',
+              'max-w-[480px] lg:max-w-[600px] text-grey-600 font-semibold leading-snug mb-10 lg:mb-20 transition-opacity',
               { 'opacity-0': searchBoxActive }
             )}>{content.introText}</h1>
           )}
