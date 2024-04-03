@@ -88,7 +88,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                   />
                   <div className='relative z-10 flex flex-col justify-center items-center '>
                     <h3 className='uppercase tracking-wide font-medium mb-2'>Coming soon</h3>
-                    <a href='mailto:t.rosenstock@cgiar.org' className='text-brand-green font-medium'>Notify Me</a>
+                    <a href='mailto:toddrosenstock@adaptationatlas.info' className='text-brand-green font-medium'>Notify Me</a>
                   </div>
                 </div>
                 <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
@@ -97,6 +97,14 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
               <Link href={`/data-spotlights/${spotlight.slug}`} className='transition-opacity hover:opacity-90'>
                 {/* Published post */}
                 <div className='relative flex justify-center items-center h-[240px] xl:h-[280px] mb-2'>
+                  <div className='absolute z-10 flex justify-center items-center h-10 w-10 top-3 right-3 bg-grey-600'>
+                    <Image // icon
+                      src={'/images/icon-bars.svg'}
+                      alt={'Bars icon'}
+                      width={20}
+                      height={20}
+                    />
+                  </div>
                   <Image
                     src={spotlight.featuredImage}
                     alt={spotlight.featuredImageAlt}
