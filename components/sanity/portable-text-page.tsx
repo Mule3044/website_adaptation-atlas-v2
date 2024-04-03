@@ -54,7 +54,7 @@ export const portableTextPage = {
     image: ImageComponent,
     gallery: ({ value }: any) => {
       return (
-        <div id='gallery' className='max-w-[960px] mx-auto mb-20 pt-[40px] flex justify-center flex-wrap items-center gap-4'>
+        <div id='gallery' className='max-w-[940px] mx-auto mb-20 pt-[40px] flex justify-center flex-wrap items-center gap-4'>
           {value.images.map((image: any) => (
             GalleryImageComponent({
               value: image
@@ -66,11 +66,11 @@ export const portableTextPage = {
   },
 
   block: {
-    h1: ({ children }: any) => <h1 className='max-w-[960px] mx-auto mb-8 page-header'>{children}</h1>,
-    h2: ({ children }: any) => <h2 className='max-w-[960px] mx-auto mb-2'>{children}</h2>,
+    h1: ({ children }: any) => <h1 className='max-w-[940px] mx-auto mb-8 page-header'>{children}</h1>,
+    h2: ({ children }: any) => <h2 className='max-w-[940px] mx-auto mb-2'>{children}</h2>,
     normal: ({ children }: any) => {
       if (children[0]) {
-        return <p className='page-text max-w-[960px] mx-auto'>{children}</p>
+        return <p className='page-text max-w-[940px] mx-auto'>{children}</p>
       } else {
         return <br />
       }
