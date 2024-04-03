@@ -102,7 +102,7 @@ export default async function SpotlightPost({ params }: Props) {
             <h2 className='mb-4'>Interactive Preview — {post.dataCard.title}</h2>
             <p className='page-text'>{post.dataCard.description}</p>
           </div>
-          <div className='mb-12'>
+          <div className='mb-12 border border-grey-200'>
             {/* If observable embed exists, display embed */}
             {dataCardEmbedSrc &&
               <iframe width='100%' height={dataCardEmbedHeight} src={dataCardEmbedSrc}></iframe>
