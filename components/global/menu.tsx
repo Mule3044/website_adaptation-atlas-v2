@@ -18,7 +18,7 @@ const Menu = () => {
   }
 
   const menuLinks = [
-    { id: 'menu-link-0', link: '/', title: 'Our Work' },
+    { id: 'menu-link-0', link: '/#spotlight-grid', title: 'Our Work' },
     { id: 'menu-link-1', link: '/about', title: 'About the Atlas' },
     { id: 'menu-link-2', link: '/get-involved', title: 'Get Involved' },
   ]
