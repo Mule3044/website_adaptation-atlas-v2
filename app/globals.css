@@ -138,4 +138,5 @@ p.page-text {
 .unknown__pt__mark__super {
   vertical-align: super;
   font-size: 14px;
+  line-height: 1.5rem;
 }

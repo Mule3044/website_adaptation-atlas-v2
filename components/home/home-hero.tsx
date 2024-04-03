@@ -18,7 +18,7 @@ const HomeHero = ({ searchContent, content }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
   const isDesktop = useMediaQuery(breakpoints.lg)
   const isLgScreen = useMediaQuery(breakpoints.xl)
-  const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase…' : 'Search for research and data…'
+  const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase…' : 'Search by keyword…'
   const introTextRef = useRef<HTMLHeadingElement>(null)
   const [translateY, setTranslateY] = useState(0)
 
