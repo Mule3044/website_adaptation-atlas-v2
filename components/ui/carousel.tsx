@@ -171,6 +171,8 @@ const Carousel = React.forwardRef<
       // Update the current slide on carousel select change
       const onSelect = () => {
         setCurrentSlide(api.selectedScrollSnap() + 1)
+        setCanScrollPrev(api.canScrollPrev())
+        setCanScrollNext(api.canScrollNext())
       }
 
       api.on('select', onSelect)
@@ -281,13 +283,14 @@ const CarouselPrevious = React.forwardRef<
       variant={'carousel'}
       size={size}
       className={cn(
-        'absolute  h-8 w-8 rounded-full',
-        'left-5 top-1/2 -translate-y-1/2',
+        'absolute  h-8 w-8 rounded-full disabled:hidden',
+        'top-1/2 -translate-y-1/2',
+        { 'left-5': type !== 'tags' },
         { 'top-[190px]': type === 'gallery' },
-        { '-left-2 border border-grey-200 text-grey-300': type === 'tags' },
+        { '-left-2 border border-grey-200 hover:border-brand-green text-grey-300': type === 'tags' },
         className
       )}
-      // disabled={!canScrollPrev}
+      disabled={(!canScrollPrev && type === 'tags')}
       onClick={scrollPrev}
       {...props}
     >
@@ -311,9 +314,10 @@ const CarouselNext = React.forwardRef<
       size={size}
       className={cn(
         'absolute h-8 w-8 rounded-full',
-        'right-5 top-1/2 -translate-y-1/2',
+        'top-1/2 -translate-y-1/2',
+        { 'right-5': type !== 'tags' },
         { 'top-[190px]': type === 'gallery' },
-        { '-right-1 border border-grey-200 text-grey-300': type === 'tags' },
+        { '-right-2 border border-grey-200 hover:border-brand-green text-grey-300': type === 'tags' },
         className
       )}
       // disabled={!canScrollNext}

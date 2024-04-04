@@ -8,6 +8,7 @@ import Filter from '@/components/ui/filter'
 import Tags from '@/components/ui/tags'
 import {
   Carousel,
+  CarouselPrevious,
   CarouselNext,
 } from '@/components/ui/carousel'
 import cn from 'classnames'
@@ -45,7 +46,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
       <div id='spotlight-filter-search' className='mb-5 -mx-2.5'>
         <h4 className='uppercase text-sm mb-2 px-2.5'>Filter tools</h4>
         <div className='flex justify-between items-center flex-wrap'>
-          <div id='spotlight-tags' className='w-full md:w-3/4 px-2.5 mb-5 md:mb-0' >
+          <div id='spotlight-tags' className='w-full md:w-3/4 pl-2.5 pr-5 mb-5 md:mb-0' >
             <Carousel type='tags' opts={{ align: 'start' }}>
               <Tags
                 data={spotlights}
@@ -55,7 +56,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                 setActiveTags={setActiveTags}
                 resetFilter={resetFilter}
               />
-              {/* <CarouselPrevious /> */}
+              <CarouselPrevious />
               <CarouselNext />
             </Carousel>
           </div>
