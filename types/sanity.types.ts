@@ -82,6 +82,7 @@ export type Spotlight = {
   slug: string
   featuredImage: string
   featuredImageAlt: string
+  featuredImageCredit: string
   url: string
   carousel: Carousel
   featuredTags: Tag[]

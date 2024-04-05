@@ -93,7 +93,7 @@ export async function getSpotlights(): Promise<Spotlight[]> {
   )
 }
 
-// Data spotlights
+// Search content
 export async function getSearchContent(): Promise<SearchItem[]> {
   return getClient.fetch(
     // groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
@@ -173,6 +173,7 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
       'slug': slug.current,
       'featuredImage': featuredImage.asset->url,
       'featuredImageAlt': featuredImage.asset->alt,
+      'featuredImageCredit': featuredImage.credit,
       url,
       content,
       'dataCard': {

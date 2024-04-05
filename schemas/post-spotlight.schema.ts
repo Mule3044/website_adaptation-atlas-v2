@@ -48,7 +48,13 @@ const spotlightPost = {
           title: 'Alt',
           type: 'string',
           description: 'Provide a concise description of the image for SEO and accessibility purposes.',
-        }
+        },
+        {
+          name: 'credit',
+          title: 'Credit',
+          type: 'string',
+          description: 'Provide an optional image credit.',
+        },
       ]
     },
     {

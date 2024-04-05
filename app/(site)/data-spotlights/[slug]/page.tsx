@@ -32,29 +32,37 @@ export default async function SpotlightPost({ params }: Props) {
   const dataCardEmbedSrc = post.dataCard.observable?.src
   const dataCardEmbedHeight = post.dataCard.observable?.height
 
+  console.log(post);
+
   return (
-    <div id='impact-post' className='p-5 mt-2 mb-[60px] lg:mb-[100px]'>
-      <header className='relative w-full h-[600px] lg:h-[800px] flex justify-center items-center mb-20'>
-        <Image
-          src={post.featuredImage}
-          alt={(post.featuredImageAlt) ? post.featuredImageAlt : 'Featured image'}
-          fill // fill available space
-          priority // prioritize above the fold images
-          style={{ objectFit: 'cover' }} // NextJS 13+ Image accepts style property
-        />
-        <div className='relative h-[340px] w-[340px] p-[40px] lg:h-[575px] lg:w-[575px] lg:p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-10'>
-          <div className='inline-block p-2 mb-2 bg-black'>
-            <Image
-              src={iconBars}
-              alt={'Page icon'}
-              width={20}
-              height={20}
-            />
+    <div id='spotlight-post' className='p-5 mt-2 mb-[60px] lg:mb-[100px]'>
+      <header className='w-full mb-20'>
+        <div id='featured-image' className='relative w-full h-[600px] lg:h-[800px] flex justify-center items-center'>
+          <Image
+            src={post.featuredImage}
+            alt={(post.featuredImageAlt) ? post.featuredImageAlt : 'Featured image'}
+            fill // fill available space
+            priority // prioritize above the fold images
+            style={{ objectFit: 'cover' }} // NextJS 13+ Image accepts style property
+          />
+          <div className='relative h-[340px] w-[340px] p-[40px] lg:h-[575px] lg:w-[575px] lg:p-[100px] flex justify-center items-center flex-col text-center rounded-full bg-white z-10'>
+            <div className='inline-block p-2 mb-2 bg-black'>
+              <Image
+                src={iconBars}
+                alt={'Page icon'}
+                width={20}
+                height={20}
+              />
+            </div>
+            <span className='uppercase leading-none font-medium mb-5'>Data Spotlight</span>
+            {/* <h1 className='text-[28px] font-semibold leading-tight'>{post.title}</h1> */}
+            <h2 className='mb-3'>{post.title}</h2>
           </div>
-          <span className='uppercase leading-none font-medium mb-5'>Data Spotlight</span>
-          {/* <h1 className='text-[28px] font-semibold leading-tight'>{post.title}</h1> */}
-          <h2 className='mb-3'>{post.title}</h2>
         </div>
+        {/* Get image credit if it exists */}
+        {post.featuredImageCredit &&
+          <p id='image-credit' className='font-normal text-sm mt-3'><span className='font-semibold'>Image Credit: </span>{post.featuredImageCredit}</p>
+        }
       </header>
 
       {post.url &&
