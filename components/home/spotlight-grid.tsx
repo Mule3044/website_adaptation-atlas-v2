@@ -11,7 +11,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '@/components/ui/carousel'
-import cn from 'classnames'
+import { incrementUpvote } from '@/utils/incrementUpvote'
 
 type Props = {
   spotlights: Spotlight[]
@@ -23,6 +23,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
   // const [filterActive, setFilterActive] = useState(false)
   const [activeTags, setActiveTags] = useState<Tag[]>([])
   const [query, setQuery] = useState('')
+  const [voted, setVoted] = useState(false)
 
   // Reset search query and show all items
   const resetFilter = () => {
@@ -35,6 +36,16 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
   const resetTags = () => {
     // setFilteredSpotlights(spotlights) // reset filter
     setActiveTags([])
+  }
+
+  const handleUpvote = (id: any) => {
+    if (!voted) {
+      incrementUpvote(id)
+      setVoted(true)
+      // const updatedVotes = [...JSON.parse(sessionStorage.getItem('votedSpotlights') || '[]'), spotlight._id];
+      // sessionStorage.setItem('votedSpotlights', JSON.stringify(updatedVotes));
+      // Optionally, refresh the spotlight data to show the updated upvote count
+    }
   }
 
   return (
@@ -89,6 +100,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                   />
                   <div className='relative z-10 flex flex-col justify-center items-center '>
                     <h3 className='uppercase tracking-wide font-medium mb-2'>Coming soon</h3>
+                    <button onClick={() => { handleUpvote(spotlight._id) }} disabled={voted}>Upvote</button>
                     <a href='mailto:toddrosenstock@adaptationatlas.info' className='text-brand-green font-medium'>Notify Me</a>
                   </div>
                 </div>

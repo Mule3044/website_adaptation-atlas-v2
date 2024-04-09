@@ -36,6 +36,13 @@ const spotlightPost = {
       type: 'boolean',
     },
     {
+      name: 'upvotes',
+      title: 'Upvotes',
+      type: 'number',
+      initialValue: 0, // Default to zero
+      hidden: true,
+    },    
+    {
       name: 'featuredImage',
       title: 'Featured image',
       type: 'image',

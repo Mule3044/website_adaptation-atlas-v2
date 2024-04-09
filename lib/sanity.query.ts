@@ -66,6 +66,7 @@ export async function getSpotlights(): Promise<Spotlight[]> {
       _createdAt,
       title,
       'comingSoon': comingSoon,
+      'upvotes': upvotes,
       'carousel': carousel,
       'slug': slug.current,
       'featuredImage': featuredImage.asset->url,

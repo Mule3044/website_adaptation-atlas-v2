@@ -79,6 +79,7 @@ export type Spotlight = {
   _createdAt: Date
   title: string
   comingSoon: boolean
+  upvotes: number
   slug: string
   featuredImage: string
   featuredImageAlt: string
