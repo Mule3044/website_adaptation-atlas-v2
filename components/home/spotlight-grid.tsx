@@ -12,6 +12,7 @@ import {
   CarouselNext,
 } from '@/components/ui/carousel'
 import { incrementUpvote } from '@/utils/incrementUpvote'
+import { BiUpArrowAlt } from 'react-icons/bi'
 
 type Props = {
   spotlights: Spotlight[]
@@ -20,10 +21,12 @@ type Props = {
 
 const SpotlightGrid = ({ spotlights, tags }: Props) => {
   const [filteredSpotlights, setFilteredSpotlights] = useState(spotlights)
-  // const [filterActive, setFilterActive] = useState(false)
   const [activeTags, setActiveTags] = useState<Tag[]>([])
   const [query, setQuery] = useState('')
-  const [voted, setVoted] = useState(false)
+  // State to track voting, initialized with each spotlight ID set to false
+  const [votes, setVotes] = useState<{ [key: string]: boolean }>(() =>
+    spotlights.reduce((acc, spotlight) => ({ ...acc, [spotlight._id]: false }), {})
+  )
 
   // Reset search query and show all items
   const resetFilter = () => {
@@ -38,12 +41,14 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
     setActiveTags([])
   }
 
-  const handleUpvote = (id: any) => {
-    if (!voted) {
-      incrementUpvote(id)
-      setVoted(true)
-      // const updatedVotes = [...JSON.parse(sessionStorage.getItem('votedSpotlights') || '[]'), spotlight._id];
-      // sessionStorage.setItem('votedSpotlights', JSON.stringify(updatedVotes));
+  const handleUpvote = (id: string) => {
+    if (!votes[id]) {
+      incrementUpvote(id);
+      // Update the voted state for the specific spotlight
+      setVotes(prevVotes => ({
+        ...prevVotes,
+        [id]: true,
+      }));
       // Optionally, refresh the spotlight data to show the updated upvote count
     }
   }
@@ -86,9 +91,9 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
       </div>
       <div id='grid' className='flex flex-wrap -mx-3'>
         {filteredSpotlights && filteredSpotlights.map((spotlight: Spotlight) =>
-          <div key={spotlight._id} className="block basis-full sm:basis-1/2 md:basis-1/3 xl:basis-1/4 px-2.5 mb-10">
+          <div key={spotlight._id} className='block basis-full sm:basis-1/2 md:basis-1/3 xl:basis-1/4 px-2.5 mb-10'>
             {spotlight.comingSoon ? (
-              <div className="relative">
+              <div className='relative'>
                 {/* Coming soon post */}
                 <div className='flex justify-center items-center h-[240px] xl:h-[280px] mb-2 relative'>
                   <Image
@@ -99,8 +104,14 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                     className='object-center opacity-30'
                   />
                   <div className='relative z-10 flex flex-col justify-center items-center '>
-                    <h3 className='uppercase tracking-wide font-medium mb-2'>Coming soon</h3>
-                    <button onClick={() => { handleUpvote(spotlight._id) }} disabled={voted}>Upvote</button>
+                    <h3 className='uppercase tracking-wide font-medium mb-1'>Coming soon</h3>
+                    <button
+                      onClick={() => { handleUpvote(spotlight._id) }}
+                      disabled={votes[spotlight._id]}
+                      className='flex justify-between items-center gap-0.5 text-brand-green disabled:opacity-50'
+                    >
+                      <span className='font-semibold'>{(!votes[spotlight._id]) ? spotlight.upvotes : spotlight.upvotes + 1}</span><BiUpArrowAlt className='scale-125' />
+                    </button>
                     <a href='mailto:toddrosenstock@adaptationatlas.info' className='text-brand-green font-medium'>Notify Me</a>
                   </div>
                 </div>
