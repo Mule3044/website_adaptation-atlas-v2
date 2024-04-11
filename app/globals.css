@@ -140,3 +140,10 @@ p.page-text {
   font-size: 14px;
   line-height: 1.5rem;
 }
+
+/* Main menu - tertiary menu */
+.menu-tertiary {
+  position: relative;
+  flex: 1;
+  mask-image: linear-gradient(transparent, black 20%, black 80%, transparent);
+}

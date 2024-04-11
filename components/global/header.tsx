@@ -3,14 +3,18 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { getSpotlights, getInsights, getImpacts, } from '@/lib/sanity.query'
 import atlasLogo from '@/public/images/atlas-logo.svg'
 import Menu from './menu'
 import cn from 'classnames'
 
-const Header = () => {
+export default async function Header() {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const headerClass = (isHome) ? 'absolute top-0' : 'relative'
+  const spotlights = await getSpotlights()
+  const insights = await getInsights()
+  const impacts = await getImpacts()
 
   return (
     <header className={cn(
@@ -29,8 +33,7 @@ const Header = () => {
         </Link>
       )}
 
-      <Menu />
+      <Menu spotlights={spotlights} insights={insights} impacts={impacts} />
     </header>
   )
 }
-export default Header
