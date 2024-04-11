@@ -105,13 +105,13 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                   />
                   <div className='relative z-10 flex flex-col justify-center items-center '>
                     <h3 className='uppercase tracking-wide font-medium mb-1'>Coming soon</h3>
-                    <button
+                    {/* <button
                       onClick={() => { handleUpvote(spotlight._id) }}
                       disabled={votes[spotlight._id]}
                       className='flex justify-between items-center gap-0.5 text-brand-green disabled:opacity-50'
                     >
                       <span className='font-semibold'>{(!votes[spotlight._id]) ? spotlight.upvotes : spotlight.upvotes + 1}</span><BiUpArrowAlt className='scale-125' />
-                    </button>
+                    </button> */}
                     <a href='mailto:toddrosenstock@adaptationatlas.info' className='text-brand-green font-medium'>Notify Me</a>
                   </div>
                 </div>
