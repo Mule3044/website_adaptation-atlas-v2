@@ -19,13 +19,14 @@ type Props = {
 const fuseOptions = {
   minMatchCharLength: 3, // Only the matches whose length exceeds this value will be returned
   threshold: 0.3, // A threshold of 0.0 requires a perfect match, a threshold of 1.0 would match anything
+  ignoreLocation: true,
   keys: [
     { name: "title", weight: 1 },
     { name: "featuredTags.name", weight: 0.75 },
     { name: "primaryTags.name", weight: 0.75 },
-    { name: "secondaryTags.name", weight: 0.5 },
-    { name: "searchableText", weight: 0.25 },
-  ]
+    { name: "secondaryTags.name", weight: 0.75 },
+    { name: "searchableText", weight: 0.5 },
+  ],
 }
 
 const searchPaths = [
@@ -46,6 +47,8 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
       .map((block: any) => block.children?.map((child: any) => child.text).join(' '))
       .join(' ')
   }));
+
+  // console.log(processedData)
 
   // Define fuse object and filter data by query
   const fuse = new Fuse(processedData, fuseOptions)
