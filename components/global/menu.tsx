@@ -15,12 +15,7 @@ type Props = {
 
 const Menu = ({ spotlights, insights, impacts }: Props) => {
   const [menuActive, setMenuActive] = useState<boolean>(false)
-  // const [primaryMenuActive, setPrimaryMenuActive] = useState(false)
-  // const [secondaryMenuActive, setSecondaryMenuActive] = useState(false)
-  // const [tertiaryMenuActive, setTertiaryMenuActive] = useState(false)
-  // const [thirdLevelMenuContent, setThirdLevelMenuContent] = useState('')
   const [menuLevelActive, setMenuLevelActive] = useState<'primary' | 'secondary' | 'tertiary'>('primary')
-  const [tertiaryMenuActive, setTertiaryMenuActive] = useState<'spotlights' | 'insights' | 'impact'>('spotlights')
   const [tertiaryMenuContent, setTertiaryMenuContent] = useState<{
     id: string
     slug: string
@@ -53,10 +48,6 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
     setMenuActive(!menuActive)
     // Reset nested menus on main menu toggle
     setMenuLevelActive('primary')
-    // setPrimaryMenuActive(true)
-    // setSecondaryMenuActive(false)
-    // setTertiaryMenuActive(false)
-    // setThirdLevelMenuContent('')
   }
 
   const activatePrimaryMenu = () => {
@@ -72,33 +63,6 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
     const menuContent = secondaryMenuLinks.find(item => item.id === menuType)
     setTertiaryMenuContent(menuContent)
   }
-
-  // const renderThirdLevelMenuItems = () => {
-  //   let items: any[] = []
-  //   switch (thirdLevelMenuContent) {
-  //     case 'Spotlights':
-  //       items = spotlights
-  //       break
-  //     case 'Insights':
-  //       items = insights
-  //       break
-  //     case 'Impacts':
-  //       items = impacts
-  //       break
-  //     default:
-  //       break
-  //   }
-
-  //   return items.map((item) => (
-  //     <Link
-  //       key={item.slug.current}
-  //       href={`/${thirdLevelMenuContent.toLowerCase()}/${item.slug.current}`}
-  //       className='text-white text-2xl md:text-4xl font-semibold tracking-wide'
-  //     >
-  //       {item.title}
-  //     </Link>
-  //   ))
-  // }
 
   const menuLinks = [
     { id: 'our-work', link: '/#spotlight-grid', title: 'Our Work' },
@@ -128,12 +92,6 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
         <BiMenu className='h-6 w-6' />
       </button>
 
-
-
-
-
-
-
       {/* Menu container */}
       <div
         className={cn(
@@ -141,15 +99,17 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
           'fixed z-50 top-0 right-0 bottom-0 left-0 bg-brand-green transition duration-400',
         )}
       >
-        <div className='flex items-center h-full w-3/4 absolute top-0 ml-[45px] md:ml-[300px]'>
+        {/* <div className='flex items-center h-3/4 md:h-full md:w-3/4 absolute top-0 ml-[45px] md:ml-[300px]'> */}
+        <div className='relative flex items-center h-3/4 lg:h-full top-0'>
           {/* Primary menu */}
           <div className={cn(
-            'absolute flex flex-col gap-7 md:gap-14',
+            'absolute flex flex-col gap-5 md:gap-7 lg:gap-14',
             'transition-all duration-300 ease-in-out transform',
+            'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
             { 'translate-x-[-100%] opacity-0 pointer-events-none': menuLevelActive !== 'primary', 'opacity-100 translate-x-0 pointer-events-auto': menuLevelActive === 'primary' },
           )}>
             {menuLinks.map((item) => (
-              <div key={item.id} className='text-white text-2xl md:text-4xl font-semibold tracking-wide'>
+              <div key={item.id} className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide'>
                 {/* Handle click for Our Work to toggle the nested menu */}
                 {item.id === 'our-work' ? (
                   <button onClick={activateSecondaryMenu}>
@@ -166,24 +126,27 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
 
           {/* Secondary menu */}
           <div className={cn(
-            'absolute flex flex-col gap-7 md:gap-14',
+            'absolute flex flex-col gap-5 md:gap-7 lg:gap-14',
             'transition-all duration-300 ease-in-out transform',
+            'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
             { 'opacity-100 translate-x-0 pointer-events-auto': menuLevelActive === 'secondary' },
             { 'translate-x-[100%] opacity-0 pointer-events-none': menuLevelActive === 'primary' },
             { '-translate-x-[100%] opacity-0 pointer-events-none': menuLevelActive === 'tertiary' },
           )}>
-            <h2 className='text-white text-2xl md:text-4xl font-semibold tracking-wide opacity-70'>Our Work</h2>
-            <button
-              className='absolute -left-12 top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
-              onClick={activatePrimaryMenu}
-            >
-              <BiChevronLeft className='text-brand-green h-8 w-8' />
-            </button>
+            <div className='relative'>
+              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>Our Work</h2>
+              <button
+                className='absolute -left-12 -top-0.5 lg:top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
+                onClick={activatePrimaryMenu}
+              >
+                <BiChevronLeft className='text-brand-green h-8 w-8' />
+              </button>
+            </div>
 
             {secondaryMenuLinks.map((item) => (
               <button
                 key={item.id}
-                className='text-white text-2xl md:text-4xl font-semibold tracking-wide text-left'
+                className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide text-left'
                 onClick={() => activateTertiaryMenu(item.id)}
               >
                 {item.title}
@@ -193,17 +156,19 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
 
           {/* Tertiary menu */}
           <div className={cn(
-            'absolute flex flex-col gap-7 md:gap-14 menu-tertiary pt-[100px] pb-[200px] px-[100px] my-[100px] -ml-[100px] h-full w-full overflow-y-auto overflow-x-hidden',
+            'absolute flex flex-col gap-5 md:gap-7 lg:gap-14 menu-tertiary',
+            'pt-[100px] pb-[200px] h-full w-full overflow-y-auto overflow-x-hidden',
+            'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
             'transition-all duration-300 ease-in-out transform',
             {
               'translate-x-[100%] opacity-0 pointer-events-none': menuLevelActive !== 'tertiary',
               'opacity-100 translate-x-0 pointer-events-auto': menuLevelActive === 'tertiary'
             },
           )}>
-            <div className='relative mt-[160px]'>
-              <h2 className='text-white text-2xl md:text-4xl font-semibold tracking-wide opacity-70'>{tertiaryMenuContent?.title}</h2>
+            <div className='relative lg:mt-[160px]'>
+              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>{tertiaryMenuContent?.title}</h2>
               <button
-                className='absolute -left-12 top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
+                className='absolute -left-12 -top-0.5 lg:top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
                 onClick={activateSecondaryMenu}
               >
                 <BiChevronLeft className='text-brand-green h-8 w-8' />
@@ -214,7 +179,8 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
               <Link
                 key={item.slug}
                 href={`/${tertiaryMenuContent?.slug}/${item.slug}`}
-                className='text-white text-2xl md:text-4xl font-semibold tracking-wide'
+                className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide'
+                onClick={handleToggleMenu}
               >
                 {item.title}
               </Link>
@@ -223,12 +189,8 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
 
         </div>
 
-
-
-
-
         {/* Menu header */}
-        <div id='menu-logo' className='relative z-50 flex items-center justify-center w-full pt-6'>
+        <div id='menu-logo' className='fixed top-0 z-50 flex items-center justify-center w-full pt-6'>
           <Link href='/' onClick={handleToggleMenu}>
             <Image
               src={atlasLogoLight}
@@ -248,7 +210,7 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
         <div className='fixed right-0 bottom-0 left-0 z-50'>
           <footer className='flex flex-col lg:flex-row justify-between w-full p-5 text-white'>
             <p className='order-2 lg:order-1'>© {year} AAA & CGIAR</p>
-            <div className='relative flex flex-col lg:flex-row order-1 lg:order-2 gap-4 mb-5'>
+            <div className='relative flex flex-col lg:flex-row order-1 lg:order-2 gap-0 md:gap-4 mb-1 md:mb-5'>
               <a href='mailto:toddrosenstock@adaptationatlas.info' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Join our mailing list</a>
               <a href='mailto:toddrosenstock@adaptationatlas.info' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Provide feedback</a>
               <a href='mailto:toddrosenstock@adaptationatlas.info' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Contact us</a>
