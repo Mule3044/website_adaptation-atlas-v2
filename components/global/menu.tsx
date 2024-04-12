@@ -22,7 +22,7 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
     title: string
     posts: Spotlight[] | Insight[] | Impact[]
   } | undefined>()
-  const menuClass = menuActive ? 'opacity-100 pointer-events-default' : 'opacity-0 pointer-events-none'
+  // const menuClass = menuActive ? 'opacity-100 pointer-events-default' : 'opacity-0 pointer-events-none'
   const secondaryMenuLinks = [
     {
       id: 'spotlights',
@@ -70,12 +70,6 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
     { id: 'get-involved', link: '/get-involved', title: 'Get Involved' },
   ]
 
-  const nestedMenuLinks = [
-    { id: 'nested-menu-link-1', link: '/spotlights', title: 'Spotlights' },
-    { id: 'nested-menu-link-2', link: '/insights', title: 'Insights' },
-    { id: 'nested-menu-link-3', link: '/impacts', title: 'Impacts' },
-  ]
-
   const year = new Date().getFullYear()
 
   return (
@@ -95,7 +89,7 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
       {/* Menu container */}
       <div
         className={cn(
-          menuClass,
+          menuActive ? 'opacity-100 pointer-events-default' : 'opacity-0 pointer-events-none',
           'fixed z-50 top-0 right-0 bottom-0 left-0 bg-brand-green transition duration-400',
         )}
       >
@@ -106,7 +100,12 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
             'absolute flex flex-col gap-5 md:gap-7 lg:gap-14',
             'transition-all duration-300 ease-in-out transform',
             'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
-            { 'translate-x-[-100%] opacity-0 pointer-events-none': menuLevelActive !== 'primary', 'opacity-100 translate-x-0 pointer-events-auto': menuLevelActive === 'primary' },
+            {
+              'opacity-100 translate-x-0': menuLevelActive === 'primary', // Active state classes
+              '-translate-x-[100%] opacity-0': menuLevelActive !== 'primary', // Inactive state classes
+              'pointer-events-auto': menuActive && menuLevelActive === 'primary', // Pointer events when active
+              'pointer-events-none': !(menuActive && menuLevelActive === 'primary') // Pointer events when not active
+            }
           )}>
             {menuLinks.map((item) => (
               <div key={item.id} className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide'>
@@ -129,9 +128,13 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
             'absolute flex flex-col gap-5 md:gap-7 lg:gap-14',
             'transition-all duration-300 ease-in-out transform',
             'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
-            { 'opacity-100 translate-x-0 pointer-events-auto': menuLevelActive === 'secondary' },
-            { 'translate-x-[100%] opacity-0 pointer-events-none': menuLevelActive === 'primary' },
-            { '-translate-x-[100%] opacity-0 pointer-events-none': menuLevelActive === 'tertiary' },
+            {
+              'opacity-100 translate-x-0': menuLevelActive === 'secondary', // Active state classes
+              'translate-x-[100%] opacity-0': menuLevelActive === 'primary', // Inactive state classes
+              '-translate-x-[100%] opacity-0': menuLevelActive === 'tertiary', // Inactive state classes
+              'pointer-events-auto': menuActive && menuLevelActive === 'secondary', // Pointer events when active
+              'pointer-events-none': !(menuActive && menuLevelActive === 'secondary') // Pointer events when not active
+            }
           )}>
             <div className='relative'>
               <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>Our Work</h2>
@@ -161,9 +164,11 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
             'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
             'transition-all duration-300 ease-in-out transform',
             {
-              'translate-x-[100%] opacity-0 pointer-events-none': menuLevelActive !== 'tertiary',
-              'opacity-100 translate-x-0 pointer-events-auto': menuLevelActive === 'tertiary'
-            },
+              'opacity-100 translate-x-0': menuLevelActive === 'tertiary', // Active state classes
+              'translate-x-[100%] opacity-0': menuLevelActive !== 'tertiary', // Inactive state classes
+              'pointer-events-auto': menuActive && menuLevelActive === 'tertiary', // Pointer events when active
+              'pointer-events-none': !(menuActive && menuLevelActive === 'tertiary') // Pointer events when not active
+            }
           )}>
             <div className='relative lg:mt-[160px]'>
               <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>{tertiaryMenuContent?.title}</h2>
