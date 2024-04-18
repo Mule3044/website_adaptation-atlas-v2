@@ -13,6 +13,7 @@ import { BiShapeCircle } from 'react-icons/bi';
 
 import { type SchemaTypeDefinition } from 'sanity'
 import { documentInternationalization } from '@sanity/document-internationalization'
+import { i18n } from '@/i18n.config'
 
 import home from './schemas/page-home.schema'
 import about from './schemas/page-about.schema'
@@ -43,7 +44,6 @@ export default defineConfig({
   plugins: [
     structureTool({
       structure: (S, context) => {
-        console.log(context)
         return S.list()
           .title('Content')
           .items([
@@ -134,11 +134,8 @@ export default defineConfig({
     }),
     visionTool(),
     documentInternationalization({
-      supportedLanguages: [
-        { id: 'en', title: 'English' },
-        { id: 'fr', title: 'French' },
-      ],
-      schemaTypes: ['spotlight'],
+      supportedLanguages: i18n.languages,
+      schemaTypes: ['home', 'about', 'getInvolved', 'spotlight', 'insight', 'impact', 'primaryTag', 'secondaryTag', 'settings'],
       languageField: 'language',
     }),
   ],

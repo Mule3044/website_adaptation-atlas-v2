@@ -1,8 +1,9 @@
 import { IBM_Plex_Sans } from 'next/font/google'
 import Header from '@/components/global/header'
 import Footer from '@/components/global/footer'
+import { LanguageProvider } from '@/contexts/language-context'
+import { SanityDataProvider } from '@/contexts/data-context'
 
-// const openSans = Open_Sans({ subsets: ['latin'] })
 const ibmPlexSans = IBM_Plex_Sans({ weight: ['400', '500', '600', '700'], subsets: ['latin'] })
 
 export default function RootLayout({
@@ -12,9 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <body className={`${ibmPlexSans.className}`}>
-      <Header />
-      <main className='max-w-[1600px] mx-auto'>{children}</main>
-      <Footer />
+      <LanguageProvider>
+        <SanityDataProvider>
+          <Header />
+          <main className='max-w-[1600px] mx-auto'>{children}</main>
+        </SanityDataProvider>
+        <Footer />
+      </LanguageProvider>
     </body>
   )
 }

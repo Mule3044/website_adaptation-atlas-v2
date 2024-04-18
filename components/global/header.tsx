@@ -3,18 +3,23 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { getSpotlights, getInsights, getImpacts, } from '@/lib/sanity.query'
 import atlasLogo from '@/public/images/atlas-logo.svg'
 import Menu from './menu'
 import cn from 'classnames'
+import LanguageSelect from '@/components/ui/language-select'
+import { useLanguageContext } from '@/contexts/language-context'
+import { useSanityData } from '@/contexts/data-context'
 
-export default async function Header() {
+export default function Header() {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const headerClass = (isHome) ? 'absolute top-0' : 'relative'
-  const spotlights = await getSpotlights()
-  const insights = await getInsights()
-  const impacts = await getImpacts()
+  const {
+    spotlights,
+    insights,
+    impacts,
+  } = useSanityData()
+  const { locale, setLocale } = useLanguageContext()
 
   return (
     <header className={cn(
@@ -33,7 +38,11 @@ export default async function Header() {
         </Link>
       )}
 
-      <Menu spotlights={spotlights} insights={insights} impacts={impacts} />
+      {(spotlights && insights && impacts) &&
+        <Menu spotlights={spotlights} insights={insights} impacts={impacts} />
+      }
+
+      <LanguageSelect setLanguage={setLocale} isHome={isHome} />
     </header>
   )
 }

@@ -6,6 +6,12 @@ export default defineType({
   title: 'Get Involved',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'title',
       title: 'Page title',
       type: 'string',

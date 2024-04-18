@@ -9,6 +9,12 @@ const impactPost = {
   fields: [
     orderRankField({ type: 'impact', newItemPosition: 'before' }),
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'title',
       title: 'Title',
       type: 'string',

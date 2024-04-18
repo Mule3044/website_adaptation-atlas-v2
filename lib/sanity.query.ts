@@ -5,7 +5,7 @@ import { Home, Page, Spotlight, Impact, Insight, Tag, SearchItem } from '@/types
 // Homepage content
 export async function getHomeContent(): Promise<Home> {
   return getClient.fetch(
-    groq`*[_type == 'home' && _id == 'home'][0] {
+    groq`*[_type == 'home' && _id == 'home' && language != 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -19,7 +19,29 @@ export async function getHomeContent(): Promise<Home> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Homepage content
+export async function getHomeContentFr(): Promise<Home> {
+  return getClient.fetch(
+    groq`*[_type == 'home' && _id == 'home' && language == 'fr'][0] {
+      _id,
+      _createdAt,
+      title,
+      introText,
+      'slug': slug.current,
+      'tout': {
+        ...tout,
+        'featuredImage': tout.featuredImage.asset->url,
+        'featuredImageAlt': tout.featuredImage.alt
+      },
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -27,7 +49,7 @@ export async function getHomeContent(): Promise<Home> {
 // About page content
 export async function getAboutContent(): Promise<Page> {
   return getClient.fetch(
-    groq`*[_type == 'about' && _id == 'about'][0] {
+    groq`*[_type == 'about' && _id == 'about' && language != 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -36,7 +58,24 @@ export async function getAboutContent(): Promise<Page> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// About page content French
+export async function getAboutContentFr(): Promise<Page> {
+  return getClient.fetch(
+    groq`*[_type == 'about' && _id == 'about' && language == 'fr'][0] {
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      content,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -44,7 +83,7 @@ export async function getAboutContent(): Promise<Page> {
 // Get involved page content
 export async function getGetInvolvedContent(): Promise<Page> {
   return getClient.fetch(
-    groq`*[_type == 'getInvolved' && _id == 'getInvolved'][0] {
+    groq`*[_type == 'getInvolved' && _id == 'getInvolved' && language != 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -53,7 +92,24 @@ export async function getGetInvolvedContent(): Promise<Page> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Get involved page content French
+export async function getGetInvolvedContentFr(): Promise<Page> {
+  return getClient.fetch(
+    groq`*[_type == 'getInvolved' && _id == 'getInvolved' && language == 'fr'][0] {
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      content,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -89,16 +145,51 @@ export async function getSpotlights(): Promise<Spotlight[]> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
 
-// Search content
+// Data spotlights French
+export async function getSpotlightsFr(): Promise<Spotlight[]> {
+  return getClient.fetch(
+    groq`*[_type == 'spotlight' && language == 'fr']|order(orderRank) {
+      _id,
+      _createdAt,
+      title,
+      'comingSoon': comingSoon,
+      'upvotes': upvotes,
+      'carousel': carousel,
+      'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+      'featuredTags': tags.featured[]->{
+        _id,
+        name,
+        slug,
+      },
+      'primaryTags': tags.primary[]->{
+        _id,
+        name,
+        slug,
+      },
+      'secondaryTags': tags.secondary[]->{
+        _id,
+        name,
+        slug,
+      },
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Get search content
 export async function getSearchContent(): Promise<SearchItem[]> {
   return getClient.fetch(
-    // groq`*[_type == 'spotlight' || _type == 'insight' || _type == 'impact']|order(orderRank) {
-    groq`*[_type in ['spotlight', 'insight', 'impact']]|order(orderRank) {
+    groq`*[_type in ['spotlight', 'insight', 'impact'] && language != 'fr']|order(orderRank) {
       _id,
       _type,
       title,
@@ -123,7 +214,40 @@ export async function getSearchContent(): Promise<SearchItem[]> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Get search content in French
+export async function getSearchContentFr(): Promise<SearchItem[]> {
+  return getClient.fetch(
+    groq`*[_type in ['spotlight', 'insight', 'impact'] && language == 'fr']|order(orderRank) {
+      _id,
+      _type,
+      title,
+      'comingSoon': comingSoon,
+      'slug': slug.current,
+      content,
+      'featuredTags': tags.featured[]->{
+        _id,
+        name,
+        slug,
+      },
+      'primaryTags': tags.primary[]->{
+        _id,
+        name,
+        slug,
+      },
+      'secondaryTags': tags.secondary[]->{
+        _id,
+        name,
+        slug,
+      },
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -141,7 +265,25 @@ export async function getInsights(): Promise<Insight[]> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Get all data insights posts in French
+export async function getInsightsFr(): Promise<Insight[]> {
+  return getClient.fetch(
+    groq`*[_type == 'insight' && language == 'fr']|order(orderRank) {
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -159,7 +301,25 @@ export async function getImpacts(): Promise<Impact[]> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Get all data in practice (impact) posts in French
+export async function getImpactsFr(): Promise<Impact[]> {
+  return getClient.fetch(
+    groq`*[_type == 'impact' && language == 'fr']|order(orderRank) {
+      _id,
+      _createdAt,
+      title,
+      'slug': slug.current,
+      'featuredImage': featuredImage.asset->url,
+      'featuredImageAlt': featuredImage.asset->alt,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -206,7 +366,7 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
     }`,
     { slug },
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -232,7 +392,7 @@ export async function getInsightPost(slug: string): Promise<Insight> {
     }`,
     { slug },
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -257,7 +417,7 @@ export async function getImpactPost(slug: string): Promise<Impact> {
     }`,
     { slug },
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -265,7 +425,7 @@ export async function getImpactPost(slug: string): Promise<Impact> {
 // Primary tags
 export async function getPrimaryTags(): Promise<Tag[]> {
   return getClient.fetch(
-    groq`*[_type == 'primaryTag']|order(orderRank) {
+    groq`*[_type == 'primaryTag' && language != 'fr']|order(orderRank) {
       _id,
       _createdAt,
       name,
@@ -273,7 +433,23 @@ export async function getPrimaryTags(): Promise<Tag[]> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Primary tags
+export async function getPrimaryTagsFr(): Promise<Tag[]> {
+  return getClient.fetch(
+    groq`*[_type == 'primaryTag' && language == 'fr']|order(orderRank) {
+      _id,
+      _createdAt,
+      name,
+      'slug': slug.current,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }
@@ -281,7 +457,7 @@ export async function getPrimaryTags(): Promise<Tag[]> {
 // Secondary tags
 export async function getSecondaryTags(): Promise<Tag[]> {
   return getClient.fetch(
-    groq`*[_type == 'secondaryTag']|order(orderRank) {
+    groq`*[_type == 'secondaryTag' && language != 'fr']|order(orderRank) {
       _id,
       _createdAt,
       name,
@@ -289,7 +465,23 @@ export async function getSecondaryTags(): Promise<Tag[]> {
     }`,
     {},
     {next: {
-      revalidate: 60 // look for updates to revalidate cache every hour
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Secondary tags French
+export async function getSecondaryTagsFr(): Promise<Tag[]> {
+  return getClient.fetch(
+    groq`*[_type == 'secondaryTag' && language == 'fr']|order(orderRank) {
+      _id,
+      _createdAt,
+      name,
+      'slug': slug.current,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
     }}
   )
 }

@@ -9,6 +9,12 @@ const primaryTag = {
   fields: [
     orderRankField({ type: 'primaryTag', newItemPosition: 'before' }),
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'name',
       title: 'Name',
       type: 'string',

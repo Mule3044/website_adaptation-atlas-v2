@@ -4,6 +4,12 @@ const secondaryTag = {
   type: 'document',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'name',
       title: 'Name',
       type: 'string',

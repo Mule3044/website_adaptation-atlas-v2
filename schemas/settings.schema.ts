@@ -10,6 +10,12 @@ export default defineType({
   ],
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'siteTitle',
       title: 'Site title',
       type: 'string',
