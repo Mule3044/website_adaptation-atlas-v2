@@ -13,6 +13,8 @@ export async function getHomeContent(): Promise<Home> {
       'slug': slug.current,
       ctaText,
       search,
+      spotlightCarousel,
+      pageHeaders,
       'tout': {
         ...tout,
         'featuredImage': tout.featuredImage.asset->url,
@@ -20,9 +22,11 @@ export async function getHomeContent(): Promise<Home> {
       },
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -37,6 +41,8 @@ export async function getHomeContentFr(): Promise<Home> {
       'slug': slug.current,
       ctaText,
       search,
+      spotlightCarousel,
+      pageHeaders,
       'tout': {
         ...tout,
         'featuredImage': tout.featuredImage.asset->url,
@@ -44,9 +50,11 @@ export async function getHomeContentFr(): Promise<Home> {
       },
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -61,9 +69,11 @@ export async function getAboutContent(): Promise<Page> {
       content,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -78,9 +88,11 @@ export async function getAboutContentFr(): Promise<Page> {
       content,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -95,9 +107,11 @@ export async function getGetInvolvedContent(): Promise<Page> {
       content,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -112,9 +126,11 @@ export async function getGetInvolvedContentFr(): Promise<Page> {
       content,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -148,9 +164,11 @@ export async function getSpotlights(): Promise<Spotlight[]> {
       },
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -184,9 +202,11 @@ export async function getSpotlightsFr(): Promise<Spotlight[]> {
       },
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -217,9 +237,11 @@ export async function getSearchContent(): Promise<SearchItem[]> {
       },
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -250,9 +272,11 @@ export async function getSearchContentFr(): Promise<SearchItem[]> {
       },
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -268,9 +292,11 @@ export async function getInsights(): Promise<Insight[]> {
       'featuredImageAlt': featuredImage.asset->alt,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -286,9 +312,11 @@ export async function getInsightsFr(): Promise<Insight[]> {
       'featuredImageAlt': featuredImage.asset->alt,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -304,9 +332,11 @@ export async function getImpacts(): Promise<Impact[]> {
       'featuredImageAlt': featuredImage.asset->alt,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -322,9 +352,11 @@ export async function getImpactsFr(): Promise<Impact[]> {
       'featuredImageAlt': featuredImage.asset->alt,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -369,9 +401,11 @@ export async function getSpotlightPost(slug: string): Promise<Spotlight> {
       },
     }`,
     { slug },
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -395,9 +429,11 @@ export async function getInsightPost(slug: string): Promise<Insight> {
       },
     }`,
     { slug },
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -420,9 +456,11 @@ export async function getImpactPost(slug: string): Promise<Impact> {
       },
     }`,
     { slug },
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -436,9 +474,11 @@ export async function getPrimaryTags(): Promise<Tag[]> {
       'slug': slug.current,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -452,9 +492,11 @@ export async function getPrimaryTagsFr(): Promise<Tag[]> {
       'slug': slug.current,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -468,9 +510,11 @@ export async function getSecondaryTags(): Promise<Tag[]> {
       'slug': slug.current,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -484,9 +528,11 @@ export async function getSecondaryTagsFr(): Promise<Tag[]> {
       'slug': slug.current,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -507,9 +553,11 @@ export async function getSiteSettings(): Promise<Settings> {
       options404,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }
 
@@ -529,8 +577,10 @@ export async function getSiteSettingsFr(): Promise<Settings> {
       options404,
     }`,
     {},
-    {next: {
-      revalidate: 60 // look for updates to revalidate cache every minute
-    }}
+    {
+      next: {
+        revalidate: 60 // look for updates to revalidate cache every minute
+      }
+    }
   )
 }

@@ -9,18 +9,19 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import iconPage from '@/public/images/icon-page.svg'
+import { useSanityData } from '@/contexts/data-context'
 
-type Props = {
-  impacts: Impact[]
-}
+const ImpactCarousel = () => {
+  const {
+    homeContent,
+    impacts,
+  } = useSanityData()
 
-const ImpactCarousel = ({ impacts }: Props) => {
-
-  return (
+  if (homeContent && impacts) return (
     <div id='impact-carousel' className='pt-20'>
       <div id='impact-carousel-header' className='mb-5'>
-        <h1 className='mb-2'>Data in Practice</h1>
-        <h3>Read about how the Atlas has supported adaptation programs.</h3>
+        <h1 className='mb-2'>{homeContent.pageHeaders.impactTitle}</h1>
+        <h3>{homeContent.pageHeaders.impactSubtitle}</h3>
       </div>
       <Carousel type='gallery' opts={{ align: 'start' }}>
         <CarouselContent className='-ml-5'>

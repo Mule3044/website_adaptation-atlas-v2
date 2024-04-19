@@ -17,8 +17,8 @@ export default function RootLayout({
         <SanityDataProvider>
           <Header />
           <main className='max-w-[1600px] mx-auto'>{children}</main>
+          <Footer />
         </SanityDataProvider>
-        <Footer />
       </LanguageProvider>
     </body>
   )

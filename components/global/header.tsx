@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import atlasLogo from '@/public/images/atlas-logo.svg'
 import Menu from './menu'
 import cn from 'classnames'
 import LanguageSelect from '@/components/ui/language-select'
@@ -18,8 +17,9 @@ export default function Header() {
     spotlights,
     insights,
     impacts,
+    siteSettings,
   } = useSanityData()
-  const { locale, setLocale } = useLanguageContext()
+  const { setLocale } = useLanguageContext()
 
   return (
     <header className={cn(
@@ -30,16 +30,17 @@ export default function Header() {
       {!isHome && (
         <Link href='/'>
           <Image // logo
-            src={atlasLogo}
-            alt='Agriculture Adaptation Atlas logo'
+            src={siteSettings.logoDark}
+            alt={siteSettings.logoDarkAlt}
             width={170}
+            height={170}
             className='pt-6'
           />
         </Link>
       )}
 
-      {(spotlights && insights && impacts) &&
-        <Menu spotlights={spotlights} insights={insights} impacts={impacts} />
+      {(spotlights && insights && impacts && siteSettings) &&
+        <Menu spotlights={spotlights} insights={insights} impacts={impacts} siteSettings={siteSettings} />
       }
 
       <LanguageSelect setLanguage={setLocale} isHome={isHome} />

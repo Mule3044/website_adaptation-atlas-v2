@@ -44,12 +44,12 @@ type Search = {
   title: string
   placeholder: string
   placeholderShort: string
+  noResultsMessage: string
 }
 
 type SpotlightCarousel = {
   kicker: string
   buttonLabel: string
-  counterLabel: string
 }
 
 type PageHeaders = {
@@ -57,6 +57,7 @@ type PageHeaders = {
   spotlightSubtitle: string
   filterLabel: string
   searchPlaceholder: string
+  noResultsMessage: string
   comingSoonLabel: string
   notifyMeLabel: string
   notifyMeLink: string

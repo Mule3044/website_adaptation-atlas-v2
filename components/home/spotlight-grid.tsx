@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Spotlight, Tag } from '@/types/sanity.types'
+import { Home, Spotlight, Tag } from '@/types/sanity.types'
 import Filter from '@/components/ui/filter'
 import Tags from '@/components/ui/tags'
 import {
@@ -15,11 +15,12 @@ import { incrementUpvote } from '@/utils/incrementUpvote'
 import { BiUpArrowAlt } from 'react-icons/bi'
 
 type Props = {
+  homeContent: Home
   spotlights: Spotlight[]
   tags: Tag[]
 }
 
-const SpotlightGrid = ({ spotlights, tags }: Props) => {
+const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
   const [filteredSpotlights, setFilteredSpotlights] = useState(spotlights)
   const [activeTags, setActiveTags] = useState<Tag[]>([])
   const [query, setQuery] = useState('')
@@ -56,8 +57,8 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
   return (
     <div id='spotlight-grid' className='pt-20'>
       <div id='spotlight-grid-header' className='mb-5'>
-        <h1 className='mb-2'>Data Spotlights</h1>
-        <h3>Explore interactive data visualizations.</h3>
+        <h1 className='mb-2'>{homeContent.pageHeaders.spotlightTitle}</h1>
+        <h3>{homeContent.pageHeaders.spotlightSubtitle}</h3>
       </div>
       <div id='spotlight-filter-search' className='mb-5 -mx-2.5'>
         <h4 className='uppercase text-sm mb-2 px-2.5'>Filter tools</h4>
@@ -104,7 +105,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                     className='object-center opacity-30'
                   />
                   <div className='relative z-10 flex flex-col justify-center items-center '>
-                    <h3 className='uppercase tracking-wide font-medium mb-1'>Coming soon</h3>
+                    <h3 className='uppercase tracking-wide font-medium mb-1'>{homeContent.pageHeaders.comingSoonLabel}</h3>
                     <button
                       onClick={() => { handleUpvote(spotlight._id) }}
                       disabled={votes[spotlight._id]}
@@ -112,7 +113,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
                     >
                       <span className='font-semibold'>{(!votes[spotlight._id]) ? spotlight.upvotes : spotlight.upvotes + 1}</span><BiUpArrowAlt className='scale-125' />
                     </button>
-                    <a href='mailto:toddrosenstock@adaptationatlas.info' className='text-brand-green font-medium'>Notify Me</a>
+                    <a href={homeContent.pageHeaders.notifyMeLink} className='text-brand-green font-medium'>{homeContent.pageHeaders.notifyMeLabel}</a>
                   </div>
                 </div>
                 <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
@@ -150,7 +151,7 @@ const SpotlightGrid = ({ spotlights, tags }: Props) => {
 
         {!filteredSpotlights.length &&
           <div className='mx-auto my-20'>
-            <p className='text-base'>No results found</p>
+            <p className='text-base'>{homeContent.pageHeaders.noResultsMessage}</p>
           </div>
         }
       </div>

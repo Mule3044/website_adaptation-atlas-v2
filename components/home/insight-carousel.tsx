@@ -9,18 +9,19 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import iconBadge from '@/public/images/icon-badge.svg'
+import { useSanityData } from '@/contexts/data-context'
 
-type Props = {
-  insights: Insight[]
-}
+const InsightCarousel = () => {
+  const {
+    homeContent,
+    insights,
+  } = useSanityData()
 
-const InsightCarousel = ({ insights }: Props) => {
-
-  return (
+  if (homeContent && insights) return (
     <div id='insight-carousel' className='pt-20'>
       <div id='insight-carousel-header' className='mb-5'>
-        <h1 className='mb-2'>Data Insights</h1>
-        <h3>Quick reads and key insights based on Atlas data.</h3>
+        <h1 className='mb-2'>{homeContent.pageHeaders.insightTitle}</h1>
+        <h3>{homeContent.pageHeaders.insightSubtitle}</h3>
       </div>
       <Carousel type='gallery' opts={{ align: 'start' }}>
         <CarouselContent className='-ml-5'>

@@ -55,6 +55,11 @@ export default defineType({
           title: 'Placeholder (mobile)',
           type: 'string',
         },
+        {
+          name: 'noResultsMessage',
+          title: 'No results message',
+          type: 'string',
+        },
       ]
     },
     {
@@ -71,11 +76,6 @@ export default defineType({
         {
           name: 'buttonLabel',
           title: 'Button label',
-          type: 'string',
-        },
-        {
-          name: 'counterLabel',
-          title: 'Counter label',
           type: 'string',
         },
       ]
@@ -104,6 +104,11 @@ export default defineType({
         {
           name: 'searchPlaceholder',
           title: 'Search placeholder',
+          type: 'string',
+        },
+        {
+          name: 'noResultsMessage',
+          title: 'No results message',
           type: 'string',
         },
         {

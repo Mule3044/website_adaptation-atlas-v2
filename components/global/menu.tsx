@@ -4,16 +4,16 @@ import Image from 'next/image'
 import cn from 'classnames'
 import Share from '@/components/ui/share'
 import { BiX, BiMenu, BiChevronLeft } from 'react-icons/bi'
-import atlasLogoLight from '@/public/images/atlas-logo-light.svg'
-import { Spotlight, Insight, Impact } from '@/types/sanity.types'
+import { Spotlight, Insight, Impact, Settings } from '@/types/sanity.types'
 
 type Props = {
   spotlights: Spotlight[]
   insights: Insight[]
   impacts: Impact[]
+  siteSettings: Settings
 }
 
-const Menu = ({ spotlights, insights, impacts }: Props) => {
+const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
   const [menuActive, setMenuActive] = useState<boolean>(false)
   const [menuLevelActive, setMenuLevelActive] = useState<'primary' | 'secondary' | 'tertiary'>('primary')
   const [tertiaryMenuContent, setTertiaryMenuContent] = useState<{
@@ -65,9 +65,9 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
   }
 
   const menuLinks = [
-    { id: 'our-work', link: '/#spotlight-grid', title: 'Our Work' },
-    { id: 'about', link: '/about', title: 'About the Atlas' },
-    { id: 'get-involved', link: '/get-involved', title: 'Get Involved' },
+    { id: 'our-work', link: '/#spotlight-grid', title: siteSettings.menu.workTitle },
+    { id: 'about', link: '/about', title: siteSettings.menu.aboutTitle },
+    { id: 'get-involved', link: '/get-involved', title: siteSettings.menu.getInvolvedTitle },
   ]
 
   const year = new Date().getFullYear()
@@ -137,7 +137,7 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
             }
           )}>
             <div className='relative'>
-              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>Our Work</h2>
+              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>{siteSettings.menu.workTitle}</h2>
               <button
                 className='absolute -left-12 -top-0.5 lg:top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
                 onClick={activatePrimaryMenu}
@@ -198,9 +198,10 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
         <div id='menu-logo' className='fixed top-0 z-50 flex items-center justify-center w-full pt-6'>
           <Link href='/' onClick={handleToggleMenu}>
             <Image
-              src={atlasLogoLight}
-              alt='Agriculture Adaptation Atlas logo'
+              src={siteSettings.logoLight}
+              alt={siteSettings.logoLightAlt}
               width={170}
+              height={170}
             />
           </Link>
         </div>
@@ -214,11 +215,11 @@ const Menu = ({ spotlights, insights, impacts }: Props) => {
         {/* Menu footer */}
         <div className='fixed right-0 bottom-0 left-0 z-50'>
           <footer className='flex flex-col lg:flex-row justify-between w-full p-5 text-white'>
-            <p className='order-2 lg:order-1'>© {year} AAA & CGIAR</p>
+            <p className='order-2 lg:order-1'>© {year} {siteSettings.footer.copyright}</p>
             <div className='relative flex flex-col lg:flex-row order-1 lg:order-2 gap-0 md:gap-4 mb-1 md:mb-5'>
-              <a href='mailto:toddrosenstock@adaptationatlas.info' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Join our mailing list</a>
-              <a href='mailto:toddrosenstock@adaptationatlas.info' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Provide feedback</a>
-              <a href='mailto:toddrosenstock@adaptationatlas.info' className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>Contact us</a>
+              <a href={siteSettings.footer.mailingListLink} className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>{siteSettings.footer.mailingListLabel}</a>
+              <a href={siteSettings.footer.feedbackLink} className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>{siteSettings.footer.feedbackLabel}</a>
+              <a href={siteSettings.footer.contactLink} className='font-medium text-white opacity-90 hover:opacity-100 transition-opacity'>{siteSettings.footer.contactLabel}</a>
               <Share type='light' />
             </div>
           </footer>

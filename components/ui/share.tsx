@@ -2,12 +2,16 @@
 
 import { useState } from 'react'
 import cn from 'classnames'
+import { useSanityData } from '@/contexts/data-context'
 
 type Props = {
   type?: string
 }
 
 const Share = ({ type }: Props) => {
+  const {
+    siteSettings,
+  } = useSanityData()
   const [tooltipVisible, setTooltipVisible] = useState(false)
   const handleCopyToClipboard = async () => {
     const url = window.location.origin  // Get the root URL of the application
@@ -24,7 +28,7 @@ const Share = ({ type }: Props) => {
     }
   }
 
-  return (
+  if (siteSettings) return (
     <div className='relative'>
       <button
         onClick={handleCopyToClipboard}
@@ -33,7 +37,7 @@ const Share = ({ type }: Props) => {
           type === 'light' ? 'text-white opacity-90 hover:opacity-100' : 'text-grey-600 hover:text-brand-green',
         )}
       >
-        Share
+        {siteSettings.footer.shareLabel}
       </button>
       <div className={cn(
         'absolute -top-8 left-1/2 transform -translate-x-1/2 pointer-events-none',
@@ -41,7 +45,7 @@ const Share = ({ type }: Props) => {
         'transition-all duration-500 ease-in-out',
         tooltipVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
       )}>
-        Copied
+        {siteSettings.footer.shareMessage}
       </div>
     </div>
   )
