@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { getInsightPost } from '@/lib/sanity.query'
 import { PortableText } from '@portabletext/react'
 import { portableTextPost } from '@/components/sanity/portable-text-post'
@@ -6,6 +5,8 @@ import iconBadge from '@/public/images/icon-badge.svg'
 import RelatedPosts from '@/components/posts/related-posts'
 import { Metadata } from 'next'
 import { siteTitle } from '@/lib/constants'
+import PostHeader from '@/components/posts/post-header'
+import Methods from '@/components/posts/methods'
 
 type Props = {
   params: { slug: string }
@@ -30,29 +31,14 @@ export default async function InsightPost({ params }: Props) {
 
   return (
     <div id='insight-post' className='p-5 mt-20 lg:mt-32'>
-      <header className='max-w-[960px] mx-auto mb-16'>
-        <div className='flex gap-3 items-end mb-3'>
-          <div className='p-2 bg-black'>
-            <Image
-              src={iconBadge}
-              alt={'Page icon'}
-              width={15}
-            />
-          </div>
-          <span className='uppercase leading-none font-medium'>Data Insight</span>
-        </div>
-        <h1 className='page-header'>{post.title}</h1>
-      </header>
+      <PostHeader type='insight' title={post.title} icon={iconBadge} iconAlt='Badge icon' />
 
       <div id='post-content' className='mb-20'>
         <PortableText value={post.content} components={portableTextPost} />
       </div>
 
       {post.methods &&
-        <div id='post-methods'>
-          <h2 className='max-w-[960px] mx-auto text-2xl font-medium tracking-normal leading-[42px] mb-6'>Methods</h2>
-          <PortableText value={post.methods} components={portableTextPost} />
-        </div>
+        <Methods post={post} />
       }
       
       {post.relatedPosts &&

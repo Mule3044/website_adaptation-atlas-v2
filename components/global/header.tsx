@@ -27,7 +27,7 @@ export default function Header() {
       'flex items-center justify-center z-50'
     )}>
       {/* Render site logo on all other pages except home */}
-      {!isHome && (
+      {!isHome && siteSettings && (
         <Link href='/'>
           <Image // logo
             src={siteSettings.logoDark}

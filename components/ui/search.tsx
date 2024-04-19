@@ -7,6 +7,7 @@ import { Combobox } from '@headlessui/react'
 import { BiX } from 'react-icons/bi'
 import { SearchItem } from '@/types/sanity.types'
 import { useRouter } from 'next/navigation'
+import { useSanityData } from '@/contexts/data-context'
 
 type Props = {
   data: SearchItem[]
@@ -38,6 +39,9 @@ const searchPaths = [
 const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Props) => {
   const [query, setQuery] = useState('')
   const router = useRouter()
+  const {
+    homeContent,
+  } = useSanityData()
 
   // Preprocess post data to include body text
   const processedData = data.map(post => ({
@@ -47,8 +51,6 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
       .map((block: any) => block.children?.map((child: any) => child.text).join(' '))
       .join(' ')
   }));
-
-  // console.log(processedData)
 
   // Define fuse object and filter data by query
   const fuse = new Fuse(processedData, fuseOptions)
@@ -137,7 +139,7 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
                 </Combobox.Option>
               )
             })}
-            {(filteredData.length === 0 && query.length > 0) && <div className='text-base pb-5'>No results found</div>}
+            {(homeContent && filteredData.length === 0 && query.length > 0) && <div className='text-base pb-5'>{homeContent.search.noResultsMessage}</div>}
           </Combobox.Options>
         </div>
       </Combobox>

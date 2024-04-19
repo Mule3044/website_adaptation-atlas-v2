@@ -88,8 +88,20 @@ export default defineType({
           type: 'string',
         },
         {
+          name: 'aboutSlug',
+          title: 'About menu slug',
+          description: 'Must match slug on About page',
+          type: 'string',
+        },
+        {
           name: 'getInvolvedTitle',
           title: 'Get involved menu title',
+          type: 'string',
+        },
+        {
+          name: 'getInvolvedSlug',
+          title: 'Get involved menu slug',
+          description: 'Must match slug on Get Involved page',
           type: 'string',
         },
       ]

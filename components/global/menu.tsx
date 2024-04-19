@@ -65,9 +65,9 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
   }
 
   const menuLinks = [
-    { id: 'our-work', link: '/#spotlight-grid', title: siteSettings.menu.workTitle },
-    { id: 'about', link: '/about', title: siteSettings.menu.aboutTitle },
-    { id: 'get-involved', link: '/get-involved', title: siteSettings.menu.getInvolvedTitle },
+    { id: 'our-work', link: '/', title: siteSettings.menu.workTitle },
+    { id: 'about', link: `/${siteSettings.menu.aboutSlug}`, title: siteSettings.menu.aboutTitle },
+    { id: 'get-involved', link: `/${siteSettings.menu.getInvolvedSlug}`, title: siteSettings.menu.getInvolvedTitle },
   ]
 
   const year = new Date().getFullYear()

@@ -1,23 +1,29 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { LiaArrowRightSolid } from 'react-icons/lia'
 import { RelatedPost } from '@/types/sanity.types'
+import { useSanityData } from '@/contexts/data-context'
 
 type Props = {
   posts: RelatedPost[]
 }
 
 const RelatedPosts = ({ posts }: Props) => {
+  const {
+    siteSettings,
+  } = useSanityData()
   const paths = [
     { type: 'spotlight', path: 'data-spotlights', image: '/images/icon-bars-dark.svg' },
     { type: 'insight', path: 'data-insights', image: '/images/icon-badge-dark.svg' },
     { type: 'impact', path: 'data-in-practice', image: '/images/icon-page-dark.svg' },
   ]
 
-  return (
+  if (siteSettings) return (
     <div id='related-posts' className='max-w-[940px] mx-auto mt-20 mb-20'>
       <div className='mb-8'>
-        <h2>Related Insights and Spotlights</h2>
+        <h2>{siteSettings.postOptions.relatedTitle}</h2>
       </div>
       <div>
         {posts.map((post: RelatedPost) => {

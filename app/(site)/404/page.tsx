@@ -11,10 +11,10 @@ export default function NotFound() {
   } = useSanityData()
   if (siteSettings) return (
     <div id='404-not-found' className='h-screen p-5 mt-20 lg:mt-32'>
-      <header className='max-w-[960px] mx-auto mb-16'>
+      <header className='max-w-[940px] mx-auto mb-16'>
         <h1 className='page-header'>{siteSettings.options404.title}</h1>
       </header>
-      <div id='page-content' className='max-w-[960px] mx-auto'>
+      <div id='page-content' className='max-w-[940px] mx-auto'>
         <Button variant={'link'} size={'md'} asChild className='group'>
           <div>
             <Link href='/'>{siteSettings.options404.linkLabel}</Link>

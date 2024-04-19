@@ -151,7 +151,9 @@ export type Impact = {
 type Menu = {
   workTitle: string
   aboutTitle: string
+  aboutSlug: string
   getInvolvedTitle: string
+  getInvolvedSlug: string
 }
 
 type ContentTypes = {
