@@ -16,11 +16,12 @@ export default function Home() {
     insights,
     impacts,
     searchContent,
+    siteSettings,
   } = useSanityData()
 
   return (
     <div id='home' className='p-5'>
-      {(homeContent && searchContent) && <HomeHero searchContent={searchContent} content={homeContent} />}
+      {(homeContent && searchContent && siteSettings) && <HomeHero searchContent={searchContent} content={homeContent} settings={siteSettings} />}
       {spotlights && <HomeCarousel spotlights={spotlights} />}
       {spotlights && primaryTags && <SpotlightGrid spotlights={spotlights} tags={primaryTags} />}
       {insights && <InsightCarousel insights={insights} />}

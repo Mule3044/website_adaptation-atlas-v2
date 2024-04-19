@@ -40,12 +40,42 @@ type Tout = {
   buttonLabel: string
 }
 
+type Search = {
+  title: string
+  placeholder: string
+  placeholderShort: string
+}
+
+type SpotlightCarousel = {
+  kicker: string
+  buttonLabel: string
+  counterLabel: string
+}
+
+type PageHeaders = {
+  spotlightTitle: string
+  spotlightSubtitle: string
+  filterLabel: string
+  searchPlaceholder: string
+  comingSoonLabel: string
+  notifyMeLabel: string
+  notifyMeLink: string
+  insightTitle: string
+  insightSubtitle: string
+  impactTitle: string
+  impactSubtitle: string
+}
+
 export type Home = {
   _id: string
   _createdAt: Date
   title: string
   slug: string
   introText: string
+  ctaText: string
+  search: Search
+  spotlightCarousel: SpotlightCarousel
+  pageHeaders: PageHeaders
   tout: Tout
 }
 
@@ -115,4 +145,56 @@ export type Impact = {
   featuredImageAlt: string
   content: PortableTextBlock[]
   relatedPosts: RelatedPost[]
+}
+
+type Menu = {
+  workTitle: string
+  aboutTitle: string
+  getInvolvedTitle: string
+}
+
+type ContentTypes = {
+  spotlightsTitle: string
+  insightsTitle: string
+  impactsTitle: string
+}
+
+type Footer = {
+  mailingListLabel: string
+  mailingListLink: string
+  feedbackLabel: string
+  feedbackLink: string
+  contactLabel: string
+  contactLink: string
+  shareLabel: string
+  shareMessage: string
+  copyright: string
+}
+
+type PostOptions = {
+  creditLabel: string
+  exploreLinkLabel: string
+  previewLabel: string
+  ctaLinkLabel: string
+  tagsTitle: string
+  relatedTitle: string
+  methodsTitle: string
+}
+
+type Options404 = {
+  title: string
+  linkLabel: string
+}
+
+export type Settings = {
+  siteTitle: string
+  logoDark: string
+  logoDarkAlt: string
+  logoLight: string
+  logoLightAlt: string
+  contentTypes: ContentTypes
+  menu: Menu
+  footer: Footer
+  postOptions: PostOptions
+  options404: Options404
 }

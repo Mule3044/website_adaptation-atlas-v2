@@ -1,16 +1,18 @@
 import { groq } from 'next-sanity'
 import { getClient } from './sanity.client'
-import { Home, Page, Spotlight, Impact, Insight, Tag, SearchItem } from '@/types/sanity.types'
+import { Home, Page, Spotlight, Impact, Insight, Tag, SearchItem, Settings } from '@/types/sanity.types'
 
 // Homepage content
 export async function getHomeContent(): Promise<Home> {
   return getClient.fetch(
-    groq`*[_type == 'home' && _id == 'home' && language != 'fr'][0] {
+    groq`*[_type == 'home' && language != 'fr'][0] {
       _id,
       _createdAt,
       title,
       introText,
       'slug': slug.current,
+      ctaText,
+      search,
       'tout': {
         ...tout,
         'featuredImage': tout.featuredImage.asset->url,
@@ -27,12 +29,14 @@ export async function getHomeContent(): Promise<Home> {
 // Homepage content
 export async function getHomeContentFr(): Promise<Home> {
   return getClient.fetch(
-    groq`*[_type == 'home' && _id == 'home' && language == 'fr'][0] {
+    groq`*[_type == 'home' && language == 'fr'][0] {
       _id,
       _createdAt,
       title,
       introText,
       'slug': slug.current,
+      ctaText,
+      search,
       'tout': {
         ...tout,
         'featuredImage': tout.featuredImage.asset->url,
@@ -49,7 +53,7 @@ export async function getHomeContentFr(): Promise<Home> {
 // About page content
 export async function getAboutContent(): Promise<Page> {
   return getClient.fetch(
-    groq`*[_type == 'about' && _id == 'about' && language != 'fr'][0] {
+    groq`*[_type == 'about' && language != 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -66,7 +70,7 @@ export async function getAboutContent(): Promise<Page> {
 // About page content French
 export async function getAboutContentFr(): Promise<Page> {
   return getClient.fetch(
-    groq`*[_type == 'about' && _id == 'about' && language == 'fr'][0] {
+    groq`*[_type == 'about' && language == 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -83,7 +87,7 @@ export async function getAboutContentFr(): Promise<Page> {
 // Get involved page content
 export async function getGetInvolvedContent(): Promise<Page> {
   return getClient.fetch(
-    groq`*[_type == 'getInvolved' && _id == 'getInvolved' && language != 'fr'][0] {
+    groq`*[_type == 'getInvolved' && language != 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -100,7 +104,7 @@ export async function getGetInvolvedContent(): Promise<Page> {
 // Get involved page content French
 export async function getGetInvolvedContentFr(): Promise<Page> {
   return getClient.fetch(
-    groq`*[_type == 'getInvolved' && _id == 'getInvolved' && language == 'fr'][0] {
+    groq`*[_type == 'getInvolved' && language == 'fr'][0] {
       _id,
       _createdAt,
       title,
@@ -478,6 +482,51 @@ export async function getSecondaryTagsFr(): Promise<Tag[]> {
       _createdAt,
       name,
       'slug': slug.current,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Site settings
+export async function getSiteSettings(): Promise<Settings> {
+  return getClient.fetch(
+    // For some reason, need to specify [1] here instead of [0]
+    groq`*[_type == 'settings' && language != 'fr'][1] {
+      siteTitle,
+      'logoDark': logoDark.asset->url,
+      'logoDarkAlt': logoDark.asset->alt,
+      'logoLight': logoLight.asset->url,
+      'logoLightAlt': logoLight.asset->alt,
+      menu,
+      contentTypes,
+      footer,
+      postOptions,
+      options404,
+    }`,
+    {},
+    {next: {
+      revalidate: 60 // look for updates to revalidate cache every minute
+    }}
+  )
+}
+
+// Site settings French
+export async function getSiteSettingsFr(): Promise<Settings> {
+  return getClient.fetch(
+    groq`*[_type == 'settings' && language == 'fr'][0] {
+      siteTitle,
+      'logoDark': logoDark.asset->url,
+      'logoDarkAlt': logoDark.asset->alt,
+      'logoLight': logoLight.asset->url,
+      'logoLightAlt': logoLight.asset->alt,
+      menu,
+      contentTypes,
+      footer,
+      postOptions,
+      options404,
     }`,
     {},
     {next: {

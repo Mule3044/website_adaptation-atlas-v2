@@ -5,22 +5,24 @@ import Image from 'next/image'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { breakpoints } from '@/lib/constants'
 import Search from '@/components/ui/search'
-import atlasLogo from '@/public/images/atlas-logo.svg'
-import { Home, SearchItem } from '@/types/sanity.types'
+// import atlasLogo from '@/public/images/atlas-logo.svg'
+import { Home, SearchItem, Settings } from '@/types/sanity.types'
 import cn from 'classnames'
 
 type Props = {
   searchContent: SearchItem[]
   content: Home
+  settings: Settings
 }
 
-const HomeHero = ({ searchContent, content }: Props) => {
+const HomeHero = ({ searchContent, content, settings }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
   const isDesktop = useMediaQuery(breakpoints.lg)
   const isLgScreen = useMediaQuery(breakpoints.xl)
-  const searchPlaceholder = isLgScreen ? 'Search for evidence-based research and data by keyword or phrase…' : 'Search by keyword…'
+  const searchPlaceholder = isLgScreen ? content.search.placeholder : content.search.placeholderShort
   const introTextRef = useRef<HTMLHeadingElement>(null)
   const [translateY, setTranslateY] = useState(0)
+  console.log(settings);
 
   const handleLinkClick = (e: any, target: any) => {
     e.preventDefault() // Prevent default anchor behavior
@@ -44,8 +46,8 @@ const HomeHero = ({ searchContent, content }: Props) => {
       <div id='intro-search' className='basis-full lg:basis-3/4 flex lg:justify-center mt-[100px] lg:mt-[200px] gap-5'>
         <div className='basis-full lg:basis-2/3'>
           <Image // logo
-            src={atlasLogo}
-            alt='Agriculture Adaptation Atlas logo'
+            src={settings.logoDark}
+            alt={settings.logoDarkAlt}
             width={280}
             height={280}
             className='mb-7 w-[200px] lg:w-[280px]'
@@ -59,7 +61,7 @@ const HomeHero = ({ searchContent, content }: Props) => {
           )}
 
           <div id='search-container' style={{ transform: `translateY(${translateY}px)` }} className='transition-transform'>
-            <p className='text-grey-600 text-lg font-medium mb-3'>Find specific information quickly</p>
+            <p className='text-grey-600 text-lg font-medium mb-3'>{content.search.title}</p>
             <Search data={searchContent} placeholder={searchPlaceholder} searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
           </div>
         </div>
@@ -72,7 +74,7 @@ const HomeHero = ({ searchContent, content }: Props) => {
           onClick={(e) => handleLinkClick(e, '#spotlight-grid')}
           className='flex items-center gap-3 px-10 relative w-full h-full transition-colors bg-brand-green hover:bg-brand-dark-green'
         >
-          <span className='text-white text-xl text-medium uppercase'>Interact with data</span>
+          <span className='text-white text-xl text-medium uppercase'>{content.ctaText}</span>
           <Image // arrow icon
             src={'/images/icon-arrow-right.svg'}
             alt='Right arrow icon'

@@ -20,6 +20,8 @@ import {
   getSecondaryTagsFr,
   getSearchContent,
   getSearchContentFr,
+  getSiteSettings,
+  getSiteSettingsFr,
 } from '@/lib/sanity.query'
 import { useLanguageContext } from '@/contexts/language-context'
 
@@ -41,6 +43,7 @@ export const SanityDataProvider = ({ children }: DataProviderProps) => {
   const [insights, setInsights] = useState<any>(null)
   const [impacts, setImpacts] = useState<any>(null)
   const [searchContent, setSearchContent] = useState<any>(null)
+  const [siteSettings, setSiteSettings] = useState<any>(null)
   const { locale } = useLanguageContext()
 
   useEffect(() => {
@@ -54,6 +57,7 @@ export const SanityDataProvider = ({ children }: DataProviderProps) => {
       const primaryTags = (locale === 'fr') ? await getPrimaryTagsFr() : await getPrimaryTags()
       const secondaryTags = (locale === 'fr') ? await getSecondaryTagsFr() : await getSecondaryTags()
       const search = (locale === 'fr') ? await getSearchContentFr() : await getSearchContent()
+      const settings = (locale === 'fr') ? await getSiteSettingsFr() : await getSiteSettings()
       const filteredSearch = search.filter(item => !item.comingSoon) // filter out coming soon items
 
       setHomeContent(home)
@@ -65,13 +69,14 @@ export const SanityDataProvider = ({ children }: DataProviderProps) => {
       setPrimaryTags(primaryTags)
       setSecondaryTags(secondaryTags)
       setSearchContent(filteredSearch)
+      setSiteSettings(settings)
     }
 
     fetchData()
   }, [locale])
 
   return (
-    <SanityDataContext.Provider value={{ homeContent, aboutContent, getInvolvedContent, spotlights, insights, impacts, primaryTags, secondaryTags, searchContent }}>
+    <SanityDataContext.Provider value={{ homeContent, aboutContent, getInvolvedContent, spotlights, insights, impacts, primaryTags, secondaryTags, searchContent, siteSettings }}>
       {children}
     </SanityDataContext.Provider>
   )

@@ -1,5 +1,4 @@
 import { defineType } from 'sanity'
-// import { Rule } from '@sanity/types'
 
 export default defineType({
   name: 'home',
@@ -16,7 +15,6 @@ export default defineType({
       name: 'title',
       title: 'Page title',
       type: 'string',
-      hidden: true,
     },
     {
       name: 'slug',
@@ -25,12 +23,125 @@ export default defineType({
       options: {
         source: 'title',
       },
-      hidden: true,
     },
     {
       name: 'introText',
       title: 'Site introduction text',
       type: 'text',
+    },
+    {
+      name: 'ctaText',
+      title: 'CTA button text',
+      type: 'string',
+    },
+    {
+      name: 'search',
+      title: 'Search',
+      description: 'Content options for the global search function.',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+        },
+        {
+          name: 'placeholder',
+          title: 'Placeholder',
+          type: 'string',
+        },
+        {
+          name: 'placeholderShort',
+          title: 'Placeholder (mobile)',
+          type: 'string',
+        },
+      ]
+    },
+    {
+      name: 'spotlightCarousel',
+      title: 'Spotlight carousel',
+      description: 'Content options for the spotlight carousel items.',
+      type: 'object',
+      fields: [
+        {
+          name: 'kicker',
+          title: 'Kicker',
+          type: 'string',
+        },
+        {
+          name: 'buttonLabel',
+          title: 'Button label',
+          type: 'string',
+        },
+        {
+          name: 'counterLabel',
+          title: 'Counter label',
+          type: 'string',
+        },
+      ]
+    },
+    {
+      name: 'pageHeaders',
+      title: 'Page headers and labels',
+      description: 'Content options for homepage grid and carousels.',
+      type: 'object',
+      fields: [
+        {
+          name: 'spotlightTitle',
+          title: 'Spotlight grid title',
+          type: 'string',
+        },
+        {
+          name: 'spotlightSubtitle',
+          title: 'Spotlight grid subtitle',
+          type: 'string',
+        },
+        {
+          name: 'filterLabel',
+          title: 'Filter label',
+          type: 'string',
+        },
+        {
+          name: 'searchPlaceholder',
+          title: 'Search placeholder',
+          type: 'string',
+        },
+        {
+          name: 'comingSoonLabel',
+          title: 'Coming soon label',
+          type: 'string',
+        },
+        {
+          name: 'notifyMeLabel',
+          title: 'Notify me label',
+          type: 'string',
+        },
+        {
+          name: 'notifyMeLink',
+          title: 'Notify me link',
+          type: 'string',
+        },
+        {
+          name: 'insightTitle',
+          title: 'Data Insights carousel title',
+          type: 'string',
+        },
+        {
+          name: 'insightSubtitle',
+          title: 'Data Insights carousel subtitle',
+          type: 'string',
+        },
+        {
+          name: 'impactTitle',
+          title: 'Data in Practice carousel title',
+          type: 'string',
+        },
+        {
+          name: 'impactSubtitle',
+          title: 'Data in Practice carousel subtitle',
+          type: 'string',
+        },
+      ]
     },
     {
       name: 'tout',
