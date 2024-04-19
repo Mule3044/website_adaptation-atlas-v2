@@ -9,7 +9,12 @@ import LanguageSelect from '@/components/ui/language-select'
 import { useLanguageContext } from '@/contexts/language-context'
 import { useSanityData } from '@/contexts/data-context'
 
-export default function Header() {
+type Props = {
+  menuActive: boolean
+  setMenuActive: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function Header({ menuActive, setMenuActive }: Props) {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const headerClass = (isHome) ? 'absolute top-0' : 'relative'
@@ -40,7 +45,14 @@ export default function Header() {
       )}
 
       {(spotlights && insights && impacts && siteSettings) &&
-        <Menu spotlights={spotlights} insights={insights} impacts={impacts} siteSettings={siteSettings} />
+        <Menu
+          spotlights={spotlights}
+          insights={insights}
+          impacts={impacts}
+          siteSettings={siteSettings}
+          menuActive={menuActive}
+          setMenuActive={setMenuActive}
+        />
       }
 
       <LanguageSelect setLanguage={setLocale} isHome={isHome} />

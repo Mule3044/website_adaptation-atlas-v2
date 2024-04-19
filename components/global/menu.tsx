@@ -11,10 +11,12 @@ type Props = {
   insights: Insight[]
   impacts: Impact[]
   siteSettings: Settings
+  menuActive: boolean
+  setMenuActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
-  const [menuActive, setMenuActive] = useState<boolean>(false)
+const Menu = ({ spotlights, insights, impacts, siteSettings, menuActive, setMenuActive }: Props) => {
+  const filteredSpotlights = spotlights.filter(item => !item.comingSoon)
   const [menuLevelActive, setMenuLevelActive] = useState<'primary' | 'secondary' | 'tertiary'>('primary')
   const [tertiaryMenuContent, setTertiaryMenuContent] = useState<{
     id: string
@@ -22,13 +24,12 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
     title: string
     posts: Spotlight[] | Insight[] | Impact[]
   } | undefined>()
-  // const menuClass = menuActive ? 'opacity-100 pointer-events-default' : 'opacity-0 pointer-events-none'
   const secondaryMenuLinks = [
     {
       id: 'spotlights',
       slug: 'data-spotlights',
       title: 'Data Spotlights',
-      posts: spotlights,
+      posts: filteredSpotlights,
     },
     {
       id: 'insights',
@@ -108,7 +109,7 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
             }
           )}>
             {menuLinks.map((item) => (
-              <div key={item.id} className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide'>
+              <div key={item.id} className='text-white text-xl md:text-2xl lg:text-4xl font-medium tracking-wide'>
                 {/* Handle click for Our Work to toggle the nested menu */}
                 {item.id === 'our-work' ? (
                   <button onClick={activateSecondaryMenu}>
@@ -137,7 +138,7 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
             }
           )}>
             <div className='relative'>
-              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>{siteSettings.menu.workTitle}</h2>
+              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-medium tracking-wide opacity-70'>{siteSettings.menu.workTitle}</h2>
               <button
                 className='absolute -left-12 -top-0.5 lg:top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
                 onClick={activatePrimaryMenu}
@@ -149,7 +150,7 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
             {secondaryMenuLinks.map((item) => (
               <button
                 key={item.id}
-                className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide text-left'
+                className='text-white text-xl md:text-2xl lg:text-4xl font-medium tracking-wide text-left'
                 onClick={() => activateTertiaryMenu(item.id)}
               >
                 {item.title}
@@ -161,7 +162,7 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
           <div className={cn(
             'absolute flex flex-col gap-5 md:gap-7 lg:gap-14 menu-tertiary',
             'pt-[100px] pb-[200px] h-full w-full overflow-y-auto overflow-x-hidden',
-            'pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]',
+            'pl-[60px] pr-[20px] lg:pl-[300px] md:pr-[50px] lg:pr-[150px] xl:pr-[250px] my-[100px]',
             'transition-all duration-300 ease-in-out transform',
             {
               'opacity-100 translate-x-0': menuLevelActive === 'tertiary', // Active state classes
@@ -171,7 +172,7 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
             }
           )}>
             <div className='relative lg:mt-[160px]'>
-              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide opacity-70'>{tertiaryMenuContent?.title}</h2>
+              <h2 className='text-white text-xl md:text-2xl lg:text-4xl font-medium tracking-wide opacity-70'>{tertiaryMenuContent?.title}</h2>
               <button
                 className='absolute -left-12 -top-0.5 lg:top-1 bg-white rounded-full transition-opacity opacity-70 hover:opacity-100'
                 onClick={activateSecondaryMenu}
@@ -184,7 +185,7 @@ const Menu = ({ spotlights, insights, impacts, siteSettings }: Props) => {
               <Link
                 key={item.slug}
                 href={`/${tertiaryMenuContent?.slug}/${item.slug}`}
-                className='text-white text-xl md:text-2xl lg:text-4xl font-semibold tracking-wide'
+                className='text-white text-xl md:text-2xl lg:text-4xl font-medium tracking-wide'
                 onClick={handleToggleMenu}
               >
                 {item.title}
