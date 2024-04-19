@@ -97,6 +97,14 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
               <div className='relative'>
                 {/* Coming soon post */}
                 <div className='flex justify-center items-center h-[240px] xl:h-[280px] mb-2 relative'>
+                  <div className='absolute z-10 flex justify-center items-center h-10 w-10 top-3 right-3 bg-grey-600 opacity-30'>
+                    <Image // icon
+                      src={'/images/icon-bars.svg'}
+                      alt={'Bars icon'}
+                      width={20}
+                      height={20}
+                    />
+                  </div>
                   <Image
                     src={spotlight.featuredImage}
                     alt={spotlight.featuredImageAlt}
@@ -105,7 +113,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
                     className='object-center opacity-30'
                   />
                   <div className='relative z-10 flex flex-col justify-center items-center '>
-                    <h3 className='uppercase tracking-wide font-medium mb-1'>{homeContent.pageHeaders.comingSoonLabel}</h3>
+                    <h3 className='uppercase font-medium mb-1'>{homeContent.pageHeaders.comingSoonLabel}</h3>
                     <button
                       onClick={() => { handleUpvote(spotlight._id) }}
                       disabled={votes[spotlight._id]}
@@ -116,7 +124,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
                     <a href={homeContent.pageHeaders.notifyMeLink} className='text-brand-green font-medium'>{homeContent.pageHeaders.notifyMeLabel}</a>
                   </div>
                 </div>
-                <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
+                <h3 className='uppercase font-medium mb-2'>{spotlight.title}</h3>
               </div>
             ) : (
               <Link href={`/data-spotlights/${spotlight.slug}`} className='transition-opacity hover:opacity-90'>
@@ -138,7 +146,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
                     className='object-center'
                   />
                 </div>
-                <h3 className='uppercase tracking-wide font-medium mb-2'>{spotlight.title}</h3>
+                <h3 className='uppercase font-medium mb-2'>{spotlight.title}</h3>
               </Link>
             )}
             <div className='flex gap-x-3 gap-y-1 flex-wrap'>

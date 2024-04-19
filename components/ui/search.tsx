@@ -88,7 +88,7 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
         }}
       >
         <div className='relative'>
-          <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-3 px-4'>
+          <div id='search-input' className='flex items-center gap-3 bg-grey-100 w-full py-[15px] px-[25px]'>
             <Image
               src={'/images/icon-search.svg'}
               alt='Search'
@@ -104,43 +104,45 @@ const Search = ({ data, placeholder, searchBoxActive, setSearchBoxActive }: Prop
             />
             {searchBoxActive &&
               <button
-                className='absolute right-3'
+                className='absolute right-[20px]'
                 onClick={resetSearchBox}
               >
                 <BiX className='text-grey-300 h-6 w-6' />
               </button>
             }
           </div>
-          <Combobox.Options className='absolute bg-grey-100 w-full px-5 max-h-[200px] lg:max-h-[320px] overflow-y-auto'>
-            {filteredData.length > 0 && filteredData.map((post: any) => {
-              const type = searchPaths.find((item: any) => item.type === post.item._type)
-              return (
-                <Combobox.Option
-                  key={post.item.slug}
-                  value={post.item.slug}
-                  className='list-none cursor-pointer'
-                >
-                  <div className='group flex gap-3 text-base mb-3'>
-                    <Image // icon
-                      src={type!.image}
-                      alt={'Icon'}
-                      width={18}
-                      height={18}
-                    />
-                    <span className='truncate'>{post.item.title}</span>
-                    <Image // icon
-                      src={'/images/icon-arrow-dark.svg'}
-                      alt={'Arrow icon'}
-                      width={22}
-                      height={22}
-                      className='scale-90 transition-transform group-hover:translate-x-2'
-                    />
-                  </div>
-                </Combobox.Option>
-              )
-            })}
-            {(homeContent && filteredData.length === 0 && query.length > 0) && <div className='text-base pb-5'>{homeContent.search.noResultsMessage}</div>}
-          </Combobox.Options>
+          {query.length > 0 &&
+            <Combobox.Options className='absolute bg-grey-100 w-full pt-[10px] pb-[20px] px-[25px] max-h-[200px] lg:max-h-[320px] overflow-y-auto'>
+              {filteredData.length > 0 && filteredData.map((post: any) => {
+                const type = searchPaths.find((item: any) => item.type === post.item._type)
+                return (
+                  <Combobox.Option
+                    key={post.item.slug}
+                    value={post.item.slug}
+                    className='list-none cursor-pointer'
+                  >
+                    <div className='group flex gap-3 text-base mb-3'>
+                      <Image // icon
+                        src={type!.image}
+                        alt={'Icon'}
+                        width={18}
+                        height={18}
+                      />
+                      <span className='truncate'>{post.item.title}</span>
+                      <Image // icon
+                        src={'/images/icon-arrow-dark.svg'}
+                        alt={'Arrow icon'}
+                        width={22}
+                        height={22}
+                        className='scale-90 transition-transform group-hover:translate-x-2'
+                      />
+                    </div>
+                  </Combobox.Option>
+                )
+              })}
+              {(homeContent && filteredData.length === 0 && query.length > 0) && <div className='text-base'>{homeContent.search.noResultsMessage}</div>}
+            </Combobox.Options>
+          }
         </div>
       </Combobox>
     </div>

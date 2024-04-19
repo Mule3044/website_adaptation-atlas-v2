@@ -134,6 +134,12 @@ p.page-text {
   }
 }
 
+.caption p {
+  font-size: 0.875rem/* 14px */;
+  line-height: 1.25rem/* 20px */;
+  margin-top: 0.75rem;
+}
+
 /* Portable text superscript */
 .unknown__pt__mark__super {
   vertical-align: super;

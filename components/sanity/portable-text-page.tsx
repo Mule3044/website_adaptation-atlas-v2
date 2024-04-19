@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { getClient } from '@/lib/sanity.client'
-import imageUrlBuilder from '@sanity/image-url';
+import imageUrlBuilder from '@sanity/image-url'
+import { PortableText } from '@portabletext/react'
 
 const builder = imageUrlBuilder(getClient);
 
@@ -12,20 +13,26 @@ const ImageComponent = ({ value }: any) => {
   // Directly access the '_ref' property of the asset object
   const imageRef = value.asset?._ref;
   // Use 'urlFor' to generate the URL from the reference
-  const imageUrl = imageRef ? urlFor({_type: 'reference', _ref: imageRef}).url() : '';
+  const imageUrl = imageRef ? urlFor({ _type: 'reference', _ref: imageRef }).url() : '';
 
   // If image URL doesn't exist, don't render
   if (!imageUrl) return
 
   return (
-    <Image
-      src={imageUrl}
-      alt={value.alt}
-      layout='responsive'
-      width={1440}
-      height={1440}
-      className={'mb-20'}
-    />
+    <div className='mb-20'>
+      <Image
+        src={imageUrl}
+        alt={value.alt}
+        layout='responsive'
+        width={1440}
+        height={1440}
+      />
+      {value.caption &&
+        <div id='image-caption' className='caption'>
+          <PortableText value={value.caption} />
+        </div>
+      }
+    </div>
   )
 }
 
@@ -33,7 +40,7 @@ const GalleryImageComponent = ({ value }: any) => {
   // Directly access the '_ref' property of the asset object
   const imageRef = value.asset?._ref;
   // Use 'urlFor' to generate the URL from the reference
-  const imageUrl = imageRef ? urlFor({_type: 'reference', _ref: imageRef}).url() : '';
+  const imageUrl = imageRef ? urlFor({ _type: 'reference', _ref: imageRef }).url() : '';
 
   // If image URL doesn't exist, don't render
   if (!imageUrl) return

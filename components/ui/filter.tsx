@@ -16,21 +16,30 @@ type Props = {
 }
 
 const fuseOptions = {
-  minMatchCharLength: 3, // Only the matches whose length exceeds this value will be returned
   threshold: 0.3, // A threshold of 0.0 requires a perfect match, a threshold of 1.0 would match anything
+  ignoreLocation: true,
   keys: [
     { name: "title", weight: 1 },
-    { name: "featuredTags.name", weight: 1 },
+    { name: "featuredTags.name", weight: 0.75 },
     { name: "primaryTags.name", weight: 0.75 },
-    { name: "secondaryTags.name", weight: 0.5 },
-  ]
+    { name: "secondaryTags.name", weight: 0.75 },
+    { name: "searchableText", weight: 0.5 },
+  ],
 }
 
 const Filter = ({ data, query, setQuery, placeholder, setFilteredData, resetFilter, resetTags }: Props) => {
-  
+
+  // Preprocess post content to include body text
+  const processedData = data.map(post => ({
+    ...post,
+    searchableText: post.content
+      .filter(block => block._type === 'block')
+      .map((block: any) => block.children?.map((child: any) => child.text).join(' '))
+      .join(' ')
+  }));
 
   // Define fuse object and filter data by query
-  const fuse = new Fuse(data, fuseOptions)
+  const fuse = new Fuse(processedData, fuseOptions)
 
   // update filtered data every time input changes
   useEffect(() => {
@@ -59,9 +68,8 @@ const Filter = ({ data, query, setQuery, placeholder, setFilteredData, resetFilt
             <Combobox.Input
               onChange={(event) => setQuery(event.target.value)}
               onFocus={focusSearchBox}
-              // onBlur={resetFilter}
               placeholder={placeholder}
-              className='w-full bg-grey-100 outline-none text-lg'
+              className='w-full bg-grey-100 outline-none text-base'
             />
             {query &&
               <button

@@ -27,6 +27,11 @@ const ImageFullComponent = ({ value }: any) => {
         width={1920}
         height={1080}
       />
+      {value.caption &&
+        <div id='image-caption' className='caption'>
+          <PortableText value={value.caption} />
+        </div>
+      }
     </div>
   )
 }
