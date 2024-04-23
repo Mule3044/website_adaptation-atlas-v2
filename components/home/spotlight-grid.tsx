@@ -119,7 +119,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
                       disabled={votes[spotlight._id]}
                       className='flex justify-between items-center gap-0.5 text-brand-green disabled:opacity-50'
                     >
-                      {homeContent && <span className='font-semibold'>{homeContent.pageHeaders?.upvoteLabel}: {(!votes[spotlight._id]) ? spotlight.upvotes : spotlight.upvotes + 1}</span>}
+                      <span className='font-semibold'>{homeContent.pageHeaders?.upvoteLabel} {(!votes[spotlight._id]) ? spotlight.upvotes : spotlight.upvotes + 1}</span>
                       <BiUpArrowAlt className='scale-125' />
                     </button>
                     <a href={homeContent.pageHeaders.notifyMeLink} className='text-brand-green font-medium'>{homeContent.pageHeaders.notifyMeLabel}</a>
