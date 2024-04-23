@@ -60,6 +60,7 @@ type PageHeaders = {
   searchPlaceholder: string
   noResultsMessage: string
   comingSoonLabel: string
+  upvoteLabel: string
   notifyMeLabel: string
   notifyMeLink: string
   insightTitle: string
