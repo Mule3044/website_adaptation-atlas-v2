@@ -21,7 +21,7 @@ export default function Home() {
     <div id='home' className='p-5'>
       {(homeContent && searchContent && siteSettings) && <HomeHero searchContent={searchContent} content={homeContent} settings={siteSettings} />}
       <HomeCarousel />
-      {spotlights && primaryTags && homeContent && <SpotlightGrid spotlights={spotlights} tags={primaryTags} homeContent={homeContent} />}
+      {(spotlights && primaryTags && homeContent) && <SpotlightGrid spotlights={spotlights} tags={primaryTags} homeContent={homeContent} />}
       <InsightCarousel />
       <ImpactCarousel />
       {homeContent && <GetInvolvedTout content={homeContent} />}
