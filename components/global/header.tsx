@@ -55,9 +55,9 @@ export default function Header({ menuActive, setMenuActive }: Props) {
         />
       }
 
-      {siteSettings && siteSettings?.localiztionEnabled &&
+      {/* {siteSettings && siteSettings?.localiztionEnabled &&
         <LanguageSelect setLanguage={setLocale} isHome={isHome} />
-      }
+      } */}
     </header>
   )
 }
