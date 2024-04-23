@@ -50,6 +50,7 @@ type Search = {
 type SpotlightCarousel = {
   kicker: string
   buttonLabel: string
+  counterLabel: string
 }
 
 type PageHeaders = {
@@ -191,6 +192,7 @@ type Options404 = {
 
 export type Settings = {
   siteTitle: string
+  localiztionEnabled: boolean
   logoDark: string
   logoDarkAlt: string
   logoLight: string

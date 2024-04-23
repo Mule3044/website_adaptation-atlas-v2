@@ -61,7 +61,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
         <h3>{homeContent.pageHeaders.spotlightSubtitle}</h3>
       </div>
       <div id='spotlight-filter-search' className='mb-5 -mx-2.5'>
-        <h4 className='uppercase text-sm mb-2 px-2.5'>Filter tools</h4>
+        <h4 className='uppercase text-sm mb-2 px-2.5'>{homeContent.pageHeaders.filterLabel}</h4>
         <div className='flex justify-between items-center flex-wrap'>
           <div id='spotlight-tags' className='w-full md:w-3/4 pl-2.5 pr-5 mb-5 md:mb-0' >
             <Carousel type='tags' opts={{ align: 'start' }}>
@@ -83,7 +83,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
               query={query}
               setQuery={setQuery}
               setFilteredData={setFilteredSpotlights}
-              placeholder='Search for a topic...'
+              placeholder={homeContent.pageHeaders.searchPlaceholder}
               resetFilter={resetFilter}
               resetTags={resetTags}
             />

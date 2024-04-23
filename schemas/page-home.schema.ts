@@ -78,6 +78,11 @@ export default defineType({
           title: 'Button label',
           type: 'string',
         },
+        {
+          name: 'counterLabel',
+          title: 'Counter label',
+          type: 'string',
+        },
       ]
     },
     {

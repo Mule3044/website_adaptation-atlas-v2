@@ -10,6 +10,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { breakpoints } from '@/lib/constants'
 import cn from 'classnames'
 import { Button } from '@/components/ui/button'
+import { useSanityData } from '@/contexts/data-context'
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -85,6 +86,9 @@ const Carousel = React.forwardRef<
       },
       plugins
     )
+    const {
+      homeContent,
+    } = useSanityData()
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
     const [currentSlide, setCurrentSlide] = React.useState(0)
@@ -155,8 +159,6 @@ const Carousel = React.forwardRef<
       setApi(api)
     }, [api, setApi])
 
-
-
     React.useEffect(() => {
       if (!api) {
         return
@@ -208,9 +210,9 @@ const Carousel = React.forwardRef<
         >
           {children}
           {/* Hero carousel current slide indicator */}
-          {type === 'hero' &&
+          {type === 'hero' && homeContent &&
             <div id='carousel-indicator' className='absolute flex justify-center w-full text-white uppercase bottom-5'>
-              {currentSlide} of {totalSlides}
+              {currentSlide} {homeContent.spotlightCarousel?.counterLabel} {totalSlides}
             </div>
           }
           {/* Gallery carousel progress bar */}

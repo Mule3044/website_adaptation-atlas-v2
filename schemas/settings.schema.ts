@@ -23,6 +23,12 @@ export default defineType({
       type: 'string',
     },
     {
+      name: 'localiztionEnabled',
+      title: 'Enable localization',
+      description: 'If checked, this will display the language selector dropdown.',
+      type: 'boolean',
+    },
+    {
       name: 'logoDark',
       title: 'Logo image (homepage)',
       type: 'image',

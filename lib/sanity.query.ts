@@ -544,6 +544,7 @@ export async function getSiteSettings(): Promise<Settings> {
     // For some reason, need to specify [1] here instead of [0]
     groq`*[_type == 'settings' && language != 'fr'][1] {
       siteTitle,
+      localiztionEnabled,
       'logoDark': logoDark.asset->url,
       'logoDarkAlt': logoDark.asset->alt,
       'logoLight': logoLight.asset->url,
@@ -568,6 +569,7 @@ export async function getSiteSettingsFr(): Promise<Settings> {
   return getClient.fetch(
     groq`*[_type == 'settings' && language == 'fr'][0] {
       siteTitle,
+      localiztionEnabled,
       'logoDark': logoDark.asset->url,
       'logoDarkAlt': logoDark.asset->alt,
       'logoLight': logoLight.asset->url,

@@ -55,7 +55,9 @@ export default function Header({ menuActive, setMenuActive }: Props) {
         />
       }
 
-      <LanguageSelect setLanguage={setLocale} isHome={isHome} />
+      {siteSettings && siteSettings?.localiztionEnabled &&
+        <LanguageSelect setLanguage={setLocale} isHome={isHome} />
+      }
     </header>
   )
 }
