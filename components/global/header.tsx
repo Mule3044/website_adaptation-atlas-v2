@@ -55,9 +55,15 @@ export default function Header({ menuActive, setMenuActive }: Props) {
         />
       }
 
-      {siteSettings && siteSettings?.localiztionEnabled &&
+      {/* localizationEnabled variable check temporarily disabled for the development site to preview French content */}
+      {/* IMPORTANT: be sure to re-enable this when pushing to production */}
+      {/* {siteSettings && siteSettings?.localiztionEnabled &&
         <LanguageSelect setLanguage={setLocale} isHome={isHome} />
-      }
+      } */}
+
+      {/* Temporarily enabled for the development site to preview French content */}
+      {/* IMPORTANT: remove this line before pushing to production */}
+      <LanguageSelect setLanguage={setLocale} isHome={isHome} />
     </header>
   )
 }
