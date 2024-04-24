@@ -28,19 +28,19 @@ const Menu = ({ spotlights, insights, impacts, siteSettings, menuActive, setMenu
     {
       id: 'spotlights',
       slug: 'data-spotlights',
-      title: 'Data Spotlights',
+      title: siteSettings.contentTypes.spotlightsTitle,
       posts: filteredSpotlights,
     },
     {
       id: 'insights',
       slug: 'data-insights',
-      title: 'Data Insights',
+      title: siteSettings.contentTypes.insightsTitle,
       posts: insights,
     },
     {
       id: 'impacts',
       slug: 'data-in-practice',
-      title: 'Data in Practice',
+      title: siteSettings.contentTypes.impactsTitle,
       posts: impacts,
     },
   ]
