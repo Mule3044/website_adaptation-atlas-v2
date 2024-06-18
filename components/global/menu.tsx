@@ -19,7 +19,7 @@ const Menu = ({
   spotlights,
   insights,
   impacts,
-  siteSettings,
+  siteSettings, 
   menuActive,
   setMenuActive,
 }: Props) => {
