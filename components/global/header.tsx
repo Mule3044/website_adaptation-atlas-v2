@@ -8,6 +8,9 @@ import cn from 'classnames'
 import LanguageSelect from '@/components/ui/language-select'
 import { useLanguageContext } from '@/contexts/language-context'
 import { useSanityData } from '@/contexts/data-context'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { breakpoints } from '@/lib/constants'
+import DropdownExpandMenu from '../ui/menu'
 
 type Props = {
   menuActive: boolean
@@ -16,6 +19,7 @@ type Props = {
 
 export default function Header({ menuActive, setMenuActive }: Props) {
   const pathname = usePathname()
+  const isDesktop = useMediaQuery(breakpoints.lg);
   const isHome = pathname === '/'
   const headerClass = (isHome) ? 'absolute top-0' : 'relative'
   const {
@@ -25,26 +29,36 @@ export default function Header({ menuActive, setMenuActive }: Props) {
     siteSettings,
   } = useSanityData()
   const { setLocale } = useLanguageContext()
-
   return (
     <header className={cn(
       headerClass,
       'flex items-center justify-center z-50'
     )}>
-      {/* Render site logo on all other pages except home */}
-      {!isHome && siteSettings && (
-        <Link href='/'>
+      { isDesktop && (
+        <Link href='/' className='flex items-center justify-center mt-4 ml-5 mr-7'>
           <Image // logo
-            src={siteSettings.logoDark}
-            alt={siteSettings.logoDarkAlt}
-            width={170}
-            height={170}
-            className='pt-6'
+            src={'/images/atlas-a.svg'}
+            alt={'Atlas logo'}
+            width={50}
+            height={50}
+            className=''
           />
         </Link>
       )}
-
-      {(spotlights && insights && impacts && siteSettings) &&
+      {
+        isDesktop && <div className='mt-4'>
+          <div className='flex '>
+            <Link  href='/about' className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
+            ABOUT 
+          </Link>
+          <DropdownExpandMenu />
+          <Link href='/get-involved'  className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
+            GET INVOLVED 
+          </Link>
+          </div>
+      </div>
+      }
+      {!isDesktop && (spotlights && insights && impacts && siteSettings) &&
         <Menu
           spotlights={spotlights}
           insights={insights}
