@@ -26,7 +26,9 @@ const DropdownExpandMenu = () => {
       setSubMenu3(!subMenu3)
     }
   }
-  const { spotlights, insights, impacts } = useSanityData()
+  const { spotlights, insights, impacts, 
+    siteSettings } = useSanityData()
+    console.log("siteSettings", siteSettings)
   if (spotlights)
     return (
       <Collapsible.Root
@@ -42,23 +44,23 @@ const DropdownExpandMenu = () => {
           }}
         >
           <Collapsible.Trigger asChild>
-            <span className="Text cursor-pointer">OUR WORK</span>
+            <span className="Text cursor-pointer">{ siteSettings.menu.workTitle.toUpperCase()}</span>
           </Collapsible.Trigger>
         </div>
-        <Collapsible.Content className="bg-white border-l-4 mt-5 w-5/6 text-grey-600 border-brand-green p-4 pl-8 absolute left-40 hover:text-brand-green transition-colors">
+        <Collapsible.Content style={{width: "814px"}} className="bg-white border-l-4 mt-5 text-grey-600 border-brand-green p-4 pl-8 absolute left-40 hover:text-brand-green transition-colors">
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(1)}>
-              <span className="cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors">
-                DATA EXPLORATIONS
+              <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu1 ? 'text-brand-green' : 'text-grey-600'}`}>
+                { siteSettings.contentTypes.spotlightsTitle.toUpperCase() }
               </span>
             </p>
             {subMenu1 &&
               spotlights.map((article: any) => (
-                <p className="my-4">
+                <p className="ml-4 my-4">
                   <a
                     key={article.id}
                     href={`/data-spotlights/${article.slug}`}
-                    className="DropdownMenuItem cursor-pointer text-base font-medium mt-5 ml-5 text-grey-600 hover:text-brand-green transition-colors"
+                    className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
                   >
                     {article.title}
                   </a>
@@ -67,17 +69,17 @@ const DropdownExpandMenu = () => {
           </div>
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(2)}>
-              <span className="cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors">
-                USE CASES
+              <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu2 ? 'text-brand-green' : 'text-grey-600'}`}>
+              { siteSettings.contentTypes.insightsTitle.toUpperCase() }
               </span>
             </p>
             {subMenu2 &&
               impacts.map((article: any) => (
-                <p className="my-4">
+                <p className="ml-4 my-4">
                   <a
                     key={article.id}
                     href={`/data-in-practice/${article.slug}`}
-                    className="DropdownMenuItem cursor-pointer text-base font-medium mt-5 ml-5 text-grey-600 hover:text-brand-green transition-colors"
+                    className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
                   >
                     {article.title}
                   </a>
@@ -86,17 +88,17 @@ const DropdownExpandMenu = () => {
           </div>
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(3)}>
-              <span className="cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors">
-                QUICK READS
+              <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu3 ? 'text-brand-green' : 'text-grey-600'}`}>
+              { siteSettings.contentTypes.impactsTitle.toUpperCase() }
               </span>
             </p>
             {subMenu3 &&
               insights.map((article: any) => (
-                <p className="my-4">
+                <p className="ml-4 my-4">
                   <a
                     key={article.id}
                     href={`/data-insights/${article.slug}`}
-                    className="DropdownMenuItem cursor-pointer text-base font-medium mt-5 ml-5 text-grey-600 hover:text-brand-green transition-colors"
+                    className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
                   >
                     {article.title}
                   </a>

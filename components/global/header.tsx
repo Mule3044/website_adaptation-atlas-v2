@@ -28,11 +28,11 @@ export default function Header({ menuActive, setMenuActive }: Props) {
     impacts,
     siteSettings,
   } = useSanityData()
-  const { setLocale } = useLanguageContext()
+  const { setLocale, locale } = useLanguageContext()
   return (
     <header className={cn(
       headerClass,
-      'flex items-center justify-center z-50'
+      'flex items-center  z-50'
     )}>
       { isDesktop && (
         <Link href='/' className='flex items-center justify-center mt-4 ml-5 mr-7'>
@@ -48,12 +48,12 @@ export default function Header({ menuActive, setMenuActive }: Props) {
       {
         isDesktop && <div className='mt-4'>
           <div className='flex '>
-            <Link  href='/about' className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
-            ABOUT 
+            <Link  href={`${locale === 'fr' ? '/about-fr' : '/about'} `} className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
+            {siteSettings?.menu.aboutTitle.toUpperCase()} 
           </Link>
           <DropdownExpandMenu />
-          <Link href='/get-involved'  className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
-            GET INVOLVED 
+          <Link href={`${locale === 'fr' ? '/get-involved-fr' : '/get-involved'} `}  className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
+            {siteSettings?.menu.getInvolvedTitle.toUpperCase()}
           </Link>
           </div>
       </div>
