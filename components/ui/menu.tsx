@@ -8,7 +8,7 @@ const DropdownExpandMenu = () => {
   const [subMenu3, setSubMenu3] = React.useState(false)
 
   const [open, setOpen] = React.useState(false)
-
+  const anySubOpen = () => (subMenu1 || subMenu2 || subMenu3) ? true : false;
   const openSubMenu = (key: number) => {
     if (key == 1) {
       setSubMenu1(!subMenu1)
@@ -47,7 +47,7 @@ const DropdownExpandMenu = () => {
             <span className="Text cursor-pointer">{ siteSettings.menu.workTitle.toUpperCase()}</span>
           </Collapsible.Trigger>
         </div>
-        <Collapsible.Content style={{width: "814px"}} className="bg-white border-l-4 mt-5 text-grey-600 border-brand-green p-4 pl-8 absolute left-40 hover:text-brand-green transition-colors">
+        <Collapsible.Content style={{width: anySubOpen() ? "814px" : "210px"}} className="bg-white border-l-4 mt-5 text-grey-600 border-brand-green pt-4 pl-6 absolute left-40 hover:text-brand-green transition-colors">
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(1)}>
               <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu1 ? 'text-brand-green' : 'text-grey-600'}`}>
@@ -70,7 +70,7 @@ const DropdownExpandMenu = () => {
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(2)}>
               <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu2 ? 'text-brand-green' : 'text-grey-600'}`}>
-              { siteSettings.contentTypes.insightsTitle.toUpperCase() }
+              { siteSettings.contentTypes.impactsTitle.toUpperCase() }
               </span>
             </p>
             {subMenu2 &&
@@ -89,7 +89,7 @@ const DropdownExpandMenu = () => {
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(3)}>
               <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu3 ? 'text-brand-green' : 'text-grey-600'}`}>
-              { siteSettings.contentTypes.impactsTitle.toUpperCase() }
+              {  siteSettings.contentTypes.insightsTitle.toUpperCase() }
               </span>
             </p>
             {subMenu3 &&
