@@ -1,13 +1,14 @@
-'use client'
+"use client"
 
-import { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { breakpoints } from '@/lib/constants'
-import Search from '@/components/ui/search'
+import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
+import { breakpoints } from "@/lib/constants"
+import Search from "@/components/ui/search"
 // import atlasLogo from '@/public/images/atlas-logo.svg'
-import { Home, SearchItem, Settings } from '@/types/sanity.types'
-import cn from 'classnames'
+import { Home, SearchItem, Settings } from "@/types/sanity.types"
+import cn from "classnames"
+import { PortableText } from "@portabletext/react"
 
 type Props = {
   searchContent: SearchItem[]
@@ -19,17 +20,19 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
   const [searchBoxActive, setSearchBoxActive] = useState(false)
   const isDesktop = useMediaQuery(breakpoints.lg)
   const isLgScreen = useMediaQuery(breakpoints.xl)
-  const searchPlaceholder = isLgScreen ? content.search.placeholder : content.search.placeholderShort
+  const searchPlaceholder = isLgScreen
+    ? content.search.placeholder
+    : content.search.placeholderShort
   const introTextRef = useRef<HTMLHeadingElement>(null)
+  const subTitleRef = useRef<HTMLHeadingElement>(null)
   const [translateY, setTranslateY] = useState(0)
-  console.log(settings);
 
   const handleLinkClick = (e: any, target: any) => {
     e.preventDefault() // Prevent default anchor behavior
     const scrollTarget = document.querySelector(target)
 
     if (scrollTarget) {
-      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
 
@@ -37,52 +40,112 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
     if (introTextRef.current) {
       const height = introTextRef.current.offsetHeight
       const offset = isDesktop ? 70 : 40
-      setTranslateY(searchBoxActive ? (-height - offset) : 0)
+      setTranslateY(searchBoxActive ? -height - offset : 0)
     }
   }, [searchBoxActive])
 
   return (
-    <div id='hero' className='flex flex-wrap justify-between h-[480px] lg:h-[800px] mb-5'>
-      <div id='intro-search' className='basis-full lg:basis-3/4 flex lg:justify-center mt-[100px] lg:mt-[200px] gap-5'>
-        <div className='basis-full lg:basis-2/3'>
-          <Image // logo
-            src={settings.logoDark}
-            alt={settings.logoDarkAlt}
-            width={280}
-            height={280}
-            className='mb-7 w-[200px] lg:w-[280px]'
-          />
+    <div
+      id="hero"
+      className="flex flex-wrap justify-between lg:h-[800px] mb-5"
+    >
+      {isDesktop ? (
+        <>
+          <div
+            id="intro-search"
+            className="basis-full lg:basis-1/2 flex lg:justify-center mt-[100px] lg:mt-[200px]"
+          >
+            <div className="basis-full lg:basis-4/5  ">
+              <Image // logo
+                src={settings.logoDark}
+                alt={settings.logoDarkAlt}
+                width={280}
+                height={280}
+                className="mb-7 w-[200px] lg:w-[280px]"
+              />
 
-          {content.introText && (
-            <h1 ref={introTextRef} className={cn(
-              'max-w-[480px] lg:max-w-[600px] text-grey-600 font-semibold leading-snug mb-10 lg:mb-20 transition-opacity',
-              { 'opacity-0': searchBoxActive }
-            )}>{content.introText}</h1>
-          )}
-
-          <div id='search-container' style={{ transform: `translateY(${translateY}px)` }} className='transition-transform'>
-            <p className='text-grey-600 text-lg font-medium mb-3'>{content.search.title}</p>
-            <Search data={searchContent} placeholder={searchPlaceholder} searchBoxActive={searchBoxActive} setSearchBoxActive={setSearchBoxActive} />
+              {content.introText && (
+                <h1
+                  ref={introTextRef}
+                  className={cn(
+                    "max-w-[480px] lg:max-w-[600px] text-grey-600 font-semibold leading-snug mb-1 lg:mb-2 lg:text-[36px] transition-opacity",
+                    { "opacity-0": searchBoxActive }
+                  )}
+                >
+                  {content.introText}
+                </h1>
+              )}
+              <div
+                className={cn(
+                  "max-w-[480px] lg:max-w-[600px] text-grey font-semibold leading-[28px] mb-5 text-[18px] lg:mb-10 "
+                )}
+              >
+                <PortableText value={content.subTitle} />
+              </div>
+              <button className="bg-brand-dark-green text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
+                <a href="#spotlight-grid">Explore Tools</a>
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
+          <div
+            id="intro-nav"
+            className="hidden lg:flex flex-col justify-center align-middle basis-full lg:basis-1/2 h-full"
+          >
+            <Image // arrow icon
+              src={"/images/hero-image-illustration.svg"}
+              alt="Right arrow icon"
+              width={739}
+              height={600}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            id="intro-search"
+            className="basis-full lg:basis-1/2 flex lg:justify-center mt-[100px] lg:mt-[200px]"
+          >
+            <div className="basis-full lg:basis-4/5  ">
+              <Image // logo
+                src={settings.logoDark}
+                alt={settings.logoDarkAlt}
+                width={280}
+                height={280}
+                className="mb-7 w-[200px] md:w-[250px] lg:w-[280px]"
+              />
 
-      {/* <div id='intro-nav' className='w-1/4 h-[calc(100vh-40px)] flex flex-col gap-5'> */}
-      <div id='intro-nav' className='hidden lg:flex flex-col gap-5 basis-full lg:basis-1/4 h-full'>
-        <a
-          href='#spotlight-grid'
-          onClick={(e) => handleLinkClick(e, '#spotlight-grid')}
-          className='flex items-center gap-3 px-10 relative w-full h-full transition-colors bg-brand-green hover:bg-brand-dark-green'
-        >
-          <span className='text-white text-xl text-medium uppercase'>{content.ctaText}</span>
-          <Image // arrow icon
-            src={'/images/icon-arrow-right.svg'}
-            alt='Right arrow icon'
-            width={20}
-            height={20}
-          />
-        </a>
-      </div>
+              {content.introText && (
+                <h1
+                  ref={introTextRef}
+                  className={cn(
+                    "max-w-[480px] md:max-w-[560px] lg:max-w-[600px] text-grey-600 font-semibold leading-snug mb-1 lg:mb-2 md:text-[30px] lg:text-[36px] transition-opacity",
+                    { "opacity-0": searchBoxActive }
+                  )}
+                >
+                  {content.introText}
+                </h1>
+              )}
+              <Image // arrow icon
+              className={cn("my-8")}
+                src={"/images/hero-image-illustration.svg"}
+                alt="Right arrow icon"
+                width={739}
+                height={400}
+              />
+              <div
+                className={cn(
+                  "max-w-[480px] lg:max-w-[600px] text-grey font-semibold leading-[28px] mb-5 text-[18px] lg:mb-10 "
+                )}
+              >
+                <PortableText value={content.subTitle} />
+              </div>
+              <button className="bg-brand-dark-green text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
+                <a href="#spotlight-grid">Explore Tools</a>
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

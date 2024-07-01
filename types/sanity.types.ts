@@ -70,12 +70,14 @@ type PageHeaders = {
 }
 
 export type Home = {
+  subTitle: any
   _id: string
   _createdAt: Date
   title: string
   slug: string
   introText: string
   ctaText: string
+  heroImage: SVGElement
   search: Search
   spotlightCarousel: SpotlightCarousel
   pageHeaders: PageHeaders

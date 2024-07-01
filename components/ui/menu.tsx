@@ -28,7 +28,6 @@ const DropdownExpandMenu = () => {
   }
   const { spotlights, insights, impacts, 
     siteSettings } = useSanityData()
-    console.log("siteSettings", siteSettings)
   if (spotlights)
     return (
       <Collapsible.Root

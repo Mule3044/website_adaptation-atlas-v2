@@ -29,10 +29,21 @@ export default defineType({
       title: 'Site introduction text',
       type: 'text',
     },
+    { 
+      name: 'subTitle',
+      title: 'Sub Title', 
+      type: 'array', 
+      of: [{type: 'block'}]
+    },
     {
       name: 'ctaText',
       title: 'CTA button text',
       type: 'string',
+    },
+    {
+      name: "heroImage",
+      title: "Hero Image",
+      type: "image"
     },
     {
       name: 'search',
