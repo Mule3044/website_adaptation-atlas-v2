@@ -1,7 +1,7 @@
 'use client'
 
 import { Home} from '@/types/sanity.types'
-import { PortableText } from 'next-sanity'
+import { PortableText } from '@portabletext/react'
 import '@/public/style.css'
 type Props = {
   homeContent: Home
