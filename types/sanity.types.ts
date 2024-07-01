@@ -81,7 +81,20 @@ export type Home = {
   search: Search
   spotlightCarousel: SpotlightCarousel
   pageHeaders: PageHeaders
+  relatedInfo: RelatedInfo
   tout: Tout
+}
+
+export type RelatedInfo = {
+  title: string,
+  title1: string,
+  content1: PortableTextBlock[],
+  title2: string,
+  content2: PortableTextBlock[],
+  title3: string,
+  content3: PortableTextBlock[],
+  title4: string, 
+  content4: PortableTextBlock[]
 }
 
 export type Page = {

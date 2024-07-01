@@ -7,6 +7,7 @@ import InsightCarousel from '@/components/home/insight-carousel'
 import ImpactCarousel from '@/components/home/impact-carousel'
 import GetInvolvedTout from '@/components/home/get-involved-tout'
 import { useSanityData } from '@/contexts/data-context'
+import RelatedInfo from '@/components/home/related-info'
 
 export default function Home() {
   const {
@@ -22,6 +23,7 @@ export default function Home() {
       {(homeContent && searchContent && siteSettings) && <HomeHero searchContent={searchContent} content={homeContent} settings={siteSettings} />}
       {/* <HomeCarousel /> */}
       {(spotlights && primaryTags && homeContent) && <SpotlightGrid spotlights={spotlights} tags={primaryTags} homeContent={homeContent} />}
+      <RelatedInfo homeContent={homeContent}/>
       {/* <InsightCarousel /> */}
       {/* <ImpactCarousel /> */}
       {/* {homeContent && <GetInvolvedTout content={homeContent} />} */}

@@ -1,4 +1,4 @@
-import { defineType } from 'sanity'
+import { Rule, defineType } from 'sanity'
 
 export default defineType({
   name: 'home',
@@ -167,6 +167,67 @@ export default defineType({
           title: 'Data in Practice carousel subtitle',
           type: 'string',
         },
+      ]
+    },
+    {
+      name: 'relatedInfo',
+      title: 'Related Information',
+      description: 'Content options for the "Related Information" section at the bottom of the homepage.',
+      type: 'object',
+      fields: [
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            },
+            {
+              name: 'title1',
+              title: 'SubTitle 1',
+              type: 'string',
+            },
+            {
+              name: 'content1',
+              title: 'block content 1',
+              description: 'Use this rich text input to edit titles, body text and images on the page.',
+              type: 'contentText',
+              validation: (rule: Rule) => rule.required(),
+            },
+            {
+              name: 'title2',
+              title: 'SubTitle 2',
+              type: 'string',
+            },
+            {
+              name: 'content2',
+              title: 'block content 2',
+              description: 'Use this rich text input to edit titles, body text and images on the page.',
+              type: 'contentText',
+              validation: (rule: Rule) => rule.required(),
+            },
+            {
+              name: 'title3',
+              title: 'SubTitle 3',
+              type: 'string',
+            },
+            {
+              name: 'content3',
+              title: 'block content 3',
+              description: 'Use this rich text input to edit titles, body text and images on the page.',
+              type: 'contentText',
+              validation: (rule: Rule) => rule.required(),
+            },
+            {
+              name: 'title4',
+              title: 'SubTitle 4',
+              type: 'string',
+            },
+            {
+              name: 'content4',
+              title: 'block content 4',
+              description: 'Use this rich text input to edit titles, body text and images on the page.',
+              type: 'contentText',
+              validation: (rule: Rule) => rule.required(),
+            }
       ]
     },
     {

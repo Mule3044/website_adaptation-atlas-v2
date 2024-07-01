@@ -17,6 +17,7 @@ export async function getHomeContent(): Promise<Home> {
       search,
       spotlightCarousel,
       pageHeaders,
+      relatedInfo,
       'tout': {
         ...tout,
         'featuredImage': tout.featuredImage.asset->url,

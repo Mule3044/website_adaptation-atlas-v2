@@ -1,0 +1,10 @@
+.PortableText > p {
+    color: #585858;
+    margin-bottom: 20px;
+    font-size: 14px !important;
+    font-weight: 500;
+    line-height: 18.2px;
+}
+.PortableText > p > a:hover {
+    color: rgb(46 118 54 / 1);
+}
