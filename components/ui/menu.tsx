@@ -1,12 +1,12 @@
 import React from "react"
 import { useSanityData } from "@/contexts/data-context"
 import * as Collapsible from "@radix-ui/react-collapsible"
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const DropdownExpandMenu = () => {
   const [subMenu1, setSubMenu1] = React.useState(false)
   const [subMenu2, setSubMenu2] = React.useState(false)
   const [subMenu3, setSubMenu3] = React.useState(false)
-
   const [open, setOpen] = React.useState(false)
   const anySubOpen = () => (subMenu1 || subMenu2 || subMenu3) ? true : false;
   const openSubMenu = (key: number) => {
@@ -26,12 +26,19 @@ const DropdownExpandMenu = () => {
       setSubMenu3(!subMenu3)
     }
   }
+  const closeAll = () => {
+    setOpen(false)
+    setSubMenu1(false)
+    setSubMenu2(false)
+    setSubMenu3(false)
+  }
   const { spotlights, insights, impacts, 
     siteSettings } = useSanityData()
+  const filteredSpotlights = spotlights?.filter((item:any) => !item.comingSoon)
   if (spotlights)
     return (
       <Collapsible.Root
-        className="CollapsibleRoot font-medium mr-12 text-grey-600 hover:text-brand-green transition-colors'"
+        className={`CollapsibleRoot font-medium mr-12 hover:text-brand-green transition-colors ${open ? 'text-brand-green' : 'text-grey-600'}`}
         open={open}
         onOpenChange={setOpen}
       >
@@ -46,7 +53,10 @@ const DropdownExpandMenu = () => {
             <span className="Text cursor-pointer">{ siteSettings.menu.workTitle.toUpperCase()}</span>
           </Collapsible.Trigger>
         </div>
-        <Collapsible.Content style={{width: anySubOpen() ? "814px" : "210px"}} className="bg-white border-l-4 mt-5 text-grey-600 border-brand-green pt-4 pl-5 absolute left-64 hover:text-brand-green transition-colors">
+        <OutsideClickHandler
+      onOutsideClick={() => closeAll()}
+    >
+      <Collapsible.Content style={{width: anySubOpen() ? "814px" : "210px"}} className="bg-white border-l-4 mt-5 text-grey-600 border-brand-green pt-4 pl-5 absolute left-64 hover:text-brand-green transition-colors">
           <div className="text-black mb-5">
             <p onClick={() => openSubMenu(1)}>
               <span className={`cursor-pointer text-base font-medium hover:text-brand-green transition-colors ${subMenu1 ? 'text-brand-green' : 'text-grey-600'}`}>
@@ -54,7 +64,7 @@ const DropdownExpandMenu = () => {
               </span>
             </p>
             {subMenu1 &&
-              spotlights.map((article: any) => (
+              filteredSpotlights.map((article: any) => (
                 <p className="ml-4 my-4">
                   <a
                     key={article.id}
@@ -105,6 +115,7 @@ const DropdownExpandMenu = () => {
               ))}
           </div>
         </Collapsible.Content>
+        </OutsideClickHandler>
       </Collapsible.Root>
     )
 }

@@ -82,14 +82,14 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
               >
                 <PortableText value={content.subTitle} />
               </div>
-              <button className="bg-brand-dark-green text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
-                <a href="#spotlight-grid">Explore Tools</a>
+              <button className="bg-[#2E7636] hover:bg-[#245E2B] text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
+                <a href="#spotlight-grid">{content.ctaText}</a>
               </button>
             </div>
           </div>
           <div
             id="intro-nav"
-            className="hidden lg:flex flex-col justify-center align-middle basis-full lg:basis-1/2 h-full"
+            className="basis-full lg:basis-1/2 flex lg:justify-center mt-[50px] lg:mt-[100px]"
           >
             <Image // arrow icon
               src={"/images/hero-image-illustration.svg"}
@@ -139,8 +139,8 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
               >
                 <PortableText value={content.subTitle} />
               </div>
-              <button className="bg-brand-dark-green text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
-                <a href="#spotlight-grid">Explore Tools</a>
+              <button className="bg-[#2E7636] hover:bg-[#245E2B] text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
+                <a href="#spotlight-grid">{content.ctaText}</a>
               </button>
             </div>
           </div>

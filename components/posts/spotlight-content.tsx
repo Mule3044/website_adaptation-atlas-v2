@@ -56,18 +56,17 @@ const SpotlightContent = ({ post }: Props) => {
             <p id='image-credit' className='font-normal text-sm mt-3'><span className='font-semibold'>{options.creditLabel} </span>{post.featuredImageCredit}</p>
           }
         </header>
-
+        
         {post.url &&
-          <div id='observable-link' className='flex justify-center mb-20'>
+          <div id='observable-link' className='flex mx-auto max-w-[940px] mb-20'>
             <a
               href={post.url}
-              className='relative w-full max-w-[940px] flex items-center px-6 py-4 transition-colors bg-brand-green hover:bg-brand-dark-green'
+              className='w-[940px] sm:w-[940px] md:w-[491px] lg:w-[491px] grid grid-flow-col items-center px-6 py-4 transition-colors bg-brand-green hover:bg-brand-dark-green'
               target='_blank'
               rel='noopener noreferrer'
             >
-              <Image src={'/images/observable-logo.svg'} alt={'Page icon'} width={22} height={21} />
-              <span className='text-xl lg:text-2xl text-white pl-5'>{options.exploreLinkLabel}</span>
-              <Image className='absolute right-6' src={'/images/icon-link.svg'} alt={'Page icon'} width={14} height={14} />
+              <span className='text-xl lg:text-2xl text-white'>{options.exploreLinkLabel}</span>
+              <Image className='justify-self-end' src={'/images/icon-link.svg'} alt={'Page icon'} width={16} height={16} />
             </a>
           </div>
         }
@@ -97,44 +96,49 @@ const SpotlightContent = ({ post }: Props) => {
 
         {/* Data card with observable embed or preview image */}
         {(dataCardImage || dataCardEmbedSrc) &&
-          <div id='data-card' className='max-w-[940px] mx-auto mb-[100px]'>
-            <div className='mb-10'>
-              <h2 className='mb-4'>{options.previewLabel} {post.dataCard.title}</h2>
-              <p className='page-text'>{post.dataCard.description}</p>
+          <>
+            <div id='data-card' className='max-w-[940px] mx-auto mb-[100px]'>
+              <div className='mb-10'>
+                <h2 className='mb-4'>{options.previewLabel} {post.dataCard.title}</h2>
+                <p className='page-text'>{post.dataCard.description}</p>
+              </div>
+              <div className='mb-12 border border-grey-200'>
+                {/* If observable embed exists, display embed */}
+                {dataCardEmbedSrc &&
+                  <iframe width='100%' height={dataCardEmbedHeight} src={dataCardEmbedSrc}></iframe>
+                }
+                {/* If preview image exists and embed doesn't, display image */}
+                {(dataCardImage && !dataCardEmbedSrc) &&
+                  <a
+                    href={post.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <Image
+                      src={dataCardImage}
+                      alt={dataCardAlt}
+                      layout='responsive'
+                      width={1920}
+                      height={1080}
+                    />
+                  </a>
+                }
+              </div>
+              
             </div>
-            <div className='mb-12 border border-grey-200'>
-              {/* If observable embed exists, display embed */}
-              {dataCardEmbedSrc &&
-                <iframe width='100%' height={dataCardEmbedHeight} src={dataCardEmbedSrc}></iframe>
-              }
-              {/* If preview image exists and embed doesn't, display image */}
-              {(dataCardImage && !dataCardEmbedSrc) &&
-                <a
-                  href={post.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <Image
-                    src={dataCardImage}
-                    alt={dataCardAlt}
-                    layout='responsive'
-                    width={1920}
-                    height={1080}
-                  />
-                </a>
-              }
+            <div className='flex items-center justify-end mx-auto max-w-[940px] mb-20'>
+              <a
+                href={post.url}
+                className='w-[940px] sm:w-[940px] md:w-[491px] lg:w-[491px] justify-self-end grid grid-flow-col items-center px-6 py-4 transition-colors bg-brand-green hover:bg-brand-dark-green'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Image src={'/images/observable-logo.svg'} alt={'Page icon'} width={22} height={21} />
+                <span className='text-xl lg:text-2xl text-white'>{options.ctaLinkLabel}</span>
+                <Image className='justify-self-end' src={'/images/icon-link.svg'} alt={'Page icon'} width={14} height={14} />
+              </a>
             </div>
-            <a
-              href={post.url}
-              className='relative w-full flex items-center px-6 py-4 transition-colors bg-brand-green hover:bg-brand-dark-green'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <Image src={'/images/observable-logo.svg'} alt={'Page icon'} width={22} height={21} />
-              <span className='text-xl lg:text-2xl text-white pl-5'>{options.ctaLinkLabel}</span>
-              <Image className='absolute right-6' src={'/images/icon-link.svg'} alt={'Page icon'} width={14} height={14} />
-            </a>
-          </div>
+          </>
         }
 
         {post.relatedPosts &&
