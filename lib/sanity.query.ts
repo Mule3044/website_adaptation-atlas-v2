@@ -17,6 +17,7 @@ export async function getHomeContent(): Promise<Home> {
       search,
       spotlightCarousel,
       pageHeaders,
+      howToUse,
       relatedInfo,
       'tout': {
         ...tout,
@@ -48,6 +49,7 @@ export async function getHomeContentFr(): Promise<Home> {
       search,
       spotlightCarousel,
       pageHeaders,
+      howToUse,
       relatedInfo,
       'tout': {
         ...tout,

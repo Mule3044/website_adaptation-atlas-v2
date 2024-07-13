@@ -170,6 +170,56 @@ export default defineType({
       ]
     },
     {
+      name: 'howToUse',
+      title: 'How To Use and Participate',
+      description: 'A title, description, and video.',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'How To Use and Participate title',
+          type: 'string',
+        },
+        {
+          name: 'description',
+          title: 'How To Use and Participate description',
+          type: 'text',
+        },
+        {
+          name: 'video',
+          title: 'Video embed',
+          description: 'Provide the video embed and resolution sizes',
+          type: 'object',
+          fields: [
+            {
+              name: 'embedCode',
+              title: 'video embed code',
+              type: 'text',
+              description: 'The full embed code copied from the website where video is stored.',
+            },
+            {
+              name: 'src',
+              title: 'Video embed src',
+              type: 'string',
+              description: 'The src property of the video as it appears in the embed code.',
+            },
+            {
+              name: 'height',
+              title: 'video height',
+              type: 'number',
+              description: 'The height property of the video as it appears in the embed code.',
+            },
+            {
+              name: 'width',
+              title: 'video width',
+              type: 'number',
+              description: 'The height property of the video as it appears in the embed code.',
+            }
+          ]
+        }
+      ]
+    },
+    {
       name: 'relatedInfo',
       title: 'Related Information',
       description: 'Content options for the "Related Information" section at the bottom of the homepage.',

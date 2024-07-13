@@ -9,6 +9,7 @@ import Search from "@/components/ui/search"
 import { Home, SearchItem, Settings } from "@/types/sanity.types"
 import cn from "classnames"
 import { PortableText } from "@portabletext/react"
+import { useLanguageContext } from "@/contexts/language-context"
 
 type Props = {
   searchContent: SearchItem[]
@@ -27,6 +28,7 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
   const subTitleRef = useRef<HTMLHeadingElement>(null)
   const [translateY, setTranslateY] = useState(0)
 
+  const { setLocale, locale } = useLanguageContext()
   const handleLinkClick = (e: any, target: any) => {
     e.preventDefault() // Prevent default anchor behavior
     const scrollTarget = document.querySelector(target)
@@ -82,7 +84,7 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
               >
                 <PortableText value={content.subTitle} />
               </div>
-              <button className="bg-[#2E7636] hover:bg-[#245E2B] text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
+              <button className={`bg-[#2E7636] hover:bg-[#245E2B] text-white text-2xl w-[${locale === 'fr' ? '255px' : '210px'}] h-[58px] py-[8px] px-[30px]`}>
                 <a href="#spotlight-grid">{content.ctaText}</a>
               </button>
             </div>

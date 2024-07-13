@@ -81,8 +81,22 @@ export type Home = {
   search: Search
   spotlightCarousel: SpotlightCarousel
   pageHeaders: PageHeaders
+  howToUse: HowToVideo
   relatedInfo: RelatedInfo
   tout: Tout
+}
+
+type Video = {
+  embedCode: string
+  src: string
+  height: number
+  width: number
+}
+
+export type HowToVideo = {
+  title: string
+  description: string
+  video: Video
 }
 
 export type RelatedInfo = {
