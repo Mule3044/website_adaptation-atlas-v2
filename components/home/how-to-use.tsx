@@ -11,7 +11,7 @@ const HowToUse = ({ homeContent }: Props) => {
   return (
     <div id='how-to-use' className='pt-20'>
         <h1 className='mb-3'>{content?.title}</h1>
-        <p>{content?.description}</p>
+        <p className='mb-[20px] font-[500] max-w-[720px]'>{content?.description}</p>
         {content?.video &&
             <iframe width='100%' height='776' src={content.video.src} id='video' title="Set up your first video" allow='autoplay; fullscreen; picture-in-picture; clipboard-write'></iframe>
         }
