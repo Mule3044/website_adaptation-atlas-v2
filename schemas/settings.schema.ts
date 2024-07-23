@@ -62,17 +62,17 @@ export default defineType({
       fields: [
         {
           name: 'spotlightsTitle',
-          title: 'Spotlights post type title',
+          title: 'Data Explorations post type title',
           type: 'string',
         },
         {
           name: 'insightsTitle',
-          title: 'Data Insights post type title',
+          title: 'Quick Reads post type title',
           type: 'string',
         },
         {
           name: 'impactsTitle',
-          title: 'Data in Practice post type title',
+          title: 'Use Cases post type title',
           type: 'string',
         },
       ]

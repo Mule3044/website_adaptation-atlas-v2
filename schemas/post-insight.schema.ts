@@ -3,7 +3,7 @@ import {orderRankField, orderRankOrdering} from '@sanity/orderable-document-list
 
 const insightPost = {
   name: 'insight',
-  title: 'Data insights',
+  title: 'Quick Reads',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [

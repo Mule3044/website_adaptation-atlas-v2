@@ -82,21 +82,21 @@ export default defineConfig({
             // Posts - these use orderable-document-list to order entries
             orderableDocumentListDeskItem({
               type: 'spotlight',
-              title: 'Spotlights',
+              title: 'Data Explorations',
               icon: BiFile,
               S,
               context,
             }),
             orderableDocumentListDeskItem({
               type: 'insight',
-              title: 'Data insights',
+              title: 'Quick Reads',
               icon: BiFile,
               S,
               context,
             }),
             orderableDocumentListDeskItem({
               type: 'impact',
-              title: 'Data in practice',
+              title: 'Use Cases',
               icon: BiFile,
               S,
               context,

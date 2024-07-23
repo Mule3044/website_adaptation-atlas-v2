@@ -39,19 +39,19 @@ const Menu = ({
   const secondaryMenuLinks = [
     {
       id: "spotlights",
-      slug: "data-spotlights",
+      slug: "data-explorations",
       title: siteSettings.contentTypes.spotlightsTitle,
       posts: filteredSpotlights,
     },
     {
       id: "insights",
-      slug: "data-insights",
+      slug: "quick-reads",
       title: siteSettings.contentTypes.insightsTitle,
       posts: insights,
     },
     {
       id: "impacts",
-      slug: "data-in-practice",
+      slug: "use-cases",
       title: siteSettings.contentTypes.impactsTitle,
       posts: impacts,
     },
