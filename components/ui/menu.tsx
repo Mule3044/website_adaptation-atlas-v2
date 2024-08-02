@@ -2,6 +2,7 @@ import React from "react"
 import { useSanityData } from "@/contexts/data-context"
 import * as Collapsible from "@radix-ui/react-collapsible"
 import OutsideClickHandler from "react-outside-click-handler"
+import Link from "next/link"
 
 const DropdownExpandMenu = () => {
   const [subMenu1, setSubMenu1] = React.useState(false)
@@ -74,13 +75,13 @@ const DropdownExpandMenu = () => {
               {subMenu1 &&
                 filteredSpotlights.map((article: any) => (
                   <p className="ml-4 my-4">
-                    <a
+                    <Link
                       key={article.id}
                       href={`/data-explorations/${article.slug}`}
                       className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
                     >
                       {article.title}
-                    </a>
+                    </Link>
                   </p>
                 ))}
             </div>
@@ -97,13 +98,13 @@ const DropdownExpandMenu = () => {
               {subMenu2 &&
                 impacts.map((article: any) => (
                   <p className="ml-4 my-4">
-                    <a
+                    <Link
                       key={article.id}
                       href={`/use-cases/${article.slug}`}
                       className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
                     >
                       {article.title}
-                    </a>
+                    </Link>
                   </p>
                 ))}
             </div>
@@ -120,13 +121,13 @@ const DropdownExpandMenu = () => {
               {subMenu3 &&
                 insights.map((article: any) => (
                   <p className="ml-4 my-4">
-                    <a
+                    <Link
                       key={article.id}
                       href={`/quick-reads/${article.slug}`}
                       className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
                     >
                       {article.title}
-                    </a>
+                    </Link>
                   </p>
                 ))}
             </div>

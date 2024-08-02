@@ -43,7 +43,16 @@ export default defineType({
     {
       name: "heroImage",
       title: "Hero Image",
-      type: "image"
+      type: "image",
+      description: 'This is the hero image.',
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt',
+          type: 'string',
+          description: 'Provide a concise description of the image for SEO and accessibility purposes.',
+        }
+      ]
     },
     {
       name: 'search',

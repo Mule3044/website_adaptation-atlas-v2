@@ -77,7 +77,8 @@ export type Home = {
   slug: string
   introText: string
   ctaText: string
-  heroImage: SVGElement
+  heroImage: string;
+  heroImageAlt: string;
   search: Search
   spotlightCarousel: SpotlightCarousel
   pageHeaders: PageHeaders

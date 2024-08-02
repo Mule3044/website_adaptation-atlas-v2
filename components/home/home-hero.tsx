@@ -93,12 +93,12 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
             id="intro-nav"
             className="basis-full lg:basis-1/2 flex lg:justify-center mt-[50px] lg:mt-[100px]"
           >
-            <Image // arrow icon
-              src={"/images/hero-image-illustration.svg"}
-              alt="Right arrow icon"
+            <Image // logo
+              src={content.heroImage}
+              alt={content.heroImageAlt}
               width={739}
               height={600}
-            />
+              />
           </div>
         </>
       ) : (
@@ -128,11 +128,11 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
                 </h1>
               )}
               <Image // arrow icon
-              className={cn("my-8")}
-                src={"/images/hero-image-illustration.svg"}
-                alt="Right arrow icon"
-                width={739}
-                height={400}
+                className={cn("my-8")}
+                src={content.heroImage}
+                alt={content.heroImageAlt}
+                width={352}
+                height={286}
               />
               <div
                 className={cn(
@@ -141,7 +141,7 @@ const HomeHero = ({ searchContent, content, settings }: Props) => {
               >
                 <PortableText value={content.subTitle} />
               </div>
-              <button className="bg-[#2E7636] hover:bg-[#245E2B] text-white text-2xl w-[205px] h-[58px] py-[8px] px-[30px]">
+              <button className={`bg-[#2E7636] hover:bg-[#245E2B] text-white text-2xl  h-[58px] py-[8px] px-[30px] ${(locale === "fr") ? "w-[255px]" : "w-[205px]"}`}>
                 <a href="#spotlight-grid">{content.ctaText}</a>
               </button>
             </div>

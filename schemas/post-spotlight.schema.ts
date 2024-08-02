@@ -18,7 +18,7 @@ const spotlightPost = {
       name: 'title',
       title: 'Title',
       type: 'string',
-      description: 'Provide a concise and descriptive title for the spotlight. This title will appear in the spotlight page header and the spotlight gallery on the homepage.',
+      description: 'Provide a concise and descriptive title for the data exploration. This title will appear in the data exploration page header and the data exploration gallery on the homepage.',
       validation: (rule: Rule) => rule.required(),
     },
     {
@@ -32,7 +32,7 @@ const spotlightPost = {
     {
       name: 'comingSoon',
       title: 'Coming Soon',
-      description: 'Check this box if the spotlight is coming soon. This can be used to indicate upcoming content.',
+      description: 'Check this box if the data exploration is coming soon. This can be used to indicate upcoming content.',
       type: 'boolean',
     },
     {
@@ -47,7 +47,7 @@ const spotlightPost = {
       name: 'featuredImage',
       title: 'Featured image',
       type: 'image',
-      description: 'This is the main image for the spotlight. Please choose a high-quality image with a central focus point. This image will be used in the spotlight page header and the spotlight gallery on the homepage.',
+      description: 'This is the main image for the data exploration. Please choose a high-quality image with a central focus point. This image will be used in the data exploration page header and the data exploration gallery on the homepage.',
       options: { hotspot: true },
       validation: (rule: Rule) => rule.required(),
       fields: [
@@ -85,7 +85,7 @@ const spotlightPost = {
     {
       name: 'tags',
       title: 'Tags',
-      description: 'Choose primary and secondary tags related to this spotlight.',
+      description: 'Choose primary and secondary tags related to this data exploration.',
       type: 'object',
       fields: [
         {
@@ -93,7 +93,7 @@ const spotlightPost = {
           title: 'Featured tags',
           type: 'array',
           of: [{ type: 'reference', to: [{ type: 'primaryTag' }] }],
-          description: 'Select up to three featured tags for this spotlight. These will appear below the spotlight thumbnail on the homepage.',
+          description: 'Select up to three featured tags for this data exploration. These will appear below the data exploration thumbnail on the homepage.',
           validation: (rule: Rule) => rule.max(3), // Enforces three maximum featured tags
         },
         {
@@ -101,21 +101,21 @@ const spotlightPost = {
           title: 'Primary tags',
           type: 'array',
           of: [{ type: 'reference', to: [{ type: 'primaryTag' }] }],
-          description: 'Select primary tags for this spotlight. Primary tags appear on the homepage and spotlight detail page.',
+          description: 'Select primary tags for this data exploration. Primary tags appear on the homepage and data exploration detail page.',
         },
         {
           name: 'secondary',
           title: 'Secondary tags',
           type: 'array',
           of: [{ type: 'reference', to: [{ type: 'secondaryTag' }] }],
-          description: 'Select secondary tags for this spotlight. Secondary tags only appear on the spotlight detail page.',
+          description: 'Select secondary tags for this data exploration. Secondary tags only appear on the data exploration detail page.',
         },
       ]
     },
     {
       name: 'carousel',
       title: 'Carousel content',
-      description: 'Provide a title and description to use for this spotlight to be used on the homepage feature carousel.',
+      description: 'Provide a title and description to use for this data exploration to be used on the homepage feature carousel.',
       type: 'object',
       fields: [
         {
