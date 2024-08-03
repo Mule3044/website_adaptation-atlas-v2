@@ -79,6 +79,7 @@ const DropdownExpandMenu = () => {
                       key={article.id}
                       href={`/data-explorations/${article.slug}`}
                       className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
+                      onClick={() => closeAll()}
                     >
                       {article.title}
                     </Link>
@@ -102,6 +103,7 @@ const DropdownExpandMenu = () => {
                       key={article.id}
                       href={`/use-cases/${article.slug}`}
                       className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
+                      onClick={() => closeAll()}
                     >
                       {article.title}
                     </Link>
@@ -125,6 +127,7 @@ const DropdownExpandMenu = () => {
                       key={article.id}
                       href={`/quick-reads/${article.slug}`}
                       className="m-0 cursor-pointer text-base font-medium text-grey-600 hover:text-brand-green transition-colors"
+                      onClick={() => closeAll()}
                     >
                       {article.title}
                     </Link>

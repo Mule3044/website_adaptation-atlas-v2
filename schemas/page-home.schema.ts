@@ -84,8 +84,8 @@ export default defineType({
     },
     {
       name: 'spotlightCarousel',
-      title: 'Spotlight carousel',
-      description: 'Content options for the spotlight carousel items.',
+      title: 'Data Explorations carousel',
+      description: 'Content options for the data explorations carousel items.',
       type: 'object',
       fields: [
         {
@@ -113,12 +113,12 @@ export default defineType({
       fields: [
         {
           name: 'spotlightTitle',
-          title: 'Spotlight grid title',
+          title: 'Data explorations grid title',
           type: 'string',
         },
         {
           name: 'spotlightSubtitle',
-          title: 'Spotlight grid subtitle',
+          title: 'Data explorations grid subtitle',
           type: 'string',
         },
         {
