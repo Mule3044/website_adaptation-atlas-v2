@@ -61,7 +61,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
     <div id="spotlight-grid" className="pt-20">
       <div id="spotlight-grid-header" className="mb-5">
         <h1 className="mb-2">{homeContent.pageHeaders.spotlightTitle}</h1>
-        <h3>{homeContent.pageHeaders.spotlightSubtitle}</h3>
+        <h3 className="max-w-[720px]">{homeContent.pageHeaders.spotlightSubtitle}</h3>
       </div>
       <div id="spotlight-filter-search" className="mb-5 -mx-2.5">
         <h4 className="uppercase text-sm mb-2 px-2.5">

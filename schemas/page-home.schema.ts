@@ -61,6 +61,11 @@ export default defineType({
       type: 'object',
       fields: [
         {
+          name: 'menuTitle',
+          title: 'Menu Title',
+          type: 'string',
+        },
+        {
           name: 'title',
           title: 'Title',
           type: 'string',

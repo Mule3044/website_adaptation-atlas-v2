@@ -107,7 +107,7 @@ const Search = ({
         <div className="relative">
           <div
             id="search-input"
-            className="flex items-center gap-3 bg-grey-100 w-full py-[15px] px-[25px]"
+            className="flex items-center gap-3 bg-[#F6F6F6] w-full py-[15px] px-[25px]"
           >
             <Image
               src={"/images/icon-search.svg"}
@@ -120,7 +120,7 @@ const Search = ({
               onFocus={focusSearchBox}
               onBlur={blurSearchBox}
               placeholder={placeholder}
-              className="w-full bg-grey-100 outline-none text-lg"
+              className="w-full bg-[#F6F6F6] outline-none text-lg"
             />
             {searchBoxActive && (
               <button
@@ -132,7 +132,7 @@ const Search = ({
             )}
           </div>
           {query.length > 0 && (
-            <Combobox.Options className="absolute bg-grey-100 w-full pt-[10px] pb-[20px] px-[25px] max-h-[200px] lg:max-h-[320px] overflow-y-auto">
+            <Combobox.Options className="absolute bg-[#F6F6F6] w-full pt-[10px] pb-[20px] px-[25px] max-h-[200px] lg:max-h-[320px] overflow-y-auto">
               {filteredData.length > 0 &&
                 filteredData.map((post: any) => {
                   const type = searchPaths.find(

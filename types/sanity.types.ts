@@ -41,6 +41,7 @@ type Tout = {
 }
 
 type Search = {
+  menuTitle: string
   title: string
   placeholder: string
   placeholderShort: string

@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import cn from "classnames"
 import Share from "@/components/ui/share"
 import { BiX, BiMenu, BiChevronLeft } from "react-icons/bi"
 import { Spotlight, Insight, Impact, Settings } from "@/types/sanity.types"
+import SearchModal from "../ui/search-modal"
+import { usePathname, useSearchParams } from "next/navigation"
 
 type Props = {
   spotlights: Spotlight[]
@@ -92,6 +94,16 @@ const Menu = ({
   ]
 
   const year = new Date().getFullYear()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const [modalState, setModalState] = useState(false)
+  const handleModalState = (bool: boolean) => {
+    setModalState(bool)
+  }
+
+  useEffect(() => {
+    setMenuActive(false) 
+  }, [pathname, searchParams]);
 
   return (
     <nav className="fixed z-50">
@@ -148,6 +160,8 @@ const Menu = ({
                 )}
               </div>
             ))}
+            
+            <SearchModal modalState={handleModalState} />
           </div>
 
           {/* Secondary menu */}
@@ -237,7 +251,7 @@ const Menu = ({
         {/* Menu header */}
         <div
           id="menu-logo"
-          className="fixed top-0 z-50 flex items-center justify-center w-full pt-6"
+          className={`${modalState ? "opacity-0" : "fixed top-0 z-40 flex items-center justify-center w-full pt-6"}`}
         >
           <Link href="/" onClick={handleToggleMenu}>
             <Image

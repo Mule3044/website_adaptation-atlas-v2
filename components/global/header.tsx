@@ -11,6 +11,8 @@ import { useSanityData } from '@/contexts/data-context'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { breakpoints } from '@/lib/constants'
 import DropdownExpandMenu from '../ui/menu'
+import SearchModal from '../ui/search-modal'
+import { useState } from 'react'
 
 type Props = {
   menuActive: boolean
@@ -18,10 +20,10 @@ type Props = {
 }
 
 export default function Header({ menuActive, setMenuActive }: Props) {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const isDesktop = useMediaQuery(breakpoints.lg);
-  const isHome = pathname === '/'
-  const headerClass = (isHome) ? 'absolute top-0' : 'relative'
+  const isHome = pathname === '/';
+  const headerClass = (isHome) ? 'absolute top-0' : 'relative';
   const {
     spotlights,
     insights,
@@ -29,6 +31,10 @@ export default function Header({ menuActive, setMenuActive }: Props) {
     siteSettings,
   } = useSanityData()
   const { setLocale, locale } = useLanguageContext()
+  const [modalState, setModalState] = useState(false)
+  const handleModalState = (bool: boolean) => {
+    setModalState(bool)
+  }
   return (
     <header className={cn(
       headerClass,
@@ -47,16 +53,17 @@ export default function Header({ menuActive, setMenuActive }: Props) {
       )}
       {
         isDesktop && <div className='mt-4'>
-          <div className='flex '>
+          <div className='flex'>
             <Link  href={`${locale === 'fr' ? '/about-fr' : '/about'} `} className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
-            {siteSettings?.menu.aboutTitle.toUpperCase()} 
-          </Link>
-          <DropdownExpandMenu />
-          <Link href={`${locale === 'fr' ? '/get-involved-fr' : '/get-involved'} `}  className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
-            {siteSettings?.menu.getInvolvedTitle.toUpperCase()}
-          </Link>
+              {siteSettings?.menu.aboutTitle.toUpperCase()} 
+            </Link>
+            <DropdownExpandMenu />
+            <Link href={`${locale === 'fr' ? '/get-involved-fr' : '/get-involved'} `}  className='mr-11 text-l font-medium text-grey-600 hover:text-brand-green transition-colors'>
+              {siteSettings?.menu.getInvolvedTitle.toUpperCase()}
+            </Link>
+            <SearchModal modalState={handleModalState} />
           </div>
-      </div>
+        </div>
       }
       {!isDesktop && (spotlights && insights && impacts && siteSettings) &&
         <Menu
