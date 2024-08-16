@@ -54,7 +54,7 @@ const SearchModal = ({modalState}: any) => {
             </Link>
           </Collapsible.Trigger>
         </div>
-        <div className={`h-screen w-screen fixed ${open && isDesktop ? ' bg-white/95 top-0 left-0' : ''}  ${open && !isDesktop ? ' bg-white top-[-245px] left-0' : ''} z-80 ${open && 'transition ease-in-out delay-50 duration-150'}`}>
+        <div className={`h-screen w-screen fixed display: ${open ? 'inline': 'hidden'} ${open && isDesktop ? ' bg-white/95 top-0 left-0' : ''}  ${open && !isDesktop ? ' bg-white top-[-245px] left-0' : ''} z-80 ${open && 'transition ease-in-out delay-50 duration-150'}`}>
         <OutsideClickHandler onOutsideClick={() => closeAll()}>
           <Collapsible.Content
             className="collapseContent text-grey-600"

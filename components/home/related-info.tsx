@@ -10,7 +10,7 @@ type Props = {
 const RelatedInfo = ({ homeContent }: Props) => {
     const content = homeContent?.relatedInfo
   return (
-    <div id='related-info' className='pt-20'>
+    <div id='related-info' className='mt-20'>
         <h1 className='mb-3'>{content?.title}</h1>
         <div className='grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4'> 
             <div>

@@ -10,15 +10,12 @@ type Props = {
 
 const HowToUse = ({ homeContent }: Props) => {
     const content = homeContent?.howToUse
-    
-  const isDesktop = useMediaQuery(breakpoints.lg);
-  const isMd = useMediaQuery(breakpoints.md)
   return (
-    <div id='how-to-use' className='pt-20'>
+    <div id='how-to-use' className='my-20 h-[65vw] min-h-[325px] max-h-[1050px]'>
         <h1 className='mb-3'>{content?.title}</h1>
         <p className='mb-[20px] font-[500] max-w-[720px]'>{content?.description}</p>
         {content?.video &&
-            <iframe width={`${isDesktop ? '1373px' : '100%'}`} height='778' style={{display: 'flex', justifyItems: 'left'}} src={content.video.src} id='video' title="Set up your first video" allow='autoplay; fullscreen; picture-in-picture; clipboard-write'></iframe>
+            <iframe width='100%' height='100%' style={{display: 'flex', justifyItems: 'left'}} src={content.video.src} id='video' title="Set up your first video" allow='autoplay; fullscreen; picture-in-picture; clipboard-write'></iframe>
         }
     </div>
   )
