@@ -15,6 +15,8 @@ const SearchModal = ({modalState}: any) => {
     }
     const isDesktop = useMediaQuery(breakpoints.lg);
     const isLgScreen = useMediaQuery(breakpoints.xl)
+    const isTablet = useMediaQuery(breakpoints.md);
+    const isPhone = useMediaQuery(breakpoints.sm);
         const {
         homeContent,
         searchContent
@@ -34,7 +36,9 @@ const SearchModal = ({modalState}: any) => {
     useEffect(() => { 
         modalState(open)
     }, [open]);
-
+    useEffect(() => {
+      if (open) {setOpen(false)}
+    },[isDesktop,isLgScreen,isTablet,isPhone])
     return (
         <Collapsible.Root
         className={`CollapsibleRoot font-medium mr-12 h-full hover:text-brand-green transition-colors`}
@@ -54,7 +58,7 @@ const SearchModal = ({modalState}: any) => {
             </Link>
           </Collapsible.Trigger>
         </div>
-        <div className={`h-screen w-screen fixed display: ${open ? 'inline': 'hidden'} ${open && isDesktop ? ' bg-white/95 top-0 left-0' : ''}  ${open && !isDesktop ? ' bg-white top-[-245px] left-0' : ''} z-80 ${open && 'transition ease-in-out delay-50 duration-150'}`}>
+        <div className={`h-screen w-screen fixed display: ${open ? 'inline': 'hidden'} ${open && isDesktop ? ' bg-white/95 top-0 left-0' : ''}  ${open && !isDesktop ? ' bg-white top-[-245px] left-0' : ''} ${open && !isDesktop && window.innerWidth < 769 ? ' bg-white top-[-265px] left-0' : ''} z-80 ${open && 'transition ease-in-out delay-50 duration-150'}`}>
         <OutsideClickHandler onOutsideClick={() => closeAll()}>
           <Collapsible.Content
             className="collapseContent text-grey-600"
