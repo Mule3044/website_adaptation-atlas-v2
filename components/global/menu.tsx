@@ -116,7 +116,6 @@ const Menu = ({
       >
         <BiMenu className="h-6 w-6" />
       </button>
-
       {/* Menu container */}
       <div
         className={cn(
@@ -127,13 +126,14 @@ const Menu = ({
         )}
       >
         {/* <div className='flex items-center h-3/4 md:h-full md:w-3/4 absolute top-0 ml-[45px] md:ml-[300px]'> */}
-        <div className="relative flex items-center h-3/4 lg:h-full top-0">
+        <div className="relative flex items-center h-3/4 lg:h-full top-0">  
+          <div className="absolute flex flex-col gap-5 md:gap-7 lg:gap-14">
           {/* Primary menu */}
           <div
             className={cn(
-              "absolute flex flex-col gap-5 md:gap-7 lg:gap-14",
+              "flex flex-col gap-5 md:gap-7 lg:gap-14",
               "transition-all duration-300 ease-in-out transform",
-              "pl-[60px] pr-[20px] lg:pl-[300px] my-[100px]",
+              "pl-[60px] pr-[20px] lg:pl-[300px] mt-[100px]",
               {
                 "opacity-100 translate-x-0": menuLevelActive === "primary", // Active state classes
                 "-translate-x-[100%] opacity-0": menuLevelActive !== "primary", // Inactive state classes
@@ -161,9 +161,9 @@ const Menu = ({
               </div>
             ))}
             
-            <SearchModal modalState={handleModalState} />
           </div>
-
+          {menuActive && <SearchModal modalState={handleModalState} />}
+          </div>
           {/* Secondary menu */}
           <div
             className={cn(
