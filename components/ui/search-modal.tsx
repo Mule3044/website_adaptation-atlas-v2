@@ -42,7 +42,7 @@ const SearchModal = ({ modalState }: any) => {
   }, [isDesktop, isLgScreen, isTablet, isPhone])
   return (
     <Collapsible.Root
-      className={`CollapsibleRoot font-medium mr-12 h-full hover:text-brand-green transition-colors`}
+      className={`CollapsibleRoot flex flex-col gap-5 md:gap-7 lg:gap-14 ${!isDesktop && ' z-[60] pl-[60px] pr-[20px] lg:pl-[300px]'} font-medium mr-12 h-full hover:text-brand-green transition-colors`}
       open={open}
       onOpenChange={setModalOpen}
     >
@@ -70,18 +70,12 @@ const SearchModal = ({ modalState }: any) => {
         </Collapsible.Trigger>
       </div>
       <div
-        className={`h-screen w-screen fixed display: ${
-          open ? "inline" : "hidden"
-        } ${open && isDesktop ? " bg-white/95 top-0 left-0" : ""}  ${
-          open && !isDesktop ? " bg-white top-[-245px] left-0" : ""
-        } ${
-          open && !isDesktop && window.innerWidth < 769
-            ? " bg-white top-[-265px] left-0"
-            : ""
-        } z-80 ${open && "transition ease-in-out delay-50 duration-150"}`}
+        className={`h-[100vh] w-[100vw] fixed  display: ${
+          open ? "inline bg-white top-0 left-0 bottom-0 right-0 overflow-hidden" : "hidden"
+        } ${!isDesktop && open ? 'bg-white' : 'bg-white/95'} </Collapsible.Root>'} z-80 ${open && "transition ease-in-out delay-50 duration-150"}`}
       >
         <OutsideClickHandler onOutsideClick={() => closeAll()}>
-          <Collapsible.Content className="collapseContent text-grey-600">
+          <Collapsible.Content className="z-60 collapseContent text-grey-600">
             <div
               id="modal"
               ref={ref}
