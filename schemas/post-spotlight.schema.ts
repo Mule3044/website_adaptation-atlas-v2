@@ -36,6 +36,12 @@ const spotlightPost = {
       type: 'boolean',
     },
     {
+      name: 'underMaintenance',
+      title: 'Under Maintenance',
+      description: 'Check this box if the data exploration is under maintenance. This can be used to indicate that the data exploration is not available for time being.',
+      type: 'boolean',
+    },
+    {
       name: 'upvotes',
       title: 'Upvotes',
       description: 'This field is controlled by the user. Appears if "Coming Soon" is marked true.',

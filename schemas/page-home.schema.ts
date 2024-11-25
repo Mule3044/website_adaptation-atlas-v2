@@ -147,6 +147,11 @@ export default defineType({
           type: 'string',
         },
         {
+          name: 'underMaintenanceLabel',
+          title: 'Under maintenance label',
+          type: 'string',
+        },
+        {
           name: 'upvoteLabel',
           title: 'Upvote label',
           type: 'string',

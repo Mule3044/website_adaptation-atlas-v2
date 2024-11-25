@@ -155,6 +155,7 @@ export async function getSpotlights(): Promise<Spotlight[]> {
       title,
       content,
       'comingSoon': comingSoon,
+      'underMaintenance': underMaintenance,
       'upvotes': upvotes,
       'carousel': carousel,
       'slug': slug.current,
@@ -194,6 +195,7 @@ export async function getSpotlightsFr(): Promise<Spotlight[]> {
       title,
       content,
       'comingSoon': comingSoon,
+      'underMaintenance': underMaintenance,
       'upvotes': upvotes,
       'carousel': carousel,
       'slug': slug.current,
@@ -232,6 +234,7 @@ export async function getSearchContent(): Promise<SearchItem[]> {
       _type,
       title,
       'comingSoon': comingSoon,
+      'underMaintenance': underMaintenance,
       'slug': slug.current,
       content,
       'featuredTags': tags.featured[]->{
@@ -267,6 +270,7 @@ export async function getSearchContentFr(): Promise<SearchItem[]> {
       _type,
       title,
       'comingSoon': comingSoon,
+      'underMaintenance': underMaintenance,
       'slug': slug.current,
       content,
       'featuredTags': tags.featured[]->{
