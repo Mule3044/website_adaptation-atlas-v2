@@ -7,7 +7,7 @@ const client = createClient({
   dataset: 'production',
   token: sanityToken, // use environment variables
   useCdn: false // `false` if you want to ensure fresh data
-});
+}); 
 
 // Function to increment upvotes
 export function incrementUpvote(spotlightId: any) {
