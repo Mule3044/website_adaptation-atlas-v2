@@ -34,7 +34,7 @@ const DropdownExpandMenu = () => {
     setSubMenu3(false)
   }
   const { spotlights, insights, impacts, siteSettings } = useSanityData()
-  const filteredSpotlights = spotlights?.filter((item: any) => !item.comingSoon)
+  const filteredSpotlights = spotlights?.filter((item: any) => !item.comingSoon  || !item.underMaintenance)
   if (spotlights)
     return (
       <Collapsible.Root

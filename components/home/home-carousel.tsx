@@ -17,7 +17,7 @@ import { useSanityData } from "@/contexts/data-context"
 const HomeCarousel = () => {
   const { homeContent, spotlights } = useSanityData()
   const publishedSpotlights = spotlights?.filter(
-    (spotlight: Spotlight) => !spotlight.comingSoon
+    (spotlight: Spotlight) => !spotlight.comingSoon || !spotlight.underMaintenance
   )
 
   if (homeContent && spotlights)

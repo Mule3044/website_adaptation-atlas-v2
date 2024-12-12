@@ -58,7 +58,7 @@ export const SanityDataProvider = ({ children }: DataProviderProps) => {
       const secondaryTags = (locale === 'fr') ? await getSecondaryTagsFr() : await getSecondaryTags()
       const search = (locale === 'fr') ? await getSearchContentFr() : await getSearchContent()
       const settings = (locale === 'fr') ? await getSiteSettingsFr() : await getSiteSettings()
-      const filteredSearch = search.filter(item => !item.comingSoon) // filter out coming soon items
+      const filteredSearch = search.filter(item => !item.comingSoon || !item.underMaintenance) // filter out coming soon items
 
       setHomeContent(home)
       setAboutContent(about)

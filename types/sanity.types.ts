@@ -61,6 +61,7 @@ type PageHeaders = {
   searchPlaceholder: string
   noResultsMessage: string
   comingSoonLabel: string
+  underMaintenanceLabel: string
   upvoteLabel: string
   notifyMeLabel: string
   notifyMeLink: string
@@ -136,6 +137,7 @@ export type SearchItem = {
   secondaryTags: Tag[]
   content: PortableTextBlock[]
   comingSoon?: boolean
+  underMaintenance?: boolean
 }
 
 export type Spotlight = {
@@ -143,6 +145,7 @@ export type Spotlight = {
   _createdAt: Date
   title: string
   comingSoon: boolean
+  underMaintenance: boolean
   upvotes: number
   slug: string
   featuredImage: string

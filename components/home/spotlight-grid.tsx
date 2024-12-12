@@ -105,7 +105,7 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
               key={spotlight._id}
               className="block basis-full sm:basis-1/2 md:basis-1/3 xl:basis-1/4 px-2.5 mb-10"
             >
-              {spotlight.comingSoon ? (
+              {spotlight.comingSoon || spotlight.underMaintenance ? (
                 <div className="relative">
                   {/* Coming soon post */}
                   <div className="flex justify-center items-center h-[240px] xl:h-[280px] mb-2 relative">
@@ -126,7 +126,9 @@ const SpotlightGrid = ({ homeContent, spotlights, tags }: Props) => {
                     />
                     <div className="relative z-10 flex flex-col justify-center items-center ">
                       <h3 className="uppercase font-medium mb-1">
-                        {homeContent.pageHeaders.comingSoonLabel}
+                        {spotlight.underMaintenance
+                          ? homeContent.pageHeaders.underMaintenanceLabel
+                          : homeContent.pageHeaders.comingSoonLabel}
                       </h3>
                       <button
                         onClick={() => {

@@ -25,7 +25,7 @@ const Menu = ({
   menuActive,
   setMenuActive,
 }: Props) => {
-  const filteredSpotlights = spotlights.filter((item) => !item.comingSoon)
+  const filteredSpotlights = spotlights.filter((item) => !item.comingSoon || !item.underMaintenance)
   const [menuLevelActive, setMenuLevelActive] = useState<
     "primary" | "secondary" | "tertiary"
   >("primary")
