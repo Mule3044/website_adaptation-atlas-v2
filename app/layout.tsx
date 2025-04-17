@@ -14,6 +14,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 export const metadata: Metadata = {
   title: 'Africa Agriculture Adaptation Atlas',
   description: 'Data and tools to better understand and take action on climate change.',
+  metadataBase: new URL('https://adaptationatlas.cgiar.org'),
 }
 
 export default function RootLayout({
