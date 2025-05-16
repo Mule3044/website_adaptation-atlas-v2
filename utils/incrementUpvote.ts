@@ -1,9 +1,9 @@
 import { createClient } from '@sanity/client'
 
 // TODO: add sanity token to environment variables for security
-const sanityToken = 'skaRbXbYkuQjP0BHVfFfTLaAei9lpGBvcLtcOXF3NavHEs4nHiQeX7Q4wFlbTU76zi0b4pIwM3TGCDxc1cLuK6aChR80QxCMXzefqrAASUzY7oRu8SamBhSM4TKzNHyPji5Oy88b6xkpbJ4rYdzQgFJyG5NBZ1KM6gnQyu1xnJWJdE6VRCAh'
+const sanityToken = 'skfwdRu0ewA9ipeNwli0BbSFwEet4zsH2JGXDg1fdYE995QPWdKa0ZJlcPw8oaBusbKf87BSWEObRNf1JMWHPX2PE5PvvuWrocma7q6TrV6kPtOxVejWVWjCSY5m1tZwmgcugCxYv2A4GuHwNoaWOIVuvD4hsCaCBPAbf23RmwrvEpwMFaoX'
 const client = createClient({
-  projectId: 'gukr2buh',
+  projectId: 'eumlnwcz',
   dataset: 'production',
   token: sanityToken, // use environment variables
   useCdn: false // `false` if you want to ensure fresh data

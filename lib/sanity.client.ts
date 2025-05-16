@@ -3,7 +3,7 @@ dotenv.config();
 
 // TODO - Import project id and dataset from .env file
 
-const NEXT_PUBLIC_SANITY_PROJECT_ID = 'gukr2buh'
+const NEXT_PUBLIC_SANITY_PROJECT_ID = 'eumlnwcz'
 const NEXT_PUBLIC_SANITY_DATASET = 'production'
 
 import { createClient } from '@sanity/client'
